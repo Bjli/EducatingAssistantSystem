@@ -30,7 +30,7 @@
     <script language="JavaScript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <script type="text/javascript">
 $(function(){	
-	//导航切换
+	
 	$(".menuson li").click(function(){
 		$(".menuson li.active").removeClass("active")
 		$(this).addClass("active");
