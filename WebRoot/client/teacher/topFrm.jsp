@@ -5,12 +5,17 @@
     <title></title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="expires" content="0">
+	<style type="text/css">
+.topleft img{margin-top:10px;margin-left:10px;}
+</style>
   </head>
   
-  <body>
-  	您好！${sessionScope.userType}:${sessionScope.userID}
-  	<br/>
-    <h1 align="center">高软教学辅助系统</h1>
+ <body style="background-color:#066CAD;">
+ 
+    <div class="topleft">
+      <div style="margin-left:80%; margin-top:15px;color:white" >您好！${sessionScope.userType}用户:${sessionScope.userID}</div> 
+     <img src="../../images/logo.png" />
+    </div>
   </body>
 </html>

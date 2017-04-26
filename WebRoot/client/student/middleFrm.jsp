@@ -7,9 +7,8 @@
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
   </head>
-  
-  <body>
+  <body style="background-color:#EDF6FA;">
   <br/>
-  <h3>&nbsp;&nbsp;授课教师：白天</h3>
+  <font size="5" color="black">欢迎使用：<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现在时间：<%Date date=new Date();%> <%=date%></font>
   </body>
 </html>

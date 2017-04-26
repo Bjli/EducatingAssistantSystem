@@ -6,7 +6,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head> 
-    <title>高软教学辅助系统后台管理</title>
+    <title>教学辅助系统后台管理</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -15,10 +15,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <frameset rows="120,*">
-  	<frame src="topFrm.jsp" name="topFrame" noresize="noresize" id="topFrame" scrolling="no"/>
- 	<frameset cols="200,*">
-    	<frame src="leftFrm.jsp" name="leftFrame" noresize="noresize" id="leftFrame"/>
-    	<frame src="middleFrm.jsp" name="middleFrame" noresize="noresize" id="middleFrame"/>
+  	<frame src="topFrm.jsp" name="topFrame" noresize="noresize" id="topFrame" scrolling="no" frameborder="0"/>
+ 	<frameset cols="230,*">
+    	<frame src="leftFrm.jsp" name="leftFrame" noresize="noresize" id="leftFrame" frameborder="0"/>
+    	<frame src="middleFrm.jsp" name="middleFrame" noresize="noresize" id="middleFrame" frameborder="0"/>
     </frameset>
     
     <noframes>

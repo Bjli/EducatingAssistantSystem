@@ -15,10 +15,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <frameset rows="120,*">
-  	<frame src="topFrm.jsp" name="topFrame" noresize="noresize" id="topFrame" scrolling="no"/>
- 	<frameset cols="200,*">
-    	<frame src="leftFrm.jsp" name="leftFrame" noresize="noresize" id="leftFrame"/>
-    	<frame src="middleFrm.jsp" name="middleFrame" noresize="noresize" id="middleFrame"/>
+  	<frame src="topFrm.jsp" name="topFrame" noresize="noresize" id="topFrame" scrolling="no" frameborder="0" />
+ 	<frameset cols="230,*">
+    	<frame src="leftFrm.jsp" name="leftFrame" noresize="noresize" id="leftFrame" frameborder="0" />
+    	<frame src="middleFrm.jsp" name="middleFrame" noresize="noresize" id="middleFrame" frameborder="0" />
     </frameset>
     <noframes>
     	<body>

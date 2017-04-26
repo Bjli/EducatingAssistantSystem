@@ -11,7 +11,7 @@
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
   </head>
-  <body>
+  <body style="background-color:#EDF6FA;">
   	<br>
     <h4 align="center">发布通知</h4>
     <form action="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=releaseNotice" method="post">
