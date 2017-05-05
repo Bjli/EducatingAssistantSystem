@@ -26,12 +26,19 @@ public class FileInfoDaoImpl implements FileInfoDao {
 	private QueryRunner qr = new QueryRunner(DBCPUtil.getDataSource());
 	//上传文件
 	public void uploadFile(FileInfo fileinfo, FileItem item) throws SQLException, ParseException{
+//		System.out.println("555555555");
+//		System.out.println(fileinfo.getDescription());
+//		System.out.println(fileinfo.getSavePath());
+//		System.out.println(fileinfo.getId());
+//		System.out.println(fileinfo.getUploader());
+//		System.out.println(fileinfo.getUploadTime());
 		String sql="insert into FileInfo(id,name,uploadTime,savePath,description,uploader) values(?,?,?,?,?,?)";
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
 		java.util.Date date = sdf.parse(fileinfo.getUploadTime()); 
 		Date sDate=new Date(date.getTime());
 		qr.update(sql, fileinfo.getId(),fileinfo.getName(),sDate,fileinfo.getSavePath(),fileinfo.getDescription(),fileinfo.getUploader());
-	    //已经确保文件名（已经加上UUID）不为空，文件大小不超过限制
+	    System.out.println("55555555555555");
+		//已经确保文件名（已经加上UUID）不为空，文件大小不超过限制
 	    File saveFile=new File(fileinfo.getSavePath(), fileinfo.getName());
 		try {
 			item.write(saveFile);

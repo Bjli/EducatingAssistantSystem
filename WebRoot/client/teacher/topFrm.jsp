@@ -7,7 +7,7 @@
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">
 	<style type="text/css">
-.topleft img{margin-top:10px;margin-left:10px;}
+.topleft img{margin-top:0px;margin-left:10px;}
 </style>
   </head>
   

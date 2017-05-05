@@ -23,7 +23,7 @@
     			<td>操作</td>
     		</tr>
     		<c:forEach items="${gList}" var="c">
-    			<tr height="10">
+    			<tr height="5">
     			<td>${c.studentID }</td>
     			<td>${c.gradeType }</td>
     			<td>${c.score }</td>
@@ -38,7 +38,7 @@
     				</form>
     			</td>
     			<td>
-    				<a href="${pageContext.request.contextPath}/servlet/GradeServlet?operation=deleteGrade&studentID=${c.studentID}&gradeType=${c.gradeType}">删除</a>
+    				<a href="javascript:if(confirm('确定要删除吗?'))window.location.href='${pageContext.request.contextPath}/servlet/GradeServlet?operation=deleteGrade&studentID=${c.studentID}'">删除</a>
     			</td>
     			</tr>
     		</c:forEach>

@@ -38,8 +38,8 @@ public class GradeDaoImpl implements GradeDao {
 
 	//É¾³ý³É¼¨
 	public void deleteGrade(Grade grade) throws SQLException {
-		String sql="delete from Grade where studentID=? and gradeType=?";
-		qr.update(sql,grade.getStudentID(),grade.getGradeType());
+		String sql="delete  from Grade where studentID=?";
+		qr.update(sql,grade.getStudentID());
 	}
 
 	//ÐÞ¸Ä³É¼¨

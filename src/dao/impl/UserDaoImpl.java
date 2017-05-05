@@ -49,7 +49,7 @@ public class UserDaoImpl implements UserDao {
 	}
 	//删除用户
 	public void deleteUser(User user) throws SQLException {
-		qr.update("delete from User where UserID=? and UserType=?",user.getUserID(),user.getUserType());
+		qr.update("delete from User where UserID=?",user.getUserID());
 	}
 	//获取用户列表
 	public List<User> checkUser() throws SQLException {
