@@ -33,7 +33,7 @@
     			<td>${c.phoneNumber }</td>
     			<td>${c.email }</td>
     			<td>
-    				<a href="${pageContext.request.contextPath}/servlet/UserServlet?operation=deleteUser&userID=${c.userID}">删除</a>
+    				<a href="javascript:if(confirm('确定要删除吗?'))window.location.href='${pageContext.request.contextPath}/servlet/UserServlet?operation=deleteUser&userID=${c.userID}'">删除</a>
     			</td>
     		</tr>
     		</c:forEach>

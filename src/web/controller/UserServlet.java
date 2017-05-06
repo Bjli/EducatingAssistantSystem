@@ -89,6 +89,7 @@ public class UserServlet extends HttpServlet {
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		} catch (SQLException e) {
+			
 			logger.error(e.getMessage());
 			String errorMsg = "数据库操作异常，请重试";
 			request.setAttribute("errorMsg", errorMsg);
@@ -156,6 +157,7 @@ public class UserServlet extends HttpServlet {
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		} catch (SQLException e) {
+			e.printStackTrace();
 			logger.error(e.getMessage());
 			String errorMsg = "数据库操作异常，请重试";
 			request.setAttribute("errorMsg", errorMsg);

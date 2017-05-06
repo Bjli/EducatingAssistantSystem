@@ -19,16 +19,14 @@
     			<td width="40%">标题</td>
     			<td>发布者</td>
     			<td>发布时间</td>
-    			<td>操作</td>
+    			
     		</tr>
     		<c:forEach items="${nList}" var="c">
     			<tr>
     			<td><a href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=getNotice&id=${c.id}">${c.title }</a></td>
     			<td>${c.author }</td>
     			<td>${c.releaseDate }</td>
-    			<td>
-    				<a href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=deleteNotice&id=${c.id}">删除</a>
-    			</td>
+    			
     		</tr>
     		</c:forEach>
     	</table>

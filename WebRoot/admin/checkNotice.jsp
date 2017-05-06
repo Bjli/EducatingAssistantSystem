@@ -27,7 +27,7 @@
     			<td>${c.author }</td>
     			<td>${c.releaseDate }</td>
     			<td>
-    				<a href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=deleteNotice&id=${c.id}">删除</a>
+    				<a href="javascript:if(confirm('确定要删除吗?'))window.location.href='${pageContext.request.contextPath}/servlet/NoticeServlet?operation=deleteNotice&id=${c.id}'">删除</a>
     			</td>
     		</tr>
     		</c:forEach>

@@ -1,6 +1,7 @@
 package dao.impl;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.dbutils.QueryRunner;
@@ -66,6 +67,7 @@ public class UserDaoImpl implements UserDao {
 		dbUser=qr.query(sql, new BeanHandler<User>(User.class),user.getUserID(),user.getUserType());
 		if(dbUser.getEmail().equals(user.getEmail())){
 			modifyPWD(user);
+			Date date=new Date();
 			Mail mail = new Mail();  
 			mail.setHost("smtp.163.com"); // 设置邮件服务器,如果不用163的,自己找找看相关的  
 			mail.setSender("ljb_nwuer@163.com");  
@@ -73,7 +75,7 @@ public class UserDaoImpl implements UserDao {
 			mail.setUsername("ljb_nwuer@163.com"); // 登录账号,一般都是和邮箱名一样吧  
 			mail.setPassword("74123698ljbLJB"); // 发件人邮箱的登录密码  
 			mail.setSubject("找回密码");  
-			mail.setMessage("您的新密码是："+pwd);  
+			mail.setMessage("<br><br><h3>您的新密码是："+pwd+"<br>------------------------------------<br>&nbsp;&nbsp; sender by @ljb<br>"+date+"</h3>");  
 			new MailUtils().send(mail);  
 			return "新密码已发至您的邮箱！";
 		}

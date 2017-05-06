@@ -29,7 +29,7 @@
     			<td>${c.uploader }</td>
     			<td>${c.description }</td>
     			<td>
-    				<a href="${pageContext.request.contextPath}/servlet/FileServlet?operation=deleteFile&id=${c.id}">删除</a>
+    				<a href="javascript:if(confirm('确定要删除吗?'))window.location.href='${pageContext.request.contextPath}/servlet/FileServlet?operation=deleteFile&id=${c.id}'">删除</a>
     				<a href="${pageContext.request.contextPath}/servlet/FileServlet?operation=downloadFile&id=${c.id}&name=${c.name}">下载</a>
     			</td>
     		</tr>
