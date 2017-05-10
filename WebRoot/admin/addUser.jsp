@@ -10,9 +10,9 @@
 	<h4 align="center">添加用户</h4>
 	<br>
 	<div style="border: solid 1px black; width: 500px; margin-left: 300px">
-		<form onsubmit="return test()"
+		<form 
 			action="${pageContext.request.contextPath}/servlet/UserServlet?operation=addUser"
-			method="post" >
+			method="post" name="useradd" >
 			<table align="center" border="0">
 				<tr height="40">
 					<td>用户编号:</td>
@@ -44,7 +44,7 @@
 					<td><input type="text" name="email" id="email"/></td>
 				</tr>
 				<tr height="40">
-					<td colspan="2" align="center"><input type="submit" value="提交" />
+					<td colspan="2" align="center"><input type="button"  onClick="return test()" value="提交" />
 					</td>
 				</tr>
 
@@ -56,27 +56,26 @@
 <script>
  function test()
       {
-          var temp1 = document.getElementById("phone");
+	       var temp = document.getElementById("email");
+	       var temp1 = document.getElementById("phone");
            //对电话的验证
-          var mobile=/^(13+\d{9})|(159+\d{8})|(153+\d{8})$/;
+           var mobile=/^(13+\d{9})|(15+\d{9})|(17+\d{9})|(18+\d{9})$/;
+           //对电子邮件的验证
+           var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+            
           if(!mobile.test(temp1.value))
           {
               alert('提示\n\n请输入有效的手机号码！');
               mobile.focus();
               return false;
-           }
-          
-            var temp = document.getElementById("email");
-           //对电子邮件的验证
-           var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-             if(!myreg.test(temp.value))
+           }else if(!myreg.test(temp.value))
            {
                   alert('提示\n\n请输入有效的E_mail！');
                   myreg.focus();
                   return false;
              }
 
-               return true;
+               useradd.submit();
  }
         
       
