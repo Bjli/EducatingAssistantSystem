@@ -74,7 +74,6 @@
                   myreg.focus();
                   return false;
              }
-
                useradd.submit();
  }
         

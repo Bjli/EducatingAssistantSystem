@@ -11,6 +11,7 @@ public class User implements Serializable {
 	private String password;
 	private String phoneNumber;
 	private String email;
+	
 	public String getUserID() {
 		return userID;
 	}
