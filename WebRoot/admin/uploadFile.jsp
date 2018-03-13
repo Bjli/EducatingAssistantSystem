@@ -7,7 +7,7 @@
 	<meta http-equiv="expires" content="0">    
   </head>
   <body>
-    <h4 align="center">上传资源</h4>
+    <h4 align="center">上传系统资源</h4>
     <hr>
     <br>
     <form action="${pageContext.request.contextPath}/servlet/FileServlet" method="post" enctype="multipart/form-data">

@@ -9,7 +9,7 @@
   </head>
   
   <body>
-    <h4 align="center">所有文件列表</h4>
+    <h4 align="center">所有教学资源列表</h4>
   	<c:if test="${empty fList }">
   		没有文件！
   	</c:if>

@@ -37,7 +37,6 @@ public class FileInfoDaoImpl implements FileInfoDao {
 		java.util.Date date = sdf.parse(fileinfo.getUploadTime()); 
 		Date sDate=new Date(date.getTime());
 		qr.update(sql, fileinfo.getId(),fileinfo.getName(),sDate,fileinfo.getSavePath(),fileinfo.getDescription(),fileinfo.getUploader());
-	    System.out.println("55555555555555");
 		//已经确保文件名（已经加上UUID）不为空，文件大小不超过限制
 	    File saveFile=new File(fileinfo.getSavePath(), fileinfo.getName());
 		try {
