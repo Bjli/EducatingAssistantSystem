@@ -22,7 +22,7 @@
   <body style="background-color:#1c77ac; background-image:url(../images/light.png); background-repeat:no-repeat; background-position:center top; overflow:hidden;">
     
     <div class="logintop">    
-    <span>欢迎登录网络互动教学平台!  &nbsp;&nbsp; <%Date date=new Date();%> <%=date%></span>       
+    <span>欢迎登录实验报告管理教学平台!  &nbsp;&nbsp; <%Date date=new Date();%> <%=date%></span>       
     </div>
     
     <div id="mainBody">
@@ -76,6 +76,6 @@
     </form>
     ${message}
     </div>
-     <div class="loginbm">版权所有 @李吉波   2017</div>
+     <div class="loginbm">版权所有 @李吉波   2018</div>
   </body>
 </html>
