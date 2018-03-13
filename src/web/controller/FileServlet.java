@@ -150,7 +150,7 @@ public class FileServlet extends HttpServlet {
 		fileinfo.setSavePath(savePath);
 		
 		
-		String tempPath = savePath + "/temp/";
+		String tempPath = "D:\\Teaching_file\\temp\\";
 		File tmpFile = new File(tempPath);
 		if (!tmpFile.exists()) {
 			tmpFile.mkdir();
@@ -184,7 +184,7 @@ public class FileServlet extends HttpServlet {
 						request.setAttribute("message", "<script type='text/javascript'>alert('文件太大！')</script>");
 						break;
 					}
-					filename = fileinfo.getId() + "_" + filename.substring(filename.lastIndexOf("\\") + 1);
+					filename = filename.substring(filename.lastIndexOf("\\") + 1);
 					fileinfo.setName(filename);
 					business.uploadFile(fileinfo, item);
 					request.setAttribute("message", "<script type='text/javascript'>alert('上传成功！')</script>");

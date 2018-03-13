@@ -15,7 +15,7 @@
  
     <div class="topleft">
       <div style="margin-left:80%; margin-top:15px;color:white" >您好！${sessionScope.userType}用户:${sessionScope.userID}</div> 
-      <h2 align="center">在线教育辅助系统</h2>
+      <h2 align="center">实验报告教学管理系统</h2>
     </div>
   </body>
 </html>

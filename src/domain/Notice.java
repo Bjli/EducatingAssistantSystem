@@ -6,9 +6,17 @@ public class Notice implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String id;
     private String author;
+    private String identity;
     private String releaseDate;
     private String title;
     private String content;
+    public String getIdentity(){
+    	return identity;
+    }
+    
+    public void setIdentity(String identity){
+    	this.identity = identity;
+    }
 	public String getId() {
 		return id;
 	}

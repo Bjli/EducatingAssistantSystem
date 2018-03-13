@@ -18,11 +18,11 @@ public class NoticeDaoImpl implements NoticeDao {
 	private QueryRunner qr = new QueryRunner(DBCPUtil.getDataSource());
 	//发布通知
 	public void releaseNotice(Notice notice) throws SQLException, ParseException {
-		String sql="insert into Notice(id,author,releaseDate,title,content) values(?,?,?,?,?)";
+		String sql="insert into Notice(id,author,identity,releaseDate,title,content) values(?,?,?,?,?,?)";
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
 		java.util.Date date = sdf.parse(notice.getReleaseDate()); 
 		Date sDate=new Date(date.getTime());
-		qr.update(sql,notice.getId(),notice.getAuthor(),sDate,notice.getTitle(),notice.getContent());
+		qr.update(sql,notice.getId(),notice.getAuthor(),notice.getIdentity(),sDate,notice.getTitle(),notice.getContent());
 	}
 	//删除通知
 	public void deleteNotice(String id) throws SQLException {
@@ -32,7 +32,7 @@ public class NoticeDaoImpl implements NoticeDao {
 
 	//查看通知
 	public List<Notice> checkNotice() throws SQLException {
-		String sql="select id,author,releaseDate,title from Notice order by releaseDate desc;";
+		String sql="select id,author,identity,releaseDate,title from Notice order by releaseDate desc;";
 		return qr.query(sql, new BeanListHandler<Notice>(Notice.class));
 	}
 
