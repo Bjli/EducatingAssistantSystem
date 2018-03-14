@@ -9,14 +9,17 @@ import java.util.List;
 
 import org.apache.commons.fileupload.FileItem;
 
+import dao.AnswerDao;
 import dao.FileInfoDao;
 import dao.GradeDao;
 import dao.NoticeDao;
 import dao.UserDao;
+import dao.impl.AnswerDaoImp;
 import dao.impl.FileInfoDaoImpl;
 import dao.impl.GradeDaoImpl;
 import dao.impl.NoticeDaoImpl;
 import dao.impl.UserDaoImpl;
+import domain.AnswerInfo;
 import domain.FileInfo;
 import domain.Grade;
 import domain.GradeTable;
@@ -97,4 +100,35 @@ public class BusinessServiceImpl implements BusinessService {
 	public List<Grade> getGrade(String studentID) throws SQLException {
 		return gDao.getGrade(studentID);
 	}
+	
+	//´ðÌâÄ£¿é
+	private AnswerDao aDao = new AnswerDaoImp();
+	public void addAnswer(AnswerInfo answer) throws SQLException, ParseException {
+		// TODO Auto-generated method stub
+		System.out.println(" aDao.addAnswer(answer);");
+		 aDao.addAnswer(answer);
+		
+	}
+	@Override
+	public void deleteAnswer(String id) throws SQLException {
+		// TODO Auto-generated method stub
+		aDao.deleteAnswer(id);
+		
+	}
+	@Override
+	public List<AnswerInfo> checkAnswerS(String id) throws SQLException {
+		// TODO Auto-generated method stub
+		return aDao.checkAnswerS(id);
+	}
+	@Override
+	public List<AnswerInfo> checkAnswerT() throws SQLException {
+		// TODO Auto-generated method stub
+		return aDao.checkAnswerT();
+	}
+	@Override
+	public AnswerInfo getAnswer(String id) throws SQLException {
+		// TODO Auto-generated method stub
+		return aDao.getAnswer(id);
+	}
+	
 }

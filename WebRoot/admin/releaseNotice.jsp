@@ -19,7 +19,7 @@
     	<tr>
     		<td width="30%">发布者:</td>
     		<td>
-    			<input type="text" name="author" />
+    			<input type="text" name="author"/>
     			<input type="radio" name="identity" value="管理员" checked="checked" />管理员 
                 <input type="radio" name="identity" value="教师" />教师 
     		</td>

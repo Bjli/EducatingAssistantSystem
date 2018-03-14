@@ -84,7 +84,17 @@ $(function(){
         <li><cite></cite><a href="${pageContext.request.contextPath}/client/teacher/uploadFile.jsp" target="middleFrame">上传文件</a><i></i></li>
         <li><cite></cite><a href="${pageContext.request.contextPath}/servlet/FileServlet?operation=checkFile" target="middleFrame">查看文件</a><i></i></li>
         </ul>
-    </dd> 
+    </dd>
+    		<dd>
+			<div class="title">
+				<span><img src="../../images/leftico04.png" /></span>&nbsp&nbsp文件管理
+			</div>
+			<ul class="menuson">
+				<li><cite></cite><a
+					href="${pageContext.request.contextPath}/servlet/AnswerServlet?operation=checkAnswer"
+					target="middleFrame">查看作业</a><i></i></li>
+			</ul>
+		</dd>
     </dl>
     
 </body>

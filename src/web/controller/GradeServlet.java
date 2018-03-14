@@ -23,7 +23,7 @@ import service.impl.BusinessServiceImpl;
 public class GradeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private BusinessService business=new BusinessServiceImpl();
-	private static Logger logger = Logger.getLogger(UserServlet.class); 
+	private static Logger logger = Logger.getLogger(GradeServlet.class); 
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.apache.commons.fileupload.FileItem;
 
+import domain.AnswerInfo;
 import domain.FileInfo;
 import domain.Grade;
 import domain.GradeTable;
@@ -40,4 +41,11 @@ public interface BusinessService {
 	List<Grade> aCheckGrade() throws SQLException;
 	List<GradeTable> getGradeTable() throws SQLException;
 	List<Grade> getGrade(String studentID) throws SQLException;
+	
+	//´ðÌâÄ£¿é
+	void addAnswer(AnswerInfo answer) throws SQLException, ParseException;
+	void deleteAnswer(String id) throws SQLException;
+	List<AnswerInfo> checkAnswerS(String id) throws SQLException;
+	List<AnswerInfo> checkAnswerT() throws SQLException;
+	AnswerInfo getAnswer(String id) throws SQLException;
 }
