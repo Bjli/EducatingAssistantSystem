@@ -160,6 +160,9 @@
 			</div>
 			<ul class="menuson">
 				<li><cite></cite><a
+					href="${pageContext.request.contextPath}/servlet/AnswerServlet?operation=checkAnswer&userId=${sessionScope.userID}"
+					target="middleFrame">查看作业</a><i></i></li>
+				<li><cite></cite><a
 					href="${pageContext.request.contextPath}/servlet/GradeServlet?operation=sCheckGrade&studentID=${sessionScope.userID}"
 					target="middleFrame">查看成绩</a><i></i></li>
 			</ul>
@@ -184,17 +187,6 @@
 				<li><cite></cite><a
 					href="${pageContext.request.contextPath}/servlet/FileServlet?operation=checkFile"
 					target="middleFrame">查看文件</a><i></i></li>
-			</ul>
-		</dd>
-
-		<dd>
-			<div class="title">
-				<span><img src="../../images/leftico04.png" /></span>&nbsp&nbsp文件管理
-			</div>
-			<ul class="menuson">
-				<li><cite></cite><a
-					href="${pageContext.request.contextPath}/servlet/AnswerServlet?operation=checkAnswer"
-					target="middleFrame">查看作业</a><i></i></li>
 			</ul>
 		</dd>
 	</dl>

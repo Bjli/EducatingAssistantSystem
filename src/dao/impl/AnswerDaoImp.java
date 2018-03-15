@@ -1,6 +1,6 @@
 package dao.impl;
 
-import java.sql.Date;
+import java.util.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,17 +21,18 @@ public class AnswerDaoImp implements AnswerDao {
 	@Override
 	public void addAnswer(AnswerInfo answer) throws SQLException, ParseException {
 		// TODO Auto-generated method stub
-		System.out.println("////////////sql");
-		System.out.println(answer.getAnswerid());
-		System.out.println(answer.getUserid());
-		System.out.println(answer.getDate());
-		System.out.println(answer.getContent());
-		System.out.println("////////////sql");
-		String sql = "insert into answer(answerID,userID,date,connect) values(?,?,?,?)";
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		java.util.Date date = sdf.parse(answer.getDate());
-		Date sDate = new Date(date.getTime());
-		qr.update(sql,answer.getAnswerid(), answer.getUserid(), sDate, answer.getContent());
+//		System.out.println("////////////sql");
+//		System.out.println(answer.getAnswerid());
+//		System.out.println(answer.getUserid());
+//		System.out.println(answer.getDate());
+//		System.out.println(answer.getWorkid());
+//		System.out.println(answer.getWorktitle());
+//		System.out.println(answer.getContent());
+//		System.out.println("////////////sql");
+		String sql = "insert into answer(answerID,userID,date,content,workid,worktitle,workuser,state) values(?,?,?,?,?,?,?,?)";
+		Date nowTime = new Date(); 
+		SimpleDateFormat time=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
+		qr.update(sql,answer.getAnswerid(), answer.getUserid(), time.format(nowTime), answer.getContent(),answer.getWorkid(),answer.getWorktitle(),answer.getWorkuser(),"“—Ã·Ωª");
 	}
 
 	@Override
@@ -43,22 +44,23 @@ public class AnswerDaoImp implements AnswerDao {
 	}
 
 	@Override
-	public List<AnswerInfo> checkAnswerS(String id) throws SQLException {
+	public List<AnswerInfo> checkAnswerS(String userid) throws SQLException {
 		// TODO Auto-generated method stub
-		String sql="select answerid,userid,Date from answer where userid = ? order by Date desc;";
-		return qr.query(sql, new BeanListHandler<AnswerInfo>(AnswerInfo.class),id);
+		String sql="select answerid,worktitle,workid,workuser,date,state from answer where userid =? order by date desc;";
+		return qr.query(sql, new BeanListHandler<AnswerInfo>(AnswerInfo.class),userid);
 	}
 
 	@Override
-	public List<AnswerInfo> checkAnswerT() throws SQLException {
+	public List<AnswerInfo> checkAnswerT(String workuser) throws SQLException {
 		// TODO Auto-generated method stub
-		String sql="select answerid,userid,Date from answer order by Date desc;";
-		return qr.query(sql, new BeanListHandler<AnswerInfo>(AnswerInfo.class));
+		String sql="select answerid,workid,worktitle,userid,date,state  from answer where workuser=? order by Date desc;";
+		return qr.query(sql, new BeanListHandler<AnswerInfo>(AnswerInfo.class),workuser);
 	}
 
 	@Override
 	public AnswerInfo getAnswer(String id) throws SQLException {
 		// TODO Auto-generated method stub
+		System.out.println(id);
 		String sql="select * from answer where answerId=?";
 		return qr.query(sql, new BeanHandler<AnswerInfo>(AnswerInfo.class),id);
 	}

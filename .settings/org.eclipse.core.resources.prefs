@@ -2,4 +2,5 @@ eclipse.preferences.version=1
 encoding//WebRoot/admin/addUser.jsp=UTF-8
 encoding//WebRoot/admin/topFrm.jsp=UTF-8
 encoding//WebRoot/client/student/addAnswer.jsp=UTF-8
+encoding//WebRoot/client/student/checkAnswer.jsp=UTF-8
 encoding//WebRoot/index.jsp=UTF-8

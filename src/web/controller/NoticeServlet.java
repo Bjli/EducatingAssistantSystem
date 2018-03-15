@@ -44,6 +44,9 @@ public class NoticeServlet extends HttpServlet {
 		if("getNotice".equals(operation)){
 			getNotice(request,response);
 		}
+		if("getNoticeForAnswer".equals(operation)){
+			getNoticeForAnswer(request,response);
+		}
 	}
 	//获取特定id的通知内容
 	private void getNotice(HttpServletRequest request,
@@ -54,6 +57,27 @@ public class NoticeServlet extends HttpServlet {
 			notice = business.getNotice(id);
 			request.setAttribute("notice", notice);
 			request.getRequestDispatcher("/common/getNotice.jsp").forward(request, response);
+		} catch (SQLException e) {
+			logger.error(e.getMessage());
+			String errorMsg = "数据库操作异常，请重试";
+			request.setAttribute("errorMsg", errorMsg);
+			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
+		} catch (IOException e) {
+			logger.error(e.getMessage());
+			String errorMsg = "IO异常,请重试";
+			request.setAttribute("errorMsg", errorMsg);
+			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
+		}
+	}
+	//获取特定id的通知内容提供给作答
+	private void getNoticeForAnswer(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		String id=request.getParameter("id");
+		Notice notice=null;
+		try {
+			notice = business.getNotice(id);
+			request.setAttribute("notice", notice);
+			request.getRequestDispatcher("/client/student/addAnswer.jsp").forward(request, response);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 			String errorMsg = "数据库操作异常，请重试";

@@ -121,9 +121,9 @@ public class BusinessServiceImpl implements BusinessService {
 		return aDao.checkAnswerS(id);
 	}
 	@Override
-	public List<AnswerInfo> checkAnswerT() throws SQLException {
+	public List<AnswerInfo> checkAnswerT(String id) throws SQLException {
 		// TODO Auto-generated method stub
-		return aDao.checkAnswerT();
+		return aDao.checkAnswerT(id);
 	}
 	@Override
 	public AnswerInfo getAnswer(String id) throws SQLException {
