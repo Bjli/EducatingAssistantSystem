@@ -61,6 +61,7 @@
     		<td>密&nbsp;码:</td>
     		<td>
     		<input type="text" name="password"/>
+    		<a href="/TeachingAssistantSystem/common/register.jsp"><font size="3" color="white">还没有账户？</font></a>
     		</td>
     	</tr>
     	<tr height="40">

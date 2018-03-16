@@ -15,26 +15,28 @@
   	</c:if>
 	<c:if test="${!empty gList}">
     	<table border="1" width="80%" align="center">
-    		<tr>
+    		<tr align="center">
     			<td width="20%">学号</td>
     			<td>作业题目</td>
     			<td>分数</td>
     			<td>评语</td>
+    			<td>老师</td>
     			<td>操作</td>
     		</tr>
     		<%int sum=0; %>
     		<c:forEach items="${gList}" var="c">
-    			<tr height="5">
+    			<tr height="5" align="center">
     			<%sum++; %>
     			<td>${c.userId }</td>
     			<td>${c.workTitle }</td>
     			<td>${c.score }</td>
     			<td>${c.remark }</td>
+    			<td>${c.teacherId }</td>
     			<td><a href="#">无</a>
     			</tr>
     		</c:forEach>
     		<tr align="right">
-    		<td colspan="5">总计发现：<%=sum %>条成绩记录</td>
+    		<td colspan="6">总计发现：<%=sum %>条成绩记录</td>
     		</tr>
     	</table>
     </c:if>

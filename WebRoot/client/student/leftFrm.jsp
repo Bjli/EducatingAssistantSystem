@@ -7,7 +7,7 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-
+<script src="${pageContext.request.contextPath}/js/calendar.js" type="text/javascript"></script> 
 <style type="text/css">
 .lefttop {
 	background: url(../../images/lefttop.gif) repeat-x;
@@ -190,6 +190,15 @@
 			</ul>
 		</dd>
 	</dl>
+	    <hr>
+    <B><DIV ALIGN="center"></DIV>  
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">  
+<!--  
+document.write("<BR>")  
+calendar();  
+//-->  
+</SCRIPT>  
+</B> 
 
 </body>
 

@@ -46,11 +46,12 @@ $(function(){
 		}
 	});
 })	
-</script>   
+</script>
+  <script src="${pageContext.request.contextPath}/js/calendar.js" type="text/javascript"></script> 
   </head>
   
   
-  <body style="background:#f0f9fd;">
+  <body style="background:#f0f9fd;" onLoad="startclock(); timerONE=window.setTimeout" TEXT="#000000" TOPMARGIN="0">
 	<div class="lefttop"><span></span>主菜单</div>
     
     <dl class="leftmenu" >
@@ -88,7 +89,15 @@ $(function(){
         </ul>
     </dd> 
     </dl>
-    
+    <hr>
+    <B><DIV ALIGN="center"></DIV>  
+<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">  
+<!--  
+document.write("<BR>")  
+calendar();  
+//-->  
+</SCRIPT>  
+</B> 
 </body>
 
 </html>

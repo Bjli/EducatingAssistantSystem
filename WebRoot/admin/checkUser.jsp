@@ -15,7 +15,7 @@
   		没有录入用户！
   	</c:if>
 	<c:if test="${!empty uList}">
-    	<table border="1" width="80%" align="center">
+    	<table border="1" width="90%" align="center">
     		<tr>
     			<td>用户编号</td>
     			<td>姓名</td>
