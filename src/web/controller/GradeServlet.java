@@ -14,94 +14,108 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
 
+import domain.AnswerInfo;
 import domain.Grade;
-import domain.GradeTable;
-import domain.PersonalGrade;
 import service.BusinessService;
 import service.impl.BusinessServiceImpl;
 
 public class GradeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private BusinessService business=new BusinessServiceImpl();
-	private static Logger logger = Logger.getLogger(GradeServlet.class); 
-	
-	public void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	private BusinessService business = new BusinessServiceImpl();
+	private static Logger logger = Logger.getLogger(GradeServlet.class);
+
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
-	public void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String operation=request.getParameter("operation");
-		if("inputGrade".equals(operation)){
-			inputGrade(request,response);
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String operation = request.getParameter("operation");
+		if ("inputGrade".equals(operation)) {
+			inputGrade(request, response);
 		}
-		if("deleteGrade".equals(operation)){
-			deleteGrade(request,response);
+		if ("deleteGrade".equals(operation)) {
+			deleteGrade(request, response);
 		}
-		if("modifyGrade".equals(operation)){
-			modifyGrade(request,response);
+		if ("modifyGrade".equals(operation)) {
+			modifyGrade(request, response);
 		}
-		//¹ÜÀíÔ±²é¿´³É¼¨
-		if("aCheckGrade".equals(operation)){
-			aCheckGrade(request,response);
+		// ç®¡ç†å‘˜æŸ¥çœ‹æˆç»©
+		if ("aCheckGrade".equals(operation)) {
+			aCheckGrade(request, response);
 		}
-		//½ÌÊ¦²é¿´³É¼¨³É¼¨±í
-		if("tCheckGrade".equals(operation)){
-			tCheckGrade(request,response);
+		// æ•™å¸ˆæŸ¥çœ‹æˆç»©æˆç»©è¡¨
+		if ("tCheckGrade".equals(operation)) {
+			tCheckGrade(request, response);
 		}
-		//Ñ§Éú»ñµÃ¸öÈË³É¼¨
-		if("sCheckGrade".equals(operation)){
-			sCheckGrade(request,response);
+		// å­¦ç”Ÿè·å¾—ä¸ªäººæˆç»©
+		if ("sCheckGrade".equals(operation)) {
+			sCheckGrade(request, response);
 		}
-		//½ÌÊ¦»ñµÃ¸öÈË³É¼¨
-		if("getGrade".equals(operation)){
-			getGrade(request,response);
+		// æ•™å¸ˆè·å¾—ä¸ªäººæˆç»©
+		if ("getStuGrade".equals(operation)) {
+			getStuGrade(request, response);
 		}
 	}
 
-	//ĞŞ¸Ä³É¼¨
-	private void modifyGrade(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		String studentID=request.getParameter("studentID");
-		String gradeType=request.getParameter("gradeType");
-		String score=request.getParameter("modifyScore");
-		Grade grade=new Grade();
-		grade.setStudentID(studentID);
-		grade.setGradeType(gradeType);
-		grade.setScore(score);
+	//
+	// ä¿®æ”¹æˆç»©
+	private void modifyGrade(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String studentID = request.getParameter("userid");
+		String workTitle = request.getParameter("worktitle");
+		String score = request.getParameter("modifyscore");
+		String remark = request.getParameter("remark");
+		Grade grade = new Grade();
+		grade.setUserId(studentID);
+		grade.setWorkTitle(workTitle);
+		grade.setScore(Integer.parseInt(score));
+		if (remark.equals("") || remark == null) {
+			grade.setRemark(null);
+		} else {
+			grade.setRemark(remark);
+		}
 		try {
 			business.modifyGrade(grade);
+			request.setAttribute("message", "<script type='text/javascript'>alert('ä¿®æ”¹æˆåŠŸï¼')</script>");
+			request.getRequestDispatcher("../admin/inputGrade.jsp").forward(request, response);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
-			String errorMsg = "Êı¾İ¿â²Ù×÷Òì³££¬ÇëÖØÊÔ";
+			String errorMsg = "æ•°æ®åº“æ“ä½œå¼‚å¸¸ï¼Œè¯·é‡è¯•";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		}
-		aCheckGrade(request, response);
 	}
 
-	private void deleteGrade(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		String studentID=request.getParameter("studentID");
-		String gradeType=request.getParameter("gradeType");
-		Grade grade=new Grade();
-		grade.setStudentID(studentID);
-		grade.setGradeType(gradeType);
+	// åˆ é™¤æˆç»©è®°å½•
+	private void deleteGrade(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String userId = request.getParameter("userId");
+		String workId = request.getParameter("workId");
 		try {
-			business.deleteGrade(grade);
+			business.deleteGrade(userId, workId);
+			HttpSession session = request.getSession();
+			List<AnswerInfo> nList = null;
+			nList = business.checkAnswerT((String) session.getAttribute("userID"));
+			request.setAttribute("nList", nList);
+			request.getRequestDispatcher("/client/teacher/checkAnswer.jsp").forward(request, response);
+
+		} catch (IOException e) {
+			logger.error(e.getMessage());
+			String errorMsg = "IOå¼‚å¸¸,è¯·é‡è¯•";
+			request.setAttribute("errorMsg", errorMsg);
+			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
-			String errorMsg = "Êı¾İ¿â²Ù×÷Òì³££¬ÇëÖØÊÔ";
+			String errorMsg = "æ•°æ®åº“æ“ä½œå¼‚å¸¸ï¼Œè¯·é‡è¯•";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		}
-		aCheckGrade(request, response);
 	}
 
-	//¹ÜÀíÔ±²é¿´³É¼¨
-	private void aCheckGrade(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+
+	// ç®¡ç†å‘˜æŸ¥çœ‹æˆç»©
+	private void aCheckGrade(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		List<Grade> gList;
 		try {
 			gList = business.aCheckGrade();
@@ -109,131 +123,115 @@ public class GradeServlet extends HttpServlet {
 			request.getRequestDispatcher("/admin/checkGrade.jsp").forward(request, response);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
-			String errorMsg = "Êı¾İ¿â²Ù×÷Òì³££¬ÇëÖØÊÔ";
+			String errorMsg = "æ•°æ®åº“æ“ä½œå¼‚å¸¸ï¼Œè¯·é‡è¯•";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		} catch (IOException e) {
 			logger.error(e.getMessage());
-			String errorMsg = "IOÒì³£,ÇëÖØÊÔ";
+			String errorMsg = "IOå¼‚å¸¸,è¯·é‡è¯•";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		}
 	}
-	//Ñ§Éú²é¿´³É¼¨
-	private void sCheckGrade(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session=request.getSession();
-		String studentID=(String)session.getAttribute("userID");
+
+	// å­¦ç”ŸæŸ¥çœ‹æˆç»©
+	private void sCheckGrade(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		String studentID = (String) session.getAttribute("userID");
 		try {
-		PersonalGrade pGrade=getPersonalGrade(studentID);
-		request.setAttribute("pGrade", pGrade);
-		request.getRequestDispatcher("/client/student/showGrade.jsp").forward(request, response);
+			List<Grade> grade = business.getGrade(studentID);
+			request.setAttribute("Grade", grade);
+			request.getRequestDispatcher("/client/student/showGrade.jsp").forward(request, response);
 		} catch (IOException e) {
 			logger.error(e.getMessage());
-			String errorMsg = "IOÒì³£,ÇëÖØÊÔ";
+			String errorMsg = "IOå¼‚å¸¸,è¯·é‡è¯•";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
-			String errorMsg = "Êı¾İ¿â²Ù×÷Òì³££¬ÇëÖØÊÔ";
+			String errorMsg = "æ•°æ®åº“æ“ä½œå¼‚å¸¸ï¼Œè¯·é‡è¯•";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		}
 	}
-	//½ÌÊ¦»ñÈ¡¸öÈË³É¼¨ĞÅÏ¢
-	private void getGrade(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		String studentID=request.getParameter("studentID");
+
+	// æ•™å¸ˆè·å–ä¸ªäººæˆç»©ä¿¡æ¯
+	private void getStuGrade(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String condition = request.getParameter("condition");
+		String ways = request.getParameter("ways");
+		HttpSession session = request.getSession();
+		String teacherId = (String) session.getAttribute("userID");
 		try {
-		PersonalGrade pGrade=getPersonalGrade(studentID);
-		request.setAttribute("pGrade", pGrade);
-		request.getRequestDispatcher("/client/teacher/showGrade.jsp").forward(request, response);
+			List<Grade> grade = null;
+			if (ways.equals("Title")) {
+				grade = business.tGetGradeByTitle(condition, teacherId);
+			} else {
+				grade = business.tGetGradeByUid(condition, teacherId);
+			}
+			request.setAttribute("grade", grade);
+			request.getRequestDispatcher("/client/teacher/showGrade.jsp").forward(request, response);
 		} catch (IOException e) {
 			logger.error(e.getMessage());
-			String errorMsg = "IOÒì³£,ÇëÖØÊÔ";
+			String errorMsg = "IOå¼‚å¸¸,è¯·é‡è¯•";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
-			String errorMsg = "Êı¾İ¿â²Ù×÷Òì³££¬ÇëÖØÊÔ";
+			String errorMsg = "æ•°æ®åº“æ“ä½œå¼‚å¸¸ï¼Œè¯·é‡è¯•";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		}
 	}
-	//½ÌÊ¦²é¿´³É¼¨±í
-	private void tCheckGrade(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+
+	// æ•™å¸ˆæŸ¥çœ‹æˆç»©è¡¨
+	private void tCheckGrade(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		String teacherId = (String) session.getAttribute("userID");
 		try {
-			List<GradeTable> tList=business.getGradeTable();
+			List<Grade> tList = business.tCheckGrade(teacherId);
 			request.setAttribute("tList", tList);
 			request.getRequestDispatcher("/client/teacher/checkGrade.jsp").forward(request, response);
 		} catch (IOException e) {
 			logger.error(e.getMessage());
-			String errorMsg = "IOÒì³£,ÇëÖØÊÔ";
+			String errorMsg = "IOå¼‚å¸¸,è¯·é‡è¯•";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
-			String errorMsg = "Êı¾İ¿â²Ù×÷Òì³££¬ÇëÖØÊÔ";
+			String errorMsg = "æ•°æ®åº“æ“ä½œå¼‚å¸¸ï¼Œè¯·é‡è¯•";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		}
 	}
-	//»ñµÃ¸öÈË³É¼¨
-	private PersonalGrade getPersonalGrade(String studentID) throws SQLException{
-		PersonalGrade pGrade=new PersonalGrade();
-		pGrade.setStudentID(studentID);
-		List<Grade> grades=business.getGrade(studentID);
-		for(Grade grade:grades){
-			if(grade.getGradeType().equals("´ó×÷Òµ")){
-				pGrade.setHomework(grade.getScore());
-			}
-			else if(grade.getGradeType().equals("±¨¸æ")){
-				pGrade.setReport(grade.getScore());
-			}
-			else if(grade.getGradeType().equals("¿ÎÌÃ»¥¶¯")){
-				pGrade.setInteraction(grade.getScore());
-			}
-			else if(grade.getGradeType().equals("ÆÚÖĞ¿¼ÊÔ")){
-				pGrade.setMiddleTest(grade.getScore());
-			}
-			else if(grade.getGradeType().equals("ÆÚÄ©¿¼ÊÔ")){
-				pGrade.setFinalTest(grade.getScore());
-			}
-		}
-		double finalScore=Double.parseDouble(pGrade.getHomework())+
-				Double.parseDouble(pGrade.getReport())+
-				Double.parseDouble(pGrade.getInteraction())+
-				Double.parseDouble(pGrade.getMiddleTest())+
-				Double.parseDouble(pGrade.getFinalTest());
-		pGrade.setFinalScore(String.valueOf(finalScore));
-		return pGrade;
-	}
 
-	private void inputGrade(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {		
-		Grade grade=new Grade();
+	// å½•å…¥æˆç»©
+	private void inputGrade(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		Grade grade = new Grade();
 		try {
 			BeanUtils.populate(grade, request.getParameterMap());
 			business.inputGrade(grade);
-			request.setAttribute("message", "<script type='text/javascript'>alert('Ìí¼Ó³É¹¦£¡')</script>");
-			request.getRequestDispatcher("/admin/inputGrade.jsp").forward(request, response);
+			request.setAttribute("message", "<script type='text/javascript'>alert('æ·»åŠ æˆåŠŸï¼')</script>");
+			request.getRequestDispatcher("/client/teacher/inputGrade.jsp").forward(request, response);
 		} catch (IOException e) {
 			logger.error(e.getMessage());
-			String errorMsg = "IOÒì³£,ÇëÖØÊÔ";
+			String errorMsg = "IOå¼‚å¸¸,è¯·é‡è¯•";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
-			String errorMsg = "Êı¾İ¿â²Ù×÷Òì³££¬ÇëÖØÊÔ";
+			String errorMsg = "æ•°æ®åº“æ“ä½œå¼‚å¸¸ï¼Œè¯·é‡è¯•";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
-		}catch (IllegalAccessException | InvocationTargetException e) {
+		} catch (IllegalAccessException | InvocationTargetException e) {
 			logger.error(e.getMessage());
-			String errorMsg = "Î´ÖªÒì³££¬ÇëÖØÊÔ»òÁªÏµ¹ÜÀíÔ±";
+			String errorMsg = "æœªçŸ¥å¼‚å¸¸ï¼Œè¯·é‡è¯•æˆ–è”ç³»ç®¡ç†å‘˜";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
-		} 
+		}
 	}
 
 }

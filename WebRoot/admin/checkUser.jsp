@@ -10,6 +10,7 @@
   
   <body>
     <h4 align="center">所有用户列表</h4>
+    <hr>
   	<c:if test="${empty uList }">
   		没有录入用户！
   	</c:if>

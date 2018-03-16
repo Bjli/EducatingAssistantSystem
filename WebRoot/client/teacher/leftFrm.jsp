@@ -163,8 +163,11 @@
 					href="${pageContext.request.contextPath}/servlet/AnswerServlet?operation=checkAnswer"
 					target="middleFrame">批改作业</a><i></i></li>
 				<li><cite></cite><a
-					href="${pageContext.request.contextPath}/servlet/GradeServlet?operation=aCheckGrade"
+					href="${pageContext.request.contextPath}/servlet/GradeServlet?operation=tCheckGrade"
 					target="middleFrame">查看成绩</a><i></i></li>
+				<li><cite></cite><a
+					href="${pageContext.request.contextPath}/client/teacher/seachGrade.jsp"
+					target="middleFrame">成绩检索</a><i></i></li>
 			</ul>
 		</dd>
 

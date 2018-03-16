@@ -16,32 +16,26 @@
 	<c:if test="${!empty gList}">
     	<table border="1" width="80%" align="center">
     		<tr>
-    			<td width="40%">学号</td>
-    			<td>成绩类型</td>
+    			<td width="20%">学号</td>
+    			<td>作业题目</td>
     			<td>分数</td>
-    			<td>修改分数</td>
+    			<td>评语</td>
     			<td>操作</td>
     		</tr>
+    		<%int sum=0; %>
     		<c:forEach items="${gList}" var="c">
     			<tr height="5">
-    			<td>${c.studentID }</td>
-    			<td>${c.gradeType }</td>
+    			<%sum++; %>
+    			<td>${c.userId }</td>
+    			<td>${c.workTitle }</td>
     			<td>${c.score }</td>
-    			<td>
-    				<form action="${pageContext.request.contextPath}/servlet/GradeServlet?operation=modifyGrade" method="post">
-    				<input type="hidden" name="studentID" value=${c.studentID }> 
-    				<input type="hidden" name="gradeType" value=${c.gradeType }> 
-    				<div style="margin-top:15px">
-    				<input type="text" height="20" name="modifyScore"> 
-                    <input type="submit" value="修改">  
-                    </div>
-    				</form>
-    			</td>
-    			<td>
-    				<a href="javascript:if(confirm('确定要删除吗?'))window.location.href='${pageContext.request.contextPath}/servlet/GradeServlet?operation=deleteGrade&studentID=${c.studentID}'">删除</a>
-    			</td>
+    			<td>${c.remark }</td>
+    			<td><a href="#">无</a>
     			</tr>
     		</c:forEach>
+    		<tr align="right">
+    		<td colspan="5">总计发现：<%=sum %>条成绩记录</td>
+    		</tr>
     	</table>
     </c:if>
   </body>

@@ -14,12 +14,16 @@
 	whith: 80%;
 	background: white;
 }
- p{text-indent: 2em;}
+
+p {
+	text-indent: 2em;
+}
 </style>
 </head>
 <body>
 	<div class="answer">
 		<h2 align="center">${answerinfo.worktitle}</h2>
+		<hr>
 		<h4 align="left">解：</h4>
 		<p>${answerinfo.content}</p>
 	</div>

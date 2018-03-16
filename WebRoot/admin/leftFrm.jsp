@@ -67,8 +67,8 @@ $(function(){
     <dd>
     <div class="title"><span><img src="../images/leftico03.png" /></span>&nbsp&nbsp成绩管理</div>
     <ul class="menuson">
-        <li><cite></cite><a href="inputGrade.jsp" target="middleFrame">录入成绩</a><i></i></li>
         <li><cite></cite><a href="${pageContext.request.contextPath}/servlet/GradeServlet?operation=aCheckGrade" target="middleFrame">查看成绩</a><i></i></li>
+                <li><cite></cite><a href="inputGrade.jsp" target="middleFrame">修改成绩</a><i></i></li>
         </ul>     
     </dd>      
     

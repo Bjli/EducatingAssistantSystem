@@ -46,14 +46,22 @@ public class AnswerServlet extends HttpServlet {
 		}
 	}
 
+	
 	//通过标识id来获取答题详情
 	private void getAnswer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		String id = request.getParameter("id");
+		HttpSession session=request.getSession();
+		String userType=(String)session.getAttribute("userType");
 		AnswerInfo answerinfo = null;
 		try{
 		answerinfo = business.getAnswer(id);
 		request.setAttribute("answerinfo", answerinfo);
-		request.getRequestDispatcher("/client/student/getAnswer.jsp").forward(request, response);
+		if(userType.equals("学生")){
+			request.getRequestDispatcher("/client/student/getAnswer.jsp").forward(request, response);
+		} else {
+			request.getRequestDispatcher("/client/teacher/inputGrade.jsp").forward(request, response);
+		}
+		
 	} catch (SQLException e) {
 		logger.error(e.getMessage());
 		String errorMsg = "数据库操作异常，请重试";
@@ -113,7 +121,6 @@ public class AnswerServlet extends HttpServlet {
 	// 回答作业
 	private void addAnswer(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		AnswerInfo answer = new AnswerInfo();
 		answer.setAnswerid(IdGenerator.genPrimaryKey());
 		try {

@@ -22,7 +22,6 @@ import dao.impl.UserDaoImpl;
 import domain.AnswerInfo;
 import domain.FileInfo;
 import domain.Grade;
-import domain.GradeTable;
 import domain.Notice;
 import domain.User;
 import service.BusinessService;
@@ -84,8 +83,8 @@ public class BusinessServiceImpl implements BusinessService {
 	public void inputGrade(Grade grade) throws SQLException {
 		gDao.inputGrade(grade);
 	}
-	public void deleteGrade(Grade grade) throws SQLException {
-		gDao.deleteGrade(grade);
+	public void deleteGrade(String userid,String workId) throws SQLException {
+		gDao.deleteGrade(userid,workId);
 		
 	}
 	public void modifyGrade(Grade grade) throws SQLException {
@@ -94,41 +93,40 @@ public class BusinessServiceImpl implements BusinessService {
 	public List<Grade> aCheckGrade() throws SQLException {
 		return gDao.aCheckGrade();
 	}
-	public List<GradeTable> getGradeTable() throws SQLException {
-		return gDao.getGradeTable();
+	
+	public List<Grade> tCheckGrade(String teacherId) throws SQLException {
+		return gDao.tCheckGrade(teacherId);
 	}
+
+	public List<Grade> tGetGradeByUid(String studentID,String teacherId) throws SQLException {
+		return gDao.tGetGradeByUid(studentID, teacherId);
+	}
+	
 	public List<Grade> getGrade(String studentID) throws SQLException {
 		return gDao.getGrade(studentID);
 	}
 	
+	public List<Grade> tGetGradeByTitle(String workTitle,String teacherId) throws SQLException {
+		return gDao.tGetGradeByTitle(workTitle,teacherId);
+	}
+
+	
 	//´ðÌâÄ£¿é
 	private AnswerDao aDao = new AnswerDaoImp();
 	public void addAnswer(AnswerInfo answer) throws SQLException, ParseException {
-		// TODO Auto-generated method stub
-		System.out.println(" aDao.addAnswer(answer);");
 		 aDao.addAnswer(answer);
-		
 	}
-	@Override
 	public void deleteAnswer(String id) throws SQLException {
-		// TODO Auto-generated method stub
 		aDao.deleteAnswer(id);
-		
 	}
-	@Override
 	public List<AnswerInfo> checkAnswerS(String id) throws SQLException {
-		// TODO Auto-generated method stub
 		return aDao.checkAnswerS(id);
 	}
-	@Override
 	public List<AnswerInfo> checkAnswerT(String id) throws SQLException {
-		// TODO Auto-generated method stub
 		return aDao.checkAnswerT(id);
 	}
-	@Override
 	public AnswerInfo getAnswer(String id) throws SQLException {
-		// TODO Auto-generated method stub
 		return aDao.getAnswer(id);
 	}
-	
+
 }

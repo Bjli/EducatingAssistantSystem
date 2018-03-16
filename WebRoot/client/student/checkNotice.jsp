@@ -10,6 +10,7 @@
 
 <body>
 	<h4 align="center">通知列表</h4>
+	<hr>
 	<c:if test="${empty nList }">
   		尚未发布通知！
   	</c:if>
@@ -28,7 +29,8 @@
 					<td>${c.author }</td>
 					<td>${c.releaseDate }</td>
 					<c:if test="${c.identity == '教师'}">
-						<td><a href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=getNoticeForAnswer&id=${c.id}">答题</a></td>
+						<td><a
+							href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=getNotice&id=${c.id}">答题</a></td>
 					</c:if>
 					<c:if test="${c.identity =='管理员'}">
 						<td><a>无</a></td>

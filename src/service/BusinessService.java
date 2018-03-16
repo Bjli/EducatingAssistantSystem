@@ -12,7 +12,6 @@ import org.apache.commons.fileupload.FileItem;
 import domain.AnswerInfo;
 import domain.FileInfo;
 import domain.Grade;
-import domain.GradeTable;
 import domain.Notice;
 import domain.User;
 
@@ -36,11 +35,14 @@ public interface BusinessService {
 	Notice getNotice(String id) throws SQLException;
 	//成绩管理模块
 	void inputGrade(Grade grade) throws SQLException;
-	void deleteGrade(Grade grade) throws SQLException;
+	void deleteGrade(String userid,String workId) throws SQLException;
 	void modifyGrade(Grade grade) throws SQLException;
 	List<Grade> aCheckGrade() throws SQLException;
-	List<GradeTable> getGradeTable() throws SQLException;
+	List<Grade> tCheckGrade(String teacherId) throws SQLException;
+	List<Grade> tGetGradeByUid(String studentID,String teacherId) throws SQLException;
 	List<Grade> getGrade(String studentID) throws SQLException;
+	List<Grade> tGetGradeByTitle(String workTitle,String teacherId) throws SQLException;
+	
 	
 	//答题模块
 	void addAnswer(AnswerInfo answer) throws SQLException, ParseException;

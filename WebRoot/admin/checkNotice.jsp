@@ -10,6 +10,7 @@
   
   <body>
     <h4 align="center">通知列表</h4>
+    <hr>
   	<c:if test="${empty nList }">
   		尚未发布通知！
   	</c:if>

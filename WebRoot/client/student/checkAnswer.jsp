@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -9,6 +9,7 @@
 </head>
 <body>
 	<h4 align="center">作业列表</h4>
+	<hr>
 	<c:if test="${empty nList }">
   		未提交过作业！
   	</c:if>
@@ -27,7 +28,7 @@
 						href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=getNotice&id=${c.workid}">${c.worktitle}</a></td>
 					<td>${c.workuser }</td>
 					<td><a
-					    href="${pageContext.request.contextPath}/servlet/AnswerServlet?operation=getAnswer&id=${c.answerid}">点击查看作答详情</a>
+						href="${pageContext.request.contextPath}/servlet/AnswerServlet?operation=getAnswer&id=${c.answerid}">点击查看作答详情</a>
 					<td>${c.date }</td>
 					<td>${c.state}</td>
 				</tr>

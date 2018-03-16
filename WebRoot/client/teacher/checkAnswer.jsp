@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -9,6 +9,7 @@
 </head>
 <body>
 	<h4 align="center">作业列表</h4>
+	<hr>
 	<c:if test="${empty nList }">
   		没有人提交过作业！
   	</c:if>
@@ -28,7 +29,13 @@
 					<td>${c.userid}</td>
 					<td>${c.date }</td>
 					<td>${c.state}</td>
-					<td><a href="#">批改</a></td>
+					<c:if test="${c.state =='已批改'}">
+						<td><a href="javascript:if(confirm('确定要删除吗?'))window.location.href='${pageContext.request.contextPath}/servlet/GradeServlet?operation=deleteGrade&workId=${c.workid}&userId=${c.userid}'">删除成绩</a></td>
+					</c:if>
+					<c:if test="${c.state =='已提交'}">
+						<td><a
+						href="${pageContext.request.contextPath}/servlet/AnswerServlet?operation=getAnswer&id=${c.answerid}">批改</a></td>
+					</c:if>
 				</tr>
 			</c:forEach>
 		</table>
