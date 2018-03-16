@@ -35,8 +35,9 @@
     			<td><a href="#">无</a>
     			</tr>
     		</c:forEach>
-    		<tr align="right">
-    		<td colspan="6">总计发现：<%=sum %>条成绩记录</td>
+    		<tr align="center">
+    		<td colspan="5">总计发现：<%=sum %>条成绩记录</td>
+    		<td align="center"><a href="${pageContext.request.contextPath}/servlet/GradeServlet?operation=ExportExcel&op=admin">导出成绩</a></td>
     		</tr>
     	</table>
     </c:if>

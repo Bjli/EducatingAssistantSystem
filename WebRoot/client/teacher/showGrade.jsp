@@ -9,7 +9,6 @@
 	<style type="text/css">
 	.gradeList{
 	padding:10px 10px;
-	
 	}
 	</style> 
   </head>
@@ -38,10 +37,12 @@
     			<td>${c.remark}</td>
     			</tr>
     		</c:forEach>
-    		<tr align="right"><td colspan="4">
+    		<tr align="center">
+    		<td colspan="3">
     		总计：<%=sum %>次成绩记录
     		</td>
-    		</tr>>
+    		<td align="center"><a href="${pageContext.request.contextPath}/servlet/GradeServlet?operation=ExportExcel&condition=${condition}&ways=${ways}&op=teacher">导出成绩</a></td>
+    		</tr>
     	</table>
     </c:if>
     </div>
