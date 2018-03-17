@@ -128,7 +128,7 @@ public class FileServlet extends HttpServlet {
 	private void uploadFile(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String userid = (String) session.getAttribute("userId");
+		String userid = (String) session.getAttribute("userID");
 		FileInfo fileinfo = new FileInfo();
 		fileinfo.setId(IdGenerator.genPrimaryKey());
 		fileinfo.setUploaderId(userid);
