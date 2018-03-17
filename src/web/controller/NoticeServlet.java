@@ -76,8 +76,10 @@ public class NoticeServlet extends HttpServlet {
 	private void deleteNotice(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String id=request.getParameter("id");
+		HttpSession session=request.getSession();
 		try {
 			business.deleteNotice(id);
+			logger.info((String)session.getAttribute("userID")+"do deleteNotice,notice_id:"+id);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 			String errorMsg = "数据库操作异常，请重试";
@@ -120,13 +122,14 @@ public class NoticeServlet extends HttpServlet {
 	private void releaseNotice(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
-		String userType=(String)session.getAttribute("userType");
+		String userId=(String)session.getAttribute("userID");
 		Notice notice=new Notice();
 		notice.setId(IdGenerator.genPrimaryKey());
-		
+		notice.setAuthorId(userId);
 		try {
 			BeanUtils.populate(notice, request.getParameterMap());
 			business.releaseNotice(notice);
+			logger.info(userId+":do releaseNotice,notice_ID:"+notice.getId());
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 			String errorMsg = "数据库操作异常，请重试";
@@ -145,12 +148,7 @@ public class NoticeServlet extends HttpServlet {
 		} 
 		request.setAttribute("message", "<script type='text/javascript'>alert('发布成功！')</script>");
 		try {
-			if(userType.equals("管理员")){
-				request.getRequestDispatcher("/admin/releaseNotice.jsp").forward(request, response);
-			}
-			else if(userType.equals("教师")){
-				request.getRequestDispatcher("/client/teacher/releaseNotice.jsp").forward(request, response);
-			}
+				request.getRequestDispatcher("/common/releaseNotice.jsp").forward(request, response);
 		} catch (IOException e) {
 			logger.error(e.getMessage());
 			String errorMsg = "IO异常,请重试";

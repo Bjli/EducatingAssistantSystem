@@ -41,6 +41,9 @@ public class BusinessServiceImpl implements BusinessService {
 	public List<User> checkUser() throws SQLException {
 		return uDao.checkUser();
 	}
+	public User getUser(String userid) throws SQLException {
+		return uDao.getUser(userid);
+	}
 	public String findPWD(User user) throws SQLException {
 		return uDao.findPWD(user);
 	}

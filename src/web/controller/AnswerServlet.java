@@ -123,9 +123,12 @@ public class AnswerServlet extends HttpServlet {
 			throws ServletException, IOException {
 		AnswerInfo answer = new AnswerInfo();
 		answer.setAnswerid(IdGenerator.genPrimaryKey());
+		HttpSession session=request.getSession();
+		answer.setUsername((String)session.getAttribute("userName"));
 		try {
 			BeanUtils.populate(answer, request.getParameterMap());
 			business.addAnswer(answer);
+			logger.info((String)session.getAttribute("userID")+"do addAnswer,for:"+answer.getAnswerid());
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 			String errorMsg = "数据库操作异常，请重试";

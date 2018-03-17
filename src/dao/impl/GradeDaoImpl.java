@@ -14,9 +14,9 @@ public class GradeDaoImpl implements GradeDao {
 	private QueryRunner qr = new QueryRunner(DBCPUtil.getDataSource());
 	//上传成绩
 	public void inputGrade(Grade grade) throws SQLException {
-		String sql="insert into Grade(userId,workId,workTitle,teacherId,score,remark) values(?,?,?,?,?,?)";
+		String sql="insert into Grade(userId,username,workId,workTitle,teacherId,teachername,score,remark) values(?,?,?,?,?,?,?,?)";
 		String sql2="update answer set state=? where workId=?";
-		qr.update(sql,grade.getUserId(),grade.getWorkId(),grade.getWorkTitle(),grade.getTeacherId(),grade.getScore(),grade.getRemark());
+		qr.update(sql,grade.getUserId(),grade.getUserName(),grade.getWorkId(),grade.getWorkTitle(),grade.getTeacherId(),grade.getTeacherName(),grade.getScore(),grade.getRemark());
 		qr.update(sql2,"已批改",grade.getWorkId());
 	}
 
@@ -32,12 +32,6 @@ public class GradeDaoImpl implements GradeDao {
 		return qr.query(sql, new BeanListHandler<Grade>(Grade.class),teacherId);
 	}
 	
-//	//教师获得成绩单
-//	public List<GradeTable> getGradeTable() throws SQLException {
-//		String sql="select * from TeacherView";
-//		return qr.query(sql, new BeanListHandler<GradeTable>(GradeTable.class));
-//	}
-//	
 	//学生获取个人成绩详细信息
 	public List<Grade> getGrade(String studentID) throws SQLException {
 		return qr.query("select * from Grade where userID=?", new BeanListHandler<Grade>(Grade.class),studentID);
@@ -49,6 +43,7 @@ public class GradeDaoImpl implements GradeDao {
 	}
 	//教师通过作业获取作答详情
 	public 	List<Grade> tGetGradeByTitle(String workTitle,String teacherId) throws SQLException {
+		System.out.println(workTitle);
 		return qr.query("select * from Grade where workTitle=? and teacherId=?",new BeanListHandler<Grade>(Grade.class), workTitle,teacherId);
 	}
 

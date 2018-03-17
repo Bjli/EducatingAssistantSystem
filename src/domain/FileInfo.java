@@ -10,6 +10,16 @@ public class FileInfo implements Serializable {
 	private String savePath;//文件保存目录
 	private String description;//文件描述
 	private String uploader;//上传者
+	private String uploaderId;//上传者工号
+	
+	
+	
+	public void setUploaderId(String uploaderId) {
+		this.uploaderId = uploaderId;
+	}
+	public String getUploaderId() {
+		return uploaderId;
+	}
 	public String getId() {
 		return id;
 	}

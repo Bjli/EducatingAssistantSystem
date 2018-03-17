@@ -17,7 +17,7 @@
 	<c:if test="${!empty nList}">
 		<table border="1" width="80%" align="center">
 			<tr>
-				<td width="40%">标题</td>
+				<td width="35%">标题</td>
 				<td>发布者</td>
 				<td>发布时间</td>
 
@@ -28,7 +28,6 @@
 						href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=getNotice&id=${c.id}">${c.title }</a></td>
 					<td>${c.author }</td>
 					<td>${c.releaseDate }</td>
-
 				</tr>
 			</c:forEach>
 		</table>

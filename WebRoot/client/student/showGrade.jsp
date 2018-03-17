@@ -27,7 +27,7 @@
 					<td>${c.workTitle }</td>
 					<%sum++; %>
 					<td>${c.score }</td>
-					<td>${c.teacherId }</td>
+					<td>${c.teacherName }</td>
 					<td>${c.remark }</td>
 				</tr>
 			</c:forEach>

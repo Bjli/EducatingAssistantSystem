@@ -78,8 +78,10 @@ public class FileServlet extends HttpServlet {
 	private void deleteFile(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String id = request.getParameter("id");
+		HttpSession session = request.getSession();
 		try {
 			business.deleteFile(id);
+			logger.info((String) session.getAttribute("userID")+"do deleteFile,delete:"+id);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 			String errorMsg = "数据库操作异常，请重试";
@@ -126,9 +128,10 @@ public class FileServlet extends HttpServlet {
 	private void uploadFile(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String userType = (String) session.getAttribute("userType");
+		String userid = (String) session.getAttribute("userId");
 		FileInfo fileinfo = new FileInfo();
 		fileinfo.setId(IdGenerator.genPrimaryKey());
+		fileinfo.setUploaderId(userid);
 		//增加按时间存储文件
 		Date d = new Date();
 		int day = d.getDate();
@@ -187,6 +190,7 @@ public class FileServlet extends HttpServlet {
 					filename = filename.substring(filename.lastIndexOf("\\") + 1);
 					fileinfo.setName(filename);
 					business.uploadFile(fileinfo, item);
+					logger.info(userid+"do uploadFile,filename:"+filename);
 					request.setAttribute("message", "<script type='text/javascript'>alert('上传成功！')</script>");
 
 					InputStream is = item.getInputStream();
@@ -201,11 +205,7 @@ public class FileServlet extends HttpServlet {
 				}
 			}
 			try {
-				if (userType.equals("管理员")) {
-					request.getRequestDispatcher("/admin/uploadFile.jsp").forward(request, response);
-				} else if (userType.equals("教师")) {
-					request.getRequestDispatcher("/client/teacher/uploadFile.jsp").forward(request, response);
-				}
+					request.getRequestDispatcher("/common/uploadFile.jsp").forward(request, response);
 			} catch (IOException e) {
 				logger.error(e.getMessage());
 				String errorMsg = "IO异常,请重试";

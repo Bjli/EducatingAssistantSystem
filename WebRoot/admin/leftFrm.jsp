@@ -76,7 +76,7 @@ $(function(){
     <dd>
     <div class="title"><span><img src="../images/leftico02.png" /></span>&nbsp&nbsp通知管理</div>
     <ul class="menuson">
-        <li><cite></cite><a href="releaseNotice.jsp" target="middleFrame">发布通知</a><i></i></li>
+        <li><cite></cite><a href="../common/releaseNotice.jsp" target="middleFrame">发布通知</a><i></i></li>
         <li><cite></cite><a href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=checkNotice" target="middleFrame">查看通知</a><i></i></li>
         </ul>
     </dd> 
@@ -84,7 +84,7 @@ $(function(){
     <dd>
     <div class="title"><span><img src="../images/leftico04.png" /></span>&nbsp&nbsp文件管理</div>
     <ul class="menuson">
-        <li><cite></cite><a href="uploadFile.jsp" target="middleFrame">上传文件</a><i></i></li>
+        <li><cite></cite><a href="../common/uploadFile.jsp" target="middleFrame">上传文件</a><i></i></li>
         <li><cite></cite><a href="${pageContext.request.contextPath}/servlet/FileServlet?operation=checkFile" target="middleFrame">查看文件</a><i></i></li>
         </ul>
     </dd> 

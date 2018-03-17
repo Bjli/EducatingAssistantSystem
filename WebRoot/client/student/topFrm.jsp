@@ -14,7 +14,7 @@
  <body style="background-color:#066CAD;">
  
     <div class="topleft">
-      <div style="margin-left:80%; margin-top:15px;color:white" >您好！${sessionScope.userType}用户:${sessionScope.userID}</div> 
+      <div style="margin-left:80%; margin-top:15px;color:white" >您好！${sessionScope.userType}用户:${sessionScope.userName}</div> 
       <h2 align="center">实验报告教学管理系统</h2>
     </div>
   </body>

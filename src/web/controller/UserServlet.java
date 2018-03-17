@@ -82,6 +82,7 @@ public class UserServlet extends HttpServlet {
 		try {
 			business.modifyPWD(user);
 			request.setAttribute("message", "<script type='text/javascript'>alert('修改成功')</script>");
+			logger.info(userID+": do modifyPWD");
 			request.getRequestDispatcher("/common/modifyPWD.jsp").forward(request, response);
 		} catch (IOException e) {
 			logger.error(e.getMessage());
@@ -89,7 +90,6 @@ public class UserServlet extends HttpServlet {
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		} catch (SQLException e) {
-
 			logger.error(e.getMessage());
 			String errorMsg = "数据库操作异常，请重试";
 			request.setAttribute("errorMsg", errorMsg);
@@ -104,6 +104,7 @@ public class UserServlet extends HttpServlet {
 			BeanUtils.populate(user, request.getParameterMap());
 			business.findPWD(user);
 			request.setAttribute("message", "<script type='text/javascript'>alert('密码已发送至你的邮箱！')</script>");
+			logger.info(user.getUserID()+": do modifyPWD.");
 			request.getRequestDispatcher("/common/login.jsp").forward(request, response);
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			logger.error(e.getMessage());
@@ -125,10 +126,13 @@ public class UserServlet extends HttpServlet {
 			BeanUtils.populate(user, request.getParameterMap());
 			loginRes = business.login(user);
 			if (loginRes.equals("登录成功")) {
+				User login = business.getUser(user.getUserID());
+				logger.info(login.getUserID()+"///"+login.getUserName()+":login_success");
 				HttpSession session = request.getSession(true);
 				// session.setMaxInactiveInterval(60);
-				session.setAttribute("userID", user.getUserID());
-				session.setAttribute("userType", user.getUserType());
+				session.setAttribute("userID", login.getUserID());
+				session.setAttribute("userName", login.getUserName());
+				session.setAttribute("userType", login.getUserType());
 				if (user.getUserType().equals("管理员")) {
 					response.sendRedirect("/TeachingAssistantSystem/admin/mainFrm.jsp");
 				} else if (user.getUserType().equals("教师")) {
@@ -169,6 +173,7 @@ public class UserServlet extends HttpServlet {
 	// 删除用户
 	private void deleteUser(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		String userID = request.getParameter("userID");
 		String userType = request.getParameter("userType");
 		User user = new User();
@@ -182,6 +187,7 @@ public class UserServlet extends HttpServlet {
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		}
+		logger.info((String) session.getAttribute("userID")+":do deleteUser:"+userID);
 		checkUser(request, response);
 	}
 
@@ -216,6 +222,7 @@ public class UserServlet extends HttpServlet {
 			BeanUtils.populate(user, request.getParameterMap());
 			business.addUser(user);
 			request.setAttribute("message", "<script type='text/javascript'>alert('注册成功！')</script>");
+			logger.info("User:"+user.getUserID()+"register.");
 			if (userId == "" || userId == null) {
 				request.getRequestDispatcher("/common/login.jsp").forward(request, response);
 			} else {

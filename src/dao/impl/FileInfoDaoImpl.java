@@ -32,11 +32,11 @@ public class FileInfoDaoImpl implements FileInfoDao {
 //		System.out.println(fileinfo.getId());
 //		System.out.println(fileinfo.getUploader());
 //		System.out.println(fileinfo.getUploadTime());
-		String sql="insert into FileInfo(id,name,uploadTime,savePath,description,uploader) values(?,?,?,?,?,?)";
+		String sql="insert into FileInfo(id,name,uploadTime,savePath,description,uploader,uploaderId) values(?,?,?,?,?,?,?)";
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");  
 		java.util.Date date = sdf.parse(fileinfo.getUploadTime()); 
 		Date sDate=new Date(date.getTime());
-		qr.update(sql, fileinfo.getId(),fileinfo.getName(),sDate,fileinfo.getSavePath(),fileinfo.getDescription(),fileinfo.getUploader());
+		qr.update(sql, fileinfo.getId(),fileinfo.getName(),sDate,fileinfo.getSavePath(),fileinfo.getDescription(),fileinfo.getUploader(),fileinfo.getUploaderId());
 		//已经确保文件名（已经加上UUID）不为空，文件大小不超过限制
 	    File saveFile=new File(fileinfo.getSavePath(), fileinfo.getName());
 		try {

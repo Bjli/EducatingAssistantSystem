@@ -18,6 +18,7 @@
 		<table border="1" width="60%" align="center">
 			<tr align="center">
 				<td width="25%">学号</td>
+				<td>姓名</td>
 				<td>作业名称</td>
 				<td>分数</td>
 				<td width="25%">评语</td>
@@ -25,6 +26,7 @@
 			<c:forEach items="${tList}" var="c">
 				<tr height="15" align="center">
 					<td>${c.userId }</td>
+					<td>${c.userName }</td>
 					<td>${c.workTitle }</td>
 					<td>${c.score }</td>
 					<td>${c.remark}</td>

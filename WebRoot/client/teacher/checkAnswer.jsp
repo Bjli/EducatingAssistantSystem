@@ -16,8 +16,9 @@
 	<c:if test="${!empty nList}">
 		<table border="1" width="85%" align="center">
 			<tr>
-				<td width="40%">题目要求</td>
+				<td width="25%">题目要求</td>
 				<td width="15%">学号</td>
+				<td width="15%">姓名</td>
 				<td width="20%">完成时间</td>
 				<td>状态</td>
 				<td>操作</td>
@@ -27,6 +28,7 @@
 					<td><a
 						href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=getNotice&id=${c.workid}">${c.worktitle}</a></td>
 					<td>${c.userid}</td>
+					<td>${c.username}</td>
 					<td>${c.date }</td>
 					<td>${c.state}</td>
 					<c:if test="${c.state =='已批改'}">

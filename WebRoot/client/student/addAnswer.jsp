@@ -52,7 +52,7 @@ function Check_form()
 		<hr>
 		<h4 align="center">学生作答</h4>
 		<form
-			action="${pageContext.request.contextPath}/servlet/AnswerServlet?operation=addAnswer&workid=${notice.id}&worktitle=${notice.title}&workuser=${notice.author}"
+			action="${pageContext.request.contextPath}/servlet/AnswerServlet?operation=addAnswer&workid=${notice.id}&worktitle=${notice.title}&workuser=${notice.author}&workuserid=${notice.authorId}"
 			onsubmit="return Check_form()" method="post">
 			<table border="1" width="100%">
 				<tr>

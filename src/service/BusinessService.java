@@ -19,6 +19,7 @@ public interface BusinessService {
 	//系统管理模块
 	String login(User user) throws SQLException;
 	void addUser(User user) throws SQLException;
+	User getUser(String userid) throws SQLException;
 	void deleteUser(User user) throws SQLException;
 	List<User> checkUser() throws SQLException;
 	String findPWD(User user) throws SQLException;

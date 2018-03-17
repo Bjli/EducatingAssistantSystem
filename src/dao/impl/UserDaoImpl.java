@@ -56,6 +56,12 @@ public class UserDaoImpl implements UserDao {
 	public List<User> checkUser() throws SQLException {
 		return qr.query("select * from User", new BeanListHandler<User>(User.class));
 	}
+	//获取登录用户的信息
+	public User getUser(String id) throws SQLException {
+		List<User> user;
+		user = qr.query("select * from User where UserID=?",new BeanListHandler<User>(User.class),id);
+		return user.get(0);
+	}
 	//找回密码
 	public String findPWD(User user) throws SQLException {
 		User dbUser=null;

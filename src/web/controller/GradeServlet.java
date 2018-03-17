@@ -3,6 +3,7 @@ package web.controller;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URLDecoder;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -75,20 +76,22 @@ public class GradeServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String op = request.getParameter("op");
 		HttpSession session = request.getSession();
-		String teacherId = (String) session.getAttribute("userID");
+		String userId = (String) session.getAttribute("userID");
 		List<Grade> gList;
 		try {
-			if(op.equals("admin")){
-				gList = business.aCheckGrade();	
+			if (op.equals("admin")) {
+				gList = business.aCheckGrade();
 			} else {
 				String condition = request.getParameter("condition");
 				String ways = request.getParameter("ways");
 				if (ways.equals("Title")) {
-					gList = business.tGetGradeByTitle(condition, teacherId);
+					gList = business.tGetGradeByTitle(condition, userId);
 				} else {
-					gList = business.tGetGradeByUid(condition, teacherId);
+					gList = business.tGetGradeByUid(condition, userId);
 				}
 			}
+			logger.info(userId + ":ExportExcel success.");
+
 			// 创建工作表
 			WritableWorkbook book = null;
 			response.reset();
@@ -103,7 +106,6 @@ public class GradeServlet extends HttpServlet {
 				response.setContentType("application/DOWLOAD");
 				response.setCharacterEncoding("UTF-8");
 
-		
 				// 设置工作表的标题
 				response.setHeader("Content-Disposition", "attachment; filename=Grdae_admin.xls");// 设置生成的文件名字
 				os = response.getOutputStream();
@@ -116,33 +118,34 @@ public class GradeServlet extends HttpServlet {
 				logger.error("导出excel出现IO异常", e1);
 			}
 			try {
-				WritableFont font = new  WritableFont(WritableFont.ARIAL, 20 ,WritableFont.BOLD);  
-                WritableCellFormat format = new  WritableCellFormat(font);
-                format.setAlignment(jxl.format.Alignment.CENTRE); 
-        		WritableFont font2 = new  WritableFont(WritableFont.ARIAL, 15);  
-                WritableCellFormat format2 = new  WritableCellFormat(font2);  
-        		WritableFont font3 = new  WritableFont(WritableFont.ARIAL, 13);  
-                WritableCellFormat format3 = new  WritableCellFormat(font3);  
- 
+				WritableFont font = new WritableFont(WritableFont.ARIAL, 20, WritableFont.BOLD);
+				WritableCellFormat format = new WritableCellFormat(font);
+				format.setAlignment(jxl.format.Alignment.CENTRE);
+				WritableFont font2 = new WritableFont(WritableFont.ARIAL, 15);
+				WritableCellFormat format2 = new WritableCellFormat(font2);
+				WritableFont font3 = new WritableFont(WritableFont.ARIAL, 13);
+				WritableCellFormat format3 = new WritableCellFormat(font3);
 
 				WritableSheet sheet = book.createSheet("学生成绩单", 0);
-				sheet.setColumnView(0,sheet.getCell(1,1).getContents().length()*2+12);
-				sheet.setColumnView(1,sheet.getCell(1,1).getContents().length()*3+15);
-				sheet.mergeCells(0,0,3,0); 
-				Label title = new Label(0, 0, "学生成绩统计表",format);
+				sheet.setColumnView(0, sheet.getCell(1, 1).getContents().length() * 2 + 12);
+				sheet.setColumnView(1, sheet.getCell(1, 1).getContents().length() * 3 + 15);
+				sheet.mergeCells(0, 0, 3, 0);
+				Label title = new Label(0, 0, "学生成绩统计表", format);
 				sheet.addCell(title);
 				// 表字段名
-				sheet.addCell(new jxl.write.Label(0, 1, "学号",format2));
-				sheet.addCell(new jxl.write.Label(1, 1, "作业名称",format2));
-				sheet.addCell(new jxl.write.Label(2, 1, "成绩",format2));
-				sheet.addCell(new jxl.write.Label(3, 1, "老师",format2));
+				sheet.addCell(new jxl.write.Label(0, 1, "学号", format2));
+				sheet.addCell(new jxl.write.Label(1, 1, "姓名", format2));
+				sheet.addCell(new jxl.write.Label(2, 1, "作业名称", format2));
+				sheet.addCell(new jxl.write.Label(3, 1, "成绩", format2));
+				sheet.addCell(new jxl.write.Label(4, 1, "老师", format2));
 
 				// 将数据追加
 				for (int i = 1; i < gList.size() + 1; i++) {
-					sheet.addCell(new jxl.write.Label(0, i+1, gList.get(i - 1).getUserId(),format3));
-					sheet.addCell(new jxl.write.Label(1, i+1, gList.get(i - 1).getWorkTitle(),format3));
-					sheet.addCell(new jxl.write.Label(2, i+1, gList.get(i - 1).getScore() + "",format3));
-					sheet.addCell(new jxl.write.Label(3, i+1, gList.get(i - 1).getTeacherId(),format3));
+					sheet.addCell(new jxl.write.Label(0, i + 1, gList.get(i - 1).getUserId(), format3));
+					sheet.addCell(new jxl.write.Label(1, i + 1, gList.get(i - 1).getUserName(), format3));
+					sheet.addCell(new jxl.write.Label(2, i + 1, gList.get(i - 1).getWorkTitle(), format3));
+					sheet.addCell(new jxl.write.Label(3, i + 1, gList.get(i - 1).getScore() + "", format3));
+					sheet.addCell(new jxl.write.Label(4, i + 1, gList.get(i - 1).getTeacherName(), format3));
 				}
 				book.write();
 				book.close();
@@ -170,6 +173,8 @@ public class GradeServlet extends HttpServlet {
 	// 修改成绩
 	private void modifyGrade(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		String userId = (String) session.getAttribute("userID");
 		String studentID = request.getParameter("userid");
 		String workTitle = request.getParameter("worktitle");
 		String score = request.getParameter("modifyscore");
@@ -186,6 +191,7 @@ public class GradeServlet extends HttpServlet {
 		try {
 			business.modifyGrade(grade);
 			request.setAttribute("message", "<script type='text/javascript'>alert('修改成功！')</script>");
+			logger.info(userId + "do modifyGrade,for stu:" + studentID + "_" + workTitle + "----" + score);
 			request.getRequestDispatcher("../admin/inputGrade.jsp").forward(request, response);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
@@ -205,9 +211,9 @@ public class GradeServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			List<AnswerInfo> nList = null;
 			nList = business.checkAnswerT((String) session.getAttribute("userID"));
+			logger.info((String) session.getAttribute("userID")+"do deleteGrade,for stu:"+userId+"_"+workId);
 			request.setAttribute("nList", nList);
 			request.getRequestDispatcher("/client/teacher/checkAnswer.jsp").forward(request, response);
-
 		} catch (IOException e) {
 			logger.error(e.getMessage());
 			String errorMsg = "IO异常,请重试";
@@ -320,10 +326,14 @@ public class GradeServlet extends HttpServlet {
 	// 录入成绩
 	private void inputGrade(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		Grade grade = new Grade();
+		grade.setTeacherId((String) session.getAttribute("userID"));
+		grade.setTeacherName((String) session.getAttribute("userName"));
 		try {
 			BeanUtils.populate(grade, request.getParameterMap());
 			business.inputGrade(grade);
+			logger.info(grade.getTeacherId()+"do inputGrade,for stu:"+grade.getUserId()+"_"+grade.getWorkTitle());
 			request.setAttribute("message", "<script type='text/javascript'>alert('添加成功！')</script>");
 			request.getRequestDispatcher("/client/teacher/inputGrade.jsp").forward(request, response);
 		} catch (IOException e) {

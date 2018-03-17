@@ -177,7 +177,7 @@
 			</div>
 			<ul class="menuson">
 				<li><cite></cite><a
-					href="${pageContext.request.contextPath}/client/teacher/releaseNotice.jsp"
+					href="${pageContext.request.contextPath}/common/releaseNotice.jsp"
 					target="middleFrame">发布通知</a><i></i></li>
 				<li><cite></cite><a
 					href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=checkNotice"
@@ -191,7 +191,7 @@
 			</div>
 			<ul class="menuson">
 				<li><cite></cite><a
-					href="${pageContext.request.contextPath}/client/teacher/uploadFile.jsp"
+					href="${pageContext.request.contextPath}/common/uploadFile.jsp"
 					target="middleFrame">上传文件</a><i></i></li>
 				<li><cite></cite><a
 					href="${pageContext.request.contextPath}/servlet/FileServlet?operation=checkFile"

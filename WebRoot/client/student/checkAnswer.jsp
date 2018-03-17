@@ -16,7 +16,7 @@
 	<c:if test="${!empty nList}">
 		<table border="1" width="85%" align="center">
 			<tr>
-				<td width="40%">题目要求</td>
+				<td width="25%">题目要求</td>
 				<td width="15%">发布者</td>
 				<td>我的作答</td>
 				<td width="20%">完成时间</td>

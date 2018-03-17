@@ -29,10 +29,10 @@ public class AnswerDaoImp implements AnswerDao {
 //		System.out.println(answer.getWorktitle());
 //		System.out.println(answer.getContent());
 //		System.out.println("////////////sql");
-		String sql = "insert into answer(answerID,userID,date,content,workid,worktitle,workuser,state) values(?,?,?,?,?,?,?,?)";
+		String sql = "insert into answer(answerID,userID,userName,date,content,workid,worktitle,workuser,state,workuserid) values(?,?,?,?,?,?,?,?,?,?)";
 		Date nowTime = new Date(); 
 		SimpleDateFormat time=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
-		qr.update(sql,answer.getAnswerid(), answer.getUserid(), time.format(nowTime), answer.getContent(),answer.getWorkid(),answer.getWorktitle(),answer.getWorkuser(),"已提交");
+		qr.update(sql,answer.getAnswerid(), answer.getUserid(),answer.getUsername(), time.format(nowTime), answer.getContent(),answer.getWorkid(),answer.getWorktitle(),answer.getWorkuser(),"已提交",answer.getWorkuserid());
 	}
 
 	@Override
@@ -51,10 +51,11 @@ public class AnswerDaoImp implements AnswerDao {
 	}
 
 	@Override
-	public List<AnswerInfo> checkAnswerT(String workuser) throws SQLException {
+	public List<AnswerInfo> checkAnswerT(String workuserid) throws SQLException {
 		// TODO Auto-generated method stub
-		String sql="select answerid,workid,worktitle,userid,date,state  from answer where workuser=? order by Date desc;";
-		return qr.query(sql, new BeanListHandler<AnswerInfo>(AnswerInfo.class),workuser);
+		System.out.println(workuserid);
+		String sql="select answerid,workid,worktitle,userid,username,date,state from answer where workuserid=? order by Date desc;";
+		return qr.query(sql, new BeanListHandler<AnswerInfo>(AnswerInfo.class),workuserid);
 	}
 
 	@Override
