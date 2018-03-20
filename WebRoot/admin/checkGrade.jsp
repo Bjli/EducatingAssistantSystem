@@ -10,6 +10,7 @@
 
 <body>
 	<h4 align="center">成绩列表</h4>
+	<hr>
 	<c:if test="${empty gList }">
   		尚未上传成绩！
   	</c:if>

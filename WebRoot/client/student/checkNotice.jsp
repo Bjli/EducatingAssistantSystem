@@ -28,11 +28,11 @@
 						href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=getNotice&id=${c.id}">${c.title }</a></td>
 					<td>${c.author }</td>
 					<td>${c.releaseDate }</td>
-					<c:if test="${c.identity == '教师'}">
+					<c:if test="${c.identity == '作业'}">
 						<td><a
 							href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=getNotice&id=${c.id}">答题</a></td>
 					</c:if>
-					<c:if test="${c.identity =='管理员'}">
+					<c:if test="${c.identity =='通知'}">
 						<td><a>无</a></td>
 					</c:if>
 				</tr>

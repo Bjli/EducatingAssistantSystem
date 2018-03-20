@@ -47,8 +47,8 @@ function Check_form()
 			<tr>
 				<td width="30%">发布者:</td>
 				<td><input type="text" name="author" id="user" />
-				    <input type="radio" name="identity" value="管理员" checked="checked" />管理员 
-				    <input type="radio" name="identity" value="教师" />教师</td>
+				    <input type="radio" name="identity" value="通知" checked="checked" />通知
+				    <input type="radio" name="identity" value="作业" />作业</td>
 			</tr>
 			<tr>
 				<td width="30%">发布时间:</td>

@@ -7,7 +7,6 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<script src="${pageContext.request.contextPath}/js/calendar.js" type="text/javascript"></script> 
 <style type="text/css">
 .lefttop {
 	background: url(../../images/lefttop.gif) repeat-x;
@@ -108,6 +107,10 @@
 .title {
 	cursor: pointer;
 }
+.link_me {
+	position: fixed;
+	bottom: 20px;
+}
 </style>
 
 <script language="JavaScript"
@@ -190,16 +193,17 @@
 			</ul>
 		</dd>
 	</dl>
-	    <hr>
-    <B><DIV ALIGN="center"></DIV>  
-<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">  
-<!--  
-document.write("<BR>")  
-calendar();  
-//-->  
-</SCRIPT>  
-</B> 
-
+		<div class="link_me">
+		<table>
+			<tr>
+				<td colspan="2"><font size="2" face="arial" color="grey">如遇到问题或在使用中有什么建议，请联系作者，谢谢。</font></td>
+			<tr>
+				<td><img alt="email" src="../../images/email.png" width="23px"
+					height="23px"></td>
+				<td><font size="3" face="arial" color="grey">: ljb_nwuer@163.com</font></td>
+			</tr>
+		</table>
+	</div>
 </body>
 
 </html>
