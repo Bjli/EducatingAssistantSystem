@@ -53,12 +53,12 @@ public class UserServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);// 防止创建Session
 		try {
 			if (session == null) {
-				response.sendRedirect("/TeachingAssistant/common/login.jsp");
+				response.sendRedirect("/TeachingAssistantSystem/common/login.jsp");
 			} else {
 				session.removeAttribute("userID");
 				session.removeAttribute("usetType");
 				session.invalidate();
-				response.sendRedirect("/TeachingAssistant/common/login.jsp");
+				response.sendRedirect("/TeachingAssistantSystem/common/login.jsp");
 			}
 		} catch (IOException e) {
 			logger.error(e.getMessage());
@@ -134,11 +134,11 @@ public class UserServlet extends HttpServlet {
 				session.setAttribute("userName", login.getUserName());
 				session.setAttribute("userType", login.getUserType());
 				if (user.getUserType().equals("管理员")) {
-					response.sendRedirect("/TeachingAssistant/admin/mainFrm.jsp");
+					response.sendRedirect("/TeachingAssistantSystem/admin/mainFrm.jsp");
 				} else if (user.getUserType().equals("教师")) {
-					response.sendRedirect("/TeachingAssistant/client/teacher/mainFrm.jsp");
+					response.sendRedirect("/TeachingAssistantSystem/client/teacher/mainFrm.jsp");
 				} else {
-					response.sendRedirect("/TeachingAssistant/client/student/mainFrm.jsp");
+					response.sendRedirect("/TeachingAssistantSystem/client/student/mainFrm.jsp");
 				}
 			} else if (loginRes.equals("密码有误")) {
 				request.setAttribute("message", "<script type='text/javascript'>alert('密码有误')</script>");
