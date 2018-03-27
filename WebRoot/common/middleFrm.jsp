@@ -23,10 +23,8 @@
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;现在时间：<%
 			Date date = new Date();
 			SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		%> <%=time.format(date)%> &nbsp;&nbsp;&nbsp;&nbsp; 系统访问总人数为：<%!int i = 0;%>
-		<%
-			i++;
-		%><%=i%></font>
+		%> <%=time.format(date)%>
+		</font>
 	<br>
 	<div class="box">
 		<table align="center" width="800px" height="200px">

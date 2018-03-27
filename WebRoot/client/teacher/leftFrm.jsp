@@ -149,7 +149,7 @@
 			</div>
 			<ul class="menuson">
 				<li><cite></cite><a
-					href="/TeachingAssistantSystem/common/modifyPWD.jsp"
+					href="/TeachingAssistant/common/modifyPWD.jsp"
 					target="middleFrame">修改密码</a><i></i></li>
 				<li><cite></cite><a
 					href="${pageContext.request.contextPath}/servlet/UserServlet?operation=logout"
@@ -207,8 +207,8 @@
 			<tr>
 				<td colspan="2"><font size="2" face="arial" color="grey">如遇到问题或在使用中有什么建议，请联系作者，谢谢。</font></td>
 			<tr>
-				<td><img alt="email" src="../../images/email.png" width="23px"
-					height="23px"></td>
+				<td><img alt="email" src="../../images/email.png" width="20px"
+					height="20px"></td>
 				<td><font size="3" face="arial" color="grey">: ljb_nwuer@163.com</font></td>
 			</tr>
 		</table>

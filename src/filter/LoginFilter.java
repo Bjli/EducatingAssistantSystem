@@ -33,8 +33,9 @@ public class LoginFilter implements Filter {
         	if(session!=null){
         		String userID = (String) session.getAttribute("userID");
         		String userType=(String) session.getAttribute("userType");
-        		if (userID == null || userType==null) {
-                    response.sendRedirect("/TeachingAssistantSystem/common/login.jsp");
+        		String userName=(String) session.getAttribute("userName");
+        		if (userID == null || userType==null || userName==null) {
+                    response.sendRedirect("/TeachingAssistant/common/login.jsp");
                     chain.doFilter(request, response);
                 }
         		else{
@@ -46,7 +47,7 @@ public class LoginFilter implements Filter {
         					chain.doFilter(request, response);
         				}
         				else{
-        					response.sendRedirect("/TeachingAssistantSystem/common/login.jsp");
+        					response.sendRedirect("/TeachingAssistant/common/login.jsp");
                             chain.doFilter(request, response);
         				}
         			}
@@ -58,7 +59,7 @@ public class LoginFilter implements Filter {
         					chain.doFilter(request, response);
         				}
         				else{
-        					response.sendRedirect("/TeachingAssistantSystem/common/login.jsp");
+        					response.sendRedirect("/TeachingAssistant/common/login.jsp");
                             chain.doFilter(request, response);
         				}
         			}
@@ -69,14 +70,14 @@ public class LoginFilter implements Filter {
         					chain.doFilter(request, response);
         				}
         				else{
-        					response.sendRedirect("/TeachingAssistantSystem/common/login.jsp");
+        					response.sendRedirect("/TeachingAssistant/common/login.jsp");
                             chain.doFilter(request, response);
         				}
         			}
         		}
         	}
         	else {
-                response.sendRedirect("/TeachingAssistantSystem/common/login.jsp");
+                response.sendRedirect("/TeachingAssistant/common/login.jsp");
             }
         }
 	}

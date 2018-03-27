@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*"
+<%@ page language="java" import="java.util.*,java.text.*"
 	contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -43,8 +43,9 @@ input:focus {
 
 	<div class="logintop">
 		<span>欢迎注册实验报告管理教学平台! &nbsp;&nbsp; <%
- 	Date date = new Date();
- %> <%=date%></span>
+			Date date = new Date();
+			SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		%> <%=time.format(date)%></span>
 	</div>
 
 	<div id="mainBody">
@@ -55,12 +56,15 @@ input:focus {
 
 	<div
 		style="border: solid 1px white; width: 550px; margin-left: 30%; margin-top: 120px">
-		<h4 align="center">注册新用户</h4>
+		
 		<br>
 		<form
 			action="${pageContext.request.contextPath}/servlet/UserServlet?operation=addUser"
 			method="post" name="useradd">
 			<table align="center" border="0">
+			<tr height="50px">
+			<td colspan="2" align="center"><font size="5" color="white">注册账户</font></td>
+			</tr>
 				<tr height="40">
 					<td>用户编号:</td>
 					<td><input type="text" name="userID" /> <font size="3"

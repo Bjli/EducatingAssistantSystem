@@ -44,7 +44,7 @@
     			<input type="submit" value="登录"/>
     		</td>
     		<td align="center">
-    			<a href="/TeachingAssistantSystem/common/findPWD.jsp" >找回密码</a>
+    			<a href="/TeachingAssistant/common/findPWD.jsp" >找回密码</a>
     		</td>
     	</tr>
     	

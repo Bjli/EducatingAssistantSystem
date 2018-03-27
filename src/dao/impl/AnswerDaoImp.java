@@ -12,7 +12,6 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import dao.AnswerDao;
 import domain.AnswerInfo;
-import domain.Notice;
 import util.DBCPUtil;
 
 public class AnswerDaoImp implements AnswerDao {

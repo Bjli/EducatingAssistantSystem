@@ -69,7 +69,7 @@ function Check_form()
     </table>
     <textarea name="content" id="myEditor" Style="height:40%;width:99.9%">请输入通知内容！</textarea>
  	<script type="text/javascript">
- 		UEDITOR_CONFIG.UEDITOR_HOME_URL = '/TeachingAssistantSystem/ueditor/'; //一定要用这句话，否则你需要去ueditor.config.js修改路径的配置信息
+ 		UEDITOR_CONFIG.UEDITOR_HOME_URL = '/TeachingAssistant/ueditor/'; //一定要用这句话，否则你需要去ueditor.config.js修改路径的配置信息
  		UE.getEditor('myEditor');
  	</script>
  	${message}

@@ -5,7 +5,6 @@ import java.text.ParseException;
 import java.util.List;
 
 import domain.AnswerInfo;
-import domain.Notice;
 
 public interface AnswerDao {
 	void addAnswer(AnswerInfo answer) throws SQLException, ParseException;
