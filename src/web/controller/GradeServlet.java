@@ -127,9 +127,10 @@ public class GradeServlet extends HttpServlet {
 				WritableCellFormat format3 = new WritableCellFormat(font3);
 
 				WritableSheet sheet = book.createSheet("学生成绩单", 0);
-				sheet.setColumnView(0, sheet.getCell(1, 1).getContents().length() * 2 + 12);
-				sheet.setColumnView(1, sheet.getCell(1, 1).getContents().length() * 3 + 15);
-				sheet.mergeCells(0, 0, 3, 0);
+				sheet.setColumnView(0, sheet.getCell(1, 1).getContents().length() * 2 + 15);
+				sheet.setColumnView(1, sheet.getCell(1, 1).getContents().length() * 3 + 12);
+				sheet.setColumnView(2, sheet.getCell(1, 1).getContents().length() * 3 + 20);
+				sheet.mergeCells(0, 0, 4, 0);
 				Label title = new Label(0, 0, "学生成绩统计表", format);
 				sheet.addCell(title);
 				// 表字段名

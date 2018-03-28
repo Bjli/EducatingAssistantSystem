@@ -28,7 +28,7 @@ public class GradeDaoImpl implements GradeDao {
 	
 	//教师获取成绩表
 	public List<Grade> tCheckGrade(String teacherId) throws SQLException {
-		String sql="select * from Grade where teacherId=?";
+		String sql="select * from Grade where teacherId=? order by worktitle desc;";
 		return qr.query(sql, new BeanListHandler<Grade>(Grade.class),teacherId);
 	}
 	

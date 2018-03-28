@@ -14,17 +14,15 @@
 
 </head>
 <body>
+<h4 align="center">修改密码</h4>
+<hr>
 	<div
-		style="border: solid 1px black; width: 500px; margin-left: 300px; margin-top: 80px">
+		style="border: solid 1px black; width: 500px; margin-left: 25%">
 		<form
 			action="${pageContext.request.contextPath}/servlet/UserServlet?operation=modifyPWD"
 			method="post">
 			<table align="center" border="0">
-				<tr>
-					<td colspan="2" align="center">
-						<h4 align="center">修改密码</h4>
-					</td>
-				</tr>
+			
 				<tr height="40">
 					<td>用户编号:</td>
 					<td>${sessionScope.userID}</td>

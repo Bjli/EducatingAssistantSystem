@@ -19,6 +19,7 @@
 	padding: 10px 10px;
 }
 </style>
+<script src="${pageContext.request.contextPath}/js/highcharts.js"></script>
 </head>
 <body>
 	<h4 align="center">成绩列表</h4>
@@ -26,7 +27,7 @@
 	<div class="gradeList">
 		<c:if test="${empty grade }">
   		未发现相关成绩！
-  	</c:if>
+  	    </c:if>
 		<c:if test="${!empty grade}">
 			<table class="table" align="center">
 				<thead>
@@ -40,7 +41,11 @@
 				</thead>
 				<tbody>
 					<%
-						int sum = 0;
+						int sum = 0;//总的成绩记录数
+						int count1 = 0;//[0,60)
+						int count2 = 0;//[60,75)
+						int count3 = 0;//[75,85)
+						int count4 = 0;//[85,99]
 					%>
 					<c:forEach items="${grade}" var="c">
 						<c:if test="${c.score < 60}">
@@ -49,6 +54,7 @@
 								<td>${c.userName }</td>
 								<%
 									sum++;
+									count1++;
 								%>
 								<td>${c.workTitle }</td>
 								<td>${c.score}</td>
@@ -61,6 +67,7 @@
 								<td>${c.userName }</td>
 								<%
 									sum++;
+									count4++;
 								%>
 								<td>${c.workTitle }</td>
 								<td>${c.score}</td>
@@ -76,6 +83,16 @@
 								%>
 								<td>${c.workTitle }</td>
 								<td>${c.score}</td>
+								<c:if test="${c.score >= 75}">
+									<%
+										count3++;
+									%>
+								</c:if>
+								<c:if test="${c.score < 75}">
+									<%
+										count2++;
+									%>
+								</c:if>
 								<td>${c.remark}</td>
 							</tr>
 						</c:if>
@@ -96,6 +113,118 @@
 					</tr>
 				</tbody>
 			</table>
+			<hr>
+			<c:if test="${ways == 'Title' }">
+				<div id="container"
+					style="width: 450px; height: 300px; margin: 0 auto"></div>
+				<script language="JavaScript">
+					$(document)
+							.ready(
+									function() {
+										var chart = {
+											plotBackgroundColor : null,
+											plotBorderWidth : null,
+											plotShadow : false
+										};
+										var title = {
+											text : '学生成绩分布占比'
+										};
+										var tooltip = {
+											pointFormat : '{series.name}: <b>{point.percentage:.1f}%</b>'
+										};
+										var plotOptions = {
+											pie : {
+												allowPointSelect : true,
+												cursor : 'pointer',
+												dataLabels : {
+													enabled : true,
+													format : '<b>{point.name}</b>: {point.percentage:.1f} %',
+													style : {
+														color : (Highcharts.theme && Highcharts.theme.contrastTextColor)
+																|| 'black'
+													}
+												}
+											}
+										};
+										var series = [ {
+											type : 'pie',
+											name : 'chart share',
+											data : [
+													[ '优秀(85分以上)',<%=count4%>],
+													[ '良好(75-85分)',<%=count3%>],
+													[ '中等(60-75分)',<%=count2%>],
+													[ '不及格(60分以下)',<%=count1%>] ]
+										} ];
+
+										var json = {};
+										json.chart = chart;
+										json.title = title;
+										json.tooltip = tooltip;
+										json.series = series;
+										json.plotOptions = plotOptions;
+										$('#container').highcharts(json);
+									});
+				</script>
+			</c:if>
+			<c:if test="${ways == 'Uid' }">
+				<div id="container"
+					style="width: 450px; height: 300px; margin: 0 auto"></div>
+				<script language="JavaScript">
+				var array = new Array();
+				<c:forEach items="${grade}" var="item">
+				array.push(${item.score});
+			    </c:forEach>
+					$(document).ready(
+							function() {
+								var title = {
+									text : '学生个人成绩走势'
+								};
+								var subtitle = {
+									text : 'Source: grade show'
+								};
+								var xAxis = {
+									categories : [ '1', '2', '3', '4', '5',
+											'6', '7', '8', '9', '10', '11',
+											'12', '13', '14', '15', '16', '17',
+											'18', '19', '20' ]
+								};
+								var yAxis = {
+									title : {
+										text : 'Score'
+									},
+									plotLines : [ {
+										value : 0,
+										width : 1,
+										color : '#808080'
+									} ]
+								};
+
+								var legend = {
+									layout : 'vertical',
+									align : 'right',
+									verticalAlign : 'middle',
+									borderWidth : 0
+								};
+
+								var series = [ {
+									name : '${condition}',
+									data : array
+								} ];
+
+								var json = {};
+
+								json.title = title;
+								json.subtitle = subtitle;
+								json.xAxis = xAxis;
+								json.yAxis = yAxis;
+								json.legend = legend;
+								json.series = series;
+
+								$('#container').highcharts(json);
+							});
+				</script>
+			</c:if>
+
 		</c:if>
 	</div>
 </body>

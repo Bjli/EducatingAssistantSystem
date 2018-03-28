@@ -49,11 +49,11 @@
 	<div id="mainBody">
 		<div id="cloud1" class="cloud"></div>
 		<div id="cloud2" class="cloud"></div>
-		<div id="cloud2" class="cloud"></div>
+		<div id="cloud3" class="cloud"></div>
 	</div>
 
 	<div
-		style="border: solid 1px white; width: 400px; margin-left: 40%; margin-top: 200px">
+		style="border: solid 1px white; width: 400px; margin-left: 35%; margin-top: 200px">
 		<form
 			action="${pageContext.request.contextPath}/servlet/UserServlet?operation=login"
 			method="post">

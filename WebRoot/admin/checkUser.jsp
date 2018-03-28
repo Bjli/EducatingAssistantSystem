@@ -34,7 +34,6 @@
 						<td>用户编号</td>
 						<td>姓名</td>
 						<td>用户类型</td>
-						<td>密码（已加密存储）</td>
 						<td>电话号码</td>
 						<td>邮箱</td>
 						<td>操作</td>
@@ -46,7 +45,6 @@
 							<td>${c.userID }</td>
 							<td>${c.userName }</td>
 							<td>${c.userType }</td>
-							<td>${c.password }</td>
 							<td>${c.phoneNumber }</td>
 							<td>${c.email }</td>
 							<td><a

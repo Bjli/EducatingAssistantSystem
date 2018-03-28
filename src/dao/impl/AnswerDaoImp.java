@@ -45,14 +45,14 @@ public class AnswerDaoImp implements AnswerDao {
 	@Override
 	public List<AnswerInfo> checkAnswerS(String userid) throws SQLException {
 		// TODO Auto-generated method stub
-		String sql="select answerid,worktitle,workid,workuser,date,state from answer where userid =? order by date desc;";
+		String sql="select answerid,worktitle,workid,workuser,date,state from answer where userid =? order by work desc;";
 		return qr.query(sql, new BeanListHandler<AnswerInfo>(AnswerInfo.class),userid);
 	}
 
 	@Override
 	public List<AnswerInfo> checkAnswerT(String workuserid) throws SQLException {
 		// TODO Auto-generated method stub
-		String sql="select answerid,workid,worktitle,userid,username,date,state from answer where workuserid=? order by Date desc;";
+		String sql="select answerid,workid,worktitle,userid,username,date,state from answer where workuserid=? order by worktitle desc;";
 		return qr.query(sql, new BeanListHandler<AnswerInfo>(AnswerInfo.class),workuserid);
 	}
 

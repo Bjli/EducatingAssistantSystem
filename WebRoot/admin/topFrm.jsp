@@ -24,7 +24,7 @@
 <body style="background-color: #066CAD;">
 
 	<div class="topleft">
-		<div style="margin-left: 80%; margin-top: 25px; color: white">欢迎您，${sessionScope.userType}用户:${sessionScope.userName}</div>
+		<div style="margin-left: 80%; margin-top: 25px; color: white">您好,${sessionScope.userType}:${sessionScope.userName}</div>
 		<img src="../images/logo.png" />
 	</div>
 </body>

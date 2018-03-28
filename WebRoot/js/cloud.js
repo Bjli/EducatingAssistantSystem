@@ -12,6 +12,7 @@
 			$body = $("body");
             $cloud1 = $("#cloud1");
 			$cloud2 = $("#cloud2");
+			$cloud3 = $("#cloud3");
 			
             mainwidth = $main.outerWidth();
          
@@ -33,6 +34,7 @@
         $cloud1.css("background-position", offset1 + "px 100px")
 		
 		$cloud2.css("background-position", offset2 + "px 460px")
+		$cloud3.css("background-position", offset2 + "px 460px")
     }, 70);
 	
 	

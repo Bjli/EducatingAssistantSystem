@@ -16,7 +16,7 @@
 <body>
 	<h4 align="center">添加用户</h4>
 	<hr>
-	<div style="border: solid 1px black; width: 500px; margin-left: 300px">
+	<div style="border: solid 1px black; width: 500px; margin-left: 25%">
 		<form
 			action="${pageContext.request.contextPath}/servlet/UserServlet?operation=addUser"
 			method="post" name="useradd">
