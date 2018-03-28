@@ -14,8 +14,9 @@
  <body style="background-color:#066CAD;">
  
     <div class="topleft">
-      <div style="margin-left:80%; margin-top:15px;color:white" >您好！${sessionScope.userType}用户:${sessionScope.userName}</div> 
-      <h2 align="center">实验报告教学管理系统</h2>
+      <div style="margin-left:80%; margin-top:15px;color:white" >您好！${sessionScope.userName},同学!</div> 
+      <div style="margin-left:40%; margin-top:15px;"><font size="6" color="white">实验报告教学管理系统</font>
+    </div>
     </div>
   </body>
 </html>

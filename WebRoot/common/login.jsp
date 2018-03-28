@@ -6,6 +6,13 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/bootstrap-3.3.7/css/bootstrap.min.css">
+<script
+	src="${pageContext.request.contextPath}/bootstrap-3.3.7/jquery-3.3.1.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
 <link href="${pageContext.request.contextPath}/css/style.css"
 	rel="stylesheet" type="text/css" />
 <script language="JavaScript"
@@ -52,13 +59,14 @@
 			method="post">
 			<table align="center" border="0">
 				<tr height="50">
-					<td colspan="2" align="center"><font size="6" color="white">用户登录</font>
+					<td colspan="3" align="center"><font size="6" color="white">用户登录</font>
 						<br></td>
 				</tr>
 				<tr height="40">
 					<td>用户名:</td>
-					<td><input type="text" name="userID" /> <font size="3"
-						color="white">学号或教师编号</font></td>
+					<td><input type="text" class="form-control" name="userID" /></td>
+					<td>
+						<font size="3" color="white">&nbsp;&nbsp;学号或教师编号</font></td>
 				</tr>
 				<tr height="40">
 					<td>用户类型:</td>
@@ -70,13 +78,14 @@
 				</tr>
 				<tr height="40">
 					<td>密&nbsp;码:</td>
-					<td><input type="text" name="password" /> <a
-						href="/TeachingAssistant/common/register.jsp"><font
-							size="3" color="white">还没有账户？</font></a></td>
+					<td><input type="text" class="form-control" name="password" /></td>
+					<td><a href="/TeachingAssistant/common/register.jsp"><font
+							size="3" color="white">&nbsp;&nbsp;还没有账户？</font></a></td>
 				</tr>
 				<tr height="40">
-					<td><input type="submit" value="登录" /></td>
-					<td align="center"><a
+					<td><input type="submit" class="btn btn-default" value="登录" /></td>
+					
+					<td colspan="2" align="center"><a
 						href="/TeachingAssistant/common/findPWD.jsp">找回密码</a></td>
 				</tr>
 

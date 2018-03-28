@@ -7,6 +7,13 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/bootstrap-3.3.7/css/bootstrap.min.css">
+<script
+	src="${pageContext.request.contextPath}/bootstrap-3.3.7/jquery-3.3.1.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
 <style type="text/css">
 .lefttop {
 	background: url(../../images/lefttop.gif) repeat-x;
@@ -25,34 +32,9 @@
 	height: 21px;
 	float: left;
 }
-
-.leftmenu {
-	width: 200px;
-	overflow: hidden;
-	background: url(../../images/leftline.gif) repeat-y right;
+.menu {
+margin-left:5px;
 }
-
-.leftmenu dd {
-	background: url(../../images/leftmenubg.gif) repeat-x;
-	line-height: 35px;
-	font-weight: bold;
-	font-size: 14px;
-	border-right: solid 1px #b7d5df;
-}
-
-.leftmenu dd span {
-	float: left;
-	margin: auto;
-}
-
-.leftmenu dd .menuson {
-	display: none;
-}
-
-.leftmenu dd:first-child .menuson {
-	display: block;
-}
-
 .menuson {
 	line-height: 30px;
 	font-weight: normal;
@@ -107,6 +89,7 @@
 .title {
 	cursor: pointer;
 }
+
 .link_me {
 	position: fixed;
 	bottom: 20px;
@@ -142,67 +125,103 @@
 		<span></span>主菜单
 	</div>
 
-	<dl class="leftmenu">
-		<dd>
-			<div class="title">
-				<span><img src="../../images/leftico01.png" /></span>&nbsp&nbsp系统信息
+	<div class="menu">
+		<div class="panel-group" id="accordion">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion"
+							href="#collapseOne"> <span><img
+								src="../../images/leftico01.png" /></span>&nbsp&nbsp系统信息
+						</a>
+					</h4>
+				</div>
+				<div id="collapseOne" class="panel-collapse collapse in">
+					<div class="panel-body">
+						<ul class="menuson">
+							<li><cite></cite><a
+								href="/TeachingAssistant/common/modifyPWD.jsp"
+								target="middleFrame">修改密码</a><i></i></li>
+							<li><cite></cite><a
+								href="${pageContext.request.contextPath}/servlet/UserServlet?operation=logout"
+								target=_parent>注销登录</a><i></i></li>
+						</ul>
+					</div>
+				</div>
 			</div>
-			<ul class="menuson">
-				<li><cite></cite><a
-					href="/TeachingAssistant/common/modifyPWD.jsp"
-					target="middleFrame">修改密码</a><i></i></li>
-				<li><cite></cite><a
-					href="${pageContext.request.contextPath}/servlet/UserServlet?operation=logout"
-					target=_parent>注销登录</a><i></i></li>
-			</ul>
-		</dd>
-
-		<dd>
-			<div class="title">
-				<span><img src="../../images/leftico03.png" /></span>&nbsp&nbsp成绩管理
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion"
+							href="#collapseTwo"> <span><img
+								src="../../images/leftico03.png" /></span>&nbsp&nbsp成绩管理
+						</a>
+					</h4>
+				</div>
+				<div id="collapseTwo" class="panel-collapse collapse">
+					<div class="panel-body">
+						<ul class="menuson">
+							<li><cite></cite><a
+								href="${pageContext.request.contextPath}/servlet/AnswerServlet?operation=checkAnswer&userId=${sessionScope.userID}"
+								target="middleFrame">查看作业</a><i></i></li>
+							<li><cite></cite><a
+								href="${pageContext.request.contextPath}/servlet/GradeServlet?operation=sCheckGrade&studentID=${sessionScope.userID}"
+								target="middleFrame">查看成绩</a><i></i></li>
+						</ul>
+					</div>
+				</div>
 			</div>
-			<ul class="menuson">
-				<li><cite></cite><a
-					href="${pageContext.request.contextPath}/servlet/AnswerServlet?operation=checkAnswer&userId=${sessionScope.userID}"
-					target="middleFrame">查看作业</a><i></i></li>
-				<li><cite></cite><a
-					href="${pageContext.request.contextPath}/servlet/GradeServlet?operation=sCheckGrade&studentID=${sessionScope.userID}"
-					target="middleFrame">查看成绩</a><i></i></li>
-			</ul>
-		</dd>
-
-		<dd>
-			<div class="title">
-				<span><img src="../../images/leftico02.png" /></span>&nbsp&nbsp通知管理
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion"
+							href="#collapseThree"> <span><img
+								src="../../images/leftico02.png" /></span>&nbsp&nbsp通知管理
+						</a>
+					</h4>
+				</div>
+				<div id="collapseThree" class="panel-collapse collapse">
+					<div class="panel-body">
+						<ul class="menuson">
+							<li><cite></cite><a
+								href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=checkNotice"
+								target="middleFrame">查看通知</a><i></i></li>
+						</ul>
+					</div>
+				</div>
 			</div>
-			<ul class="menuson">
-				<li><cite></cite><a
-					href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=checkNotice"
-					target="middleFrame">查看通知</a><i></i></li>
-			</ul>
-		</dd>
-
-		<dd>
-			<div class="title">
-				<span><img src="../../images/leftico04.png" /></span>&nbsp&nbsp文件管理
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4 class="panel-title">
+						<a data-toggle="collapse" data-parent="#accordion"
+							href="#collapseFour"> <span><img
+								src="../../images/leftico04.png" /></span>&nbsp&nbsp文件管理
+						</a>
+					</h4>
+				</div>
+				<div id="collapseFour" class="panel-collapse collapse">
+					<div class="panel-body">
+						<ul class="menuson">
+							<li><cite></cite><a
+								href="${pageContext.request.contextPath}/servlet/FileServlet?operation=checkFile"
+								target="middleFrame">查看文件</a><i></i></li>
+						</ul>
+					</div>
+				</div>
 			</div>
-			<ul class="menuson">
-				<li><cite></cite><a
-					href="${pageContext.request.contextPath}/servlet/FileServlet?operation=checkFile"
-					target="middleFrame">查看文件</a><i></i></li>
-			</ul>
-		</dd>
-	</dl>
+		</div>
 		<div class="link_me">
-		<table>
-			<tr>
-				<td colspan="2"><font size="2" face="arial" color="grey">如遇到问题或在使用中有什么建议，请联系作者，谢谢。</font></td>
-			<tr>
-				<td><img alt="email" src="../../images/email.png" width="20px"
-					height="20px"></td>
-				<td><font size="3" face="arial" color="grey">: ljb_nwuer@163.com</font></td>
-			</tr>
-		</table>
+			<table>
+				<tr>
+					<td colspan="2"><font size="2" face="arial" color="grey">如遇到问题或在使用中有什么建议，请联系作者，谢谢。</font></td>
+				<tr>
+					<td><img alt="email" src="../../images/email.png" width="20px"
+						height="20px"></td>
+					<td><font size="3" face="arial" color="grey">:
+							ljb_nwuer@163.com</font></td>
+				</tr>
+			</table>
+		</div>
 	</div>
 </body>
 

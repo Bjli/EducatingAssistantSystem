@@ -14,7 +14,7 @@
  <body style="background-color:#066CAD;">
  
     <div class="topleft">
-      <div style="margin-left:80%; margin-top:15px;color:white" >您好！${sessionScope.userType}用户:${sessionScope.userName}</div> 
+      <div style="margin-left:80%; margin-top:15px;color:white" >您好！${sessionScope.userName} 老师</div> 
      <img src="../../images/logo.png" />
     </div>
   </body>

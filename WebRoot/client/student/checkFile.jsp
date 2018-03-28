@@ -6,35 +6,48 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/bootstrap-3.3.7/css/bootstrap.min.css">
+<script
+	src="${pageContext.request.contextPath}/bootstrap-3.3.7/jquery-3.3.1.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
-	<h4 align="center">所有教学资源列表</h4>
+	<h4 align="center">所有文件列表</h4>
 	<hr>
 	<c:if test="${empty fList }">
   		没有文件！
   	</c:if>
 	<c:if test="${!empty fList}">
-		<table border="1" width="80%" align="center">
-			<tr>
-				<td>文件名</td>
-				<td>上传日期</td>
-				<td>上传者</td>
-				<td>文件描述</td>
-				<td>操作</td>
-			</tr>
-			<c:forEach items="${fList}" var="c">
-				<tr>
-					<td>${c.name }</td>
-					<td>${c.uploadTime }</td>
-					<td>${c.uploader }</td>
-					<td>${c.description }</td>
-					<td><a
-						href="${pageContext.request.contextPath}/servlet/FileServlet?operation=downloadFile&id=${c.id}&name=${c.name}">下载</a>
-					</td>
-				</tr>
-			</c:forEach>
-		</table>
+		<div class="table-responsive">
+			<table class="table table-striped" align="center">
+				<thead>
+					<tr>
+						<td>文件名</td>
+						<td>上传日期</td>
+						<td>上传者</td>
+						<td>文件描述</td>
+						<td>操作</td>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${fList}" var="c">
+						<tr>
+							<td>${c.name }</td>
+							<td>${c.uploadTime }</td>
+							<td>${c.uploader }</td>
+							<td>${c.description }</td>
+							<td><a
+								href="${pageContext.request.contextPath}/servlet/FileServlet?operation=downloadFile&id=${c.id}&name=${c.name}">下载</a>
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 	</c:if>
 </body>
 </html>

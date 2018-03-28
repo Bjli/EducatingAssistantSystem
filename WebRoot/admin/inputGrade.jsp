@@ -29,27 +29,26 @@ input:focus {
 		rgba(102, 175, 233, .6)
 }
 </style>
-	<script type="text/javascript">
-function Check_form()  
-{    
-    if ( document.getElementById("userid").value==""||document.getElementById("userid")==null)   
-    {  
-        alert('请录入学号!');   
-        return false;  
-    }
-    if ( document.getElementById("title").value==""||document.getElementById("title")==null)   
-    {  
-        alert('请录入具体作业名称!');   
-        return false;  
-    }
-    if ( document.getElementById("score").value==""||document.getElementById("score")==null)   
-    {  
-        alert('请录入成绩!');   
-        return false;  
-    }
-        return true;
-}
-</script>    
+<script type="text/javascript">
+	function Check_form() {
+		if (document.getElementById("userid").value == ""
+				|| document.getElementById("userid") == null) {
+			alert('请录入学号!');
+			return false;
+		}
+		if (document.getElementById("title").value == ""
+				|| document.getElementById("title") == null) {
+			alert('请录入具体作业名称!');
+			return false;
+		}
+		if (document.getElementById("score").value == ""
+				|| document.getElementById("score") == null) {
+			alert('请录入成绩!');
+			return false;
+		}
+		return true;
+	}
+</script>
 
 </head>
 <body>
@@ -63,7 +62,7 @@ function Check_form()
 			<table align="center" border="0">
 				<tr height="60">
 					<td>学&nbsp;&nbsp;号:</td>
-					<td><input type="text" name="userid" /></td>
+					<td><input type="text" name="userid" id="userid" /></td>
 				</tr>
 				<tr height="60">
 					<td>作业名称:</td>
@@ -75,7 +74,7 @@ function Check_form()
 				</tr>
 				<tr height="60">
 					<td>评&nbsp;&nbsp;语:</td>
-					<td><input type="text" name="remark" value="无.."/></td>
+					<td><input type="text" name="remark" value="无.." /></td>
 				</tr>
 				<tr height="60">
 					<td colspan="2" align="center"><input type="submit" value="提交"
