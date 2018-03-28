@@ -52,7 +52,6 @@ public class AnswerDaoImp implements AnswerDao {
 	@Override
 	public List<AnswerInfo> checkAnswerT(String workuserid) throws SQLException {
 		// TODO Auto-generated method stub
-		System.out.println(workuserid);
 		String sql="select answerid,workid,worktitle,userid,username,date,state from answer where workuserid=? order by Date desc;";
 		return qr.query(sql, new BeanListHandler<AnswerInfo>(AnswerInfo.class),workuserid);
 	}
@@ -60,7 +59,6 @@ public class AnswerDaoImp implements AnswerDao {
 	@Override
 	public AnswerInfo getAnswer(String id) throws SQLException {
 		// TODO Auto-generated method stub
-		System.out.println(id);
 		String sql="select * from answer where answerId=?";
 		return qr.query(sql, new BeanHandler<AnswerInfo>(AnswerInfo.class),id);
 	}

@@ -15,9 +15,9 @@ public class GradeDaoImpl implements GradeDao {
 	//上传成绩
 	public void inputGrade(Grade grade) throws SQLException {
 		String sql="insert into Grade(userId,username,workId,workTitle,teacherId,teachername,score,remark) values(?,?,?,?,?,?,?,?)";
-		String sql2="update answer set state=? where workId=?";
+		String sql2="update answer set state=? where workId=? and userId=?";
 		qr.update(sql,grade.getUserId(),grade.getUserName(),grade.getWorkId(),grade.getWorkTitle(),grade.getTeacherId(),grade.getTeacherName(),grade.getScore(),grade.getRemark());
-		qr.update(sql2,"已批改",grade.getWorkId());
+		qr.update(sql2,"已批改",grade.getWorkId(),grade.getUserId());
 	}
 
 	//管理员查看成绩
@@ -43,7 +43,6 @@ public class GradeDaoImpl implements GradeDao {
 	}
 	//教师通过作业获取作答详情
 	public 	List<Grade> tGetGradeByTitle(String workTitle,String teacherId) throws SQLException {
-		System.out.println(workTitle);
 		return qr.query("select * from Grade where workTitle=? and teacherId=?",new BeanListHandler<Grade>(Grade.class), workTitle,teacherId);
 	}
 
