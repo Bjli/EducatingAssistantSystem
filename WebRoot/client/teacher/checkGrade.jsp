@@ -14,7 +14,7 @@
 	src="${pageContext.request.contextPath}/bootstrap-3.3.7/js/bootstrap.min.js"></script>
 </head>
 
-<body>
+<body onload="goPage(1,9);">
 	<h4 align="center">成绩列表</h4>
 	<hr>
 	<c:if test="${empty tList }">
@@ -31,7 +31,7 @@
 					<td width="25%">评语</td>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="Tbody">
 				<c:forEach items="${tList}" var="c">
 					<c:if test="${c.score < 60}">
 						<tr class="danger" align="center">
@@ -61,8 +61,9 @@
 						</tr>
 					</c:if>
 				</c:forEach>
-				</tbody>
+			</tbody>
 		</table>
+		<%@ include file="../../common/page.jsp"%>
 	</c:if>
 </body>
 </html>

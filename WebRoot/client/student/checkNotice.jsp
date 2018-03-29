@@ -20,7 +20,7 @@
 </style>
 </head>
 
-<body>
+<body onload="goPage(1,9);">
 	<h4 align="center">通知列表</h4>
 	<hr>
 	<div class="notice-box">
@@ -37,7 +37,7 @@
 						<td>操作</td>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="Tbody">
 					<c:forEach items="${nList}" var="c">
 						<tr>
 							<td><a
@@ -55,6 +55,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<%@ include file="../../common/page.jsp"%>
 		</c:if>
 	</div>
 </body>

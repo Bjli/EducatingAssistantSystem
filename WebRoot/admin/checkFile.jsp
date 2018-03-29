@@ -12,10 +12,8 @@
 	src="${pageContext.request.contextPath}/bootstrap-3.3.7/jquery-3.3.1.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-
 </head>
-
-<body>
+<body onload="goPage(1,9);">
 	<h4 align="center">所有文件列表</h4>
 	<hr>
 	<c:if test="${empty fList }">
@@ -33,7 +31,7 @@
 						<td>操作</td>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="Tbody">
 					<c:forEach items="${fList}" var="c">
 						<tr>
 							<td>${c.name }</td>
@@ -49,6 +47,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<%@ include file="../common/page.jsp"%>
 		</div>
 	</c:if>
 </body>

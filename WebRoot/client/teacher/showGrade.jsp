@@ -18,10 +18,14 @@
 .gradeList {
 	padding: 10px 10px;
 }
+
+.export_but {
+	margin-left: 80%;
+}
 </style>
 <script src="${pageContext.request.contextPath}/js/highcharts.js"></script>
 </head>
-<body>
+<body onload="goPage(1,9);">
 	<h4 align="center">成绩列表</h4>
 	<hr>
 	<div class="gradeList">
@@ -39,13 +43,13 @@
 						<td width="25%">评语</td>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="Tbody">
 					<%
 						int sum = 0;//总的成绩记录数
-						int count1 = 0;//[0,60)
-						int count2 = 0;//[60,75)
-						int count3 = 0;//[75,85)
-						int count4 = 0;//[85,99]
+							int count1 = 0;//[0,60)
+							int count2 = 0;//[60,75)
+							int count3 = 0;//[75,85)
+							int count4 = 0;//[85,99]
 					%>
 					<c:forEach items="${grade}" var="c">
 						<c:if test="${c.score < 60}">
@@ -54,7 +58,7 @@
 								<td>${c.userName }</td>
 								<%
 									sum++;
-									count1++;
+												count1++;
 								%>
 								<td>${c.workTitle }</td>
 								<td>${c.score}</td>
@@ -67,7 +71,7 @@
 								<td>${c.userName }</td>
 								<%
 									sum++;
-									count4++;
+												count4++;
 								%>
 								<td>${c.workTitle }</td>
 								<td>${c.score}</td>
@@ -97,22 +101,20 @@
 							</tr>
 						</c:if>
 					</c:forEach>
-					<tr align="center">
-						<td colspan="4">总计：<%=sum%>次成绩记录
-						</td>
-						<td align="center">
-							<form
-								action="${pageContext.request.contextPath}/servlet/GradeServlet?operation=ExportExcel"
-								method="post" name="useradd">
-								<input type="hidden" name="ways" value="${ways}"> <input
-									type="hidden" name="op" value="teacher"> <input
-									type="hidden" name="condition" value="${condition}"> <br>
-								<input type="submit" class="btn btn-primary" value="导出成绩单">
-							</form>
-						</td>
-					</tr>
 				</tbody>
 			</table>
+			<div class="export_but">
+				<form
+					action="${pageContext.request.contextPath}/servlet/GradeServlet?operation=ExportExcel"
+					method="post" name="useradd">
+					<input type="hidden" name="ways" value="${ways}"> <input
+						type="hidden" name="op" value="teacher"> <input
+						type="hidden" name="condition" value="${condition}"> <br>
+					<input type="submit" class="btn btn-primary" value="导出成绩单">
+				</form>
+			</div>
+			<%@ include file="../../common/page.jsp"%>
+			<br>
 			<hr>
 			<c:if test="${ways == 'Title' }">
 				<div id="container"

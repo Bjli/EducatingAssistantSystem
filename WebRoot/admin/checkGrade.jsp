@@ -12,10 +12,14 @@
 	src="${pageContext.request.contextPath}/bootstrap-3.3.7/jquery-3.3.1.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-
+<style type="text/css">
+.export_but {
+  margin-left:80%;
+}
+</style>
 </head>
 
-<body>
+<body onload="goPage(1,8);">
 	<h4 align="center">成绩列表</h4>
 	<hr>
 	<c:if test="${empty gList }">
@@ -33,12 +37,12 @@
 					<td>操作</td>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="Tbody">
 				<%
 					int sum = 0;
 				%>
 				<c:forEach items="${gList}" var="c">
-					<tr height="5" align="center">
+					<tr align="center">
 						<%
 							sum++;
 						%>
@@ -50,20 +54,17 @@
 						<td><a href="#">无</a>
 					</tr>
 				</c:forEach>
-				<tr align="center">
-					<td colspan="5">总计发现：<%=sum%>条成绩记录
-					</td>
-					<td align="center">
-						<form
-							action="${pageContext.request.contextPath}/servlet/GradeServlet?operation=ExportExcel"
-							method="post" name="useradd">
-							<input type="hidden" name="op" value="admin"> <br> <input
-								type="submit" class="btn btn-primary" value="导出成绩单">
-						</form>
-					</td>
-				</tr>
 			</tbody>
 		</table>
+		<%@ include file="../common/page.jsp" %>
+		<div class="export_but">
+			<form
+				action="${pageContext.request.contextPath}/servlet/GradeServlet?operation=ExportExcel"
+				method="post" name="useradd">
+				<input type="hidden" name="op" value="admin"> <br> <input
+					type="submit" class="btn btn-primary" value="导出成绩单">
+			</form>
+		</div>
 	</c:if>
 </body>
 </html>

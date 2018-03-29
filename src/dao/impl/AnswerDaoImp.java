@@ -45,7 +45,7 @@ public class AnswerDaoImp implements AnswerDao {
 	@Override
 	public List<AnswerInfo> checkAnswerS(String userid) throws SQLException {
 		// TODO Auto-generated method stub
-		String sql="select answerid,worktitle,workid,workuser,date,state from answer where userid =? order by work desc;";
+		String sql="select answerid,worktitle,workid,workuser,date,state from answer where userid =? order by date desc;";
 		return qr.query(sql, new BeanListHandler<AnswerInfo>(AnswerInfo.class),userid);
 	}
 

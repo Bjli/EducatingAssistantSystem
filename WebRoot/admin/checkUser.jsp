@@ -6,6 +6,7 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/bootstrap-3.3.7/css/bootstrap.min.css">
 <script
@@ -20,7 +21,7 @@
 </style>
 </head>
 
-<body>
+<body onload="goPage(1,9);">
 	<h4 align="center">所有用户列表</h4>
 	<hr>
 	<div class="connect">
@@ -39,7 +40,7 @@
 						<td>操作</td>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="Tbody">
 					<c:forEach items="${uList}" var="c">
 						<tr>
 							<td>${c.userID }</td>
@@ -54,6 +55,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<%@ include file="../common/page.jsp"%>
 		</c:if>
 	</div>
 </body>

@@ -11,15 +11,15 @@
 	src="${pageContext.request.contextPath}/bootstrap-3.3.7/jquery-3.3.1.min.js"></script>
 <script
 	src="${pageContext.request.contextPath}/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-<title>查看自己作业</title>
+<title>查看学生作业</title>
 <style type="text/css">
 .answer-box {
- margin-left:5%;
- width:90%;
+	margin-left: 5%;
+	width: 90%;
 }
 </style>
 </head>
-<body>
+<body onload="goPage(1,9);">
 	<h4 align="center">作业列表</h4>
 	<hr>
 	<div class="answer-box">
@@ -38,7 +38,7 @@
 						<td>操作</td>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="Tbody">
 					<c:forEach items="${nList}" var="c">
 						<c:if test="${c.state =='已批改'}">
 							<tr class="success">
@@ -67,6 +67,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<%@ include file="../../common/page.jsp"%>
 		</c:if>
 	</div>
 

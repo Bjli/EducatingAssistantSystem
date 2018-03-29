@@ -15,7 +15,7 @@
 
 </head>
 
-<body>
+<body onload="goPage(1,9);">
 	<h4 align="center">所有文件列表</h4>
 	<hr>
 	<c:if test="${empty fList }">
@@ -33,7 +33,7 @@
 						<td>操作</td>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="Tbody">
 					<c:forEach items="${fList}" var="c">
 						<tr>
 							<td>${c.name }</td>
@@ -48,6 +48,7 @@
 				</tbody>
 			</table>
 		</div>
+		<%@ include file="../../common/page.jsp"%>
 	</c:if>
 </body>
 </html>
