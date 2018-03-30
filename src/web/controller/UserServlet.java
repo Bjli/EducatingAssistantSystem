@@ -3,6 +3,7 @@ package web.controller;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -82,7 +83,7 @@ public class UserServlet extends HttpServlet {
 		try {
 			business.modifyPWD(user);
 			request.setAttribute("message", "<script type='text/javascript'>alert('修改成功')</script>");
-			logger.info(userID+": do modifyPWD");
+			logger.info(userID+": do modifyPWD success.");
 			request.getRequestDispatcher("/common/modifyPWD.jsp").forward(request, response);
 		} catch (IOException e) {
 			logger.error(e.getMessage());
@@ -104,7 +105,7 @@ public class UserServlet extends HttpServlet {
 			BeanUtils.populate(user, request.getParameterMap());
 			business.findPWD(user);
 			request.setAttribute("message", "<script type='text/javascript'>alert('密码已发送至你的邮箱！')</script>");
-			logger.info(user.getUserID()+": do modifyPWD.");
+			logger.info(user.getUserID()+": do findPWD success.");
 			request.getRequestDispatcher("/common/login.jsp").forward(request, response);
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			logger.error(e.getMessage());
@@ -127,7 +128,7 @@ public class UserServlet extends HttpServlet {
 			loginRes = business.login(user);
 			if (loginRes.equals("登录成功")) {
 				User login = business.getUser(user.getUserID());
-				logger.info(login.getUserID()+"///"+login.getUserName()+":login_success");
+				logger.info(login.getUserID()+"/"+login.getUserName()+":login success");
 				HttpSession session = request.getSession(true);
 				// session.setMaxInactiveInterval(60);
 				session.setAttribute("userID", login.getUserID());
@@ -187,7 +188,7 @@ public class UserServlet extends HttpServlet {
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		}
-		logger.info((String) session.getAttribute("userID")+":do deleteUser:"+userID);
+		logger.info((String) session.getAttribute("userID")+": do deleteUser:"+userID+" success.");
 		checkUser(request, response);
 	}
 

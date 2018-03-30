@@ -74,14 +74,15 @@ public class UserDaoImpl implements UserDao {
 		if(dbUser.getEmail().equals(user.getEmail())){
 			modifyPWD(user);
 			Date date=new Date();
-			Mail mail = new Mail();  
+			Mail mail = new Mail(); 
 			mail.setHost("smtp.163.com"); // 设置邮件服务器,如果不用163的,自己找找看相关的  
 			mail.setSender("ljb_nwuer@163.com");  
 			mail.setReceiver(mailAdd); // 接收人  
 			mail.setUsername("ljb_nwuer@163.com"); // 登录账号,一般都是和邮箱名一样吧  
 			mail.setPassword("123456ljb"); // 发件人邮箱的登录密码  
 			mail.setSubject("找回密码");  
-			mail.setMessage("<br><br><h3>您的新密码是："+pwd+"<br>-------------------------<br>&nbsp;&nbsp; sender by @ljb<br>"+date+"</h3>");  
+			mail.setMessage("<br><h3>您的新密码是："+pwd+"<br>-------------------------<br>&nbsp;&nbsp; sender by @李吉波<br>"+date+"</h3>");  
+			mail.setName("实验报告教学管理系统");
 			new MailUtils().send(mail);  
 			return "新密码已发至您的邮箱！";
 		}
