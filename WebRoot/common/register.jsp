@@ -81,7 +81,7 @@ input:focus {
 				</tr>
 				<tr height="40">
 					<td>密&nbsp;&nbsp;码:</td>
-					<td><input type="text" name="password" /></td>
+					<td><input type="password" name="password" /></td>
 				</tr>
 				<tr height="40">
 					<td>电话号码:&nbsp;&nbsp;&nbsp;&nbsp;</td>

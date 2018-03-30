@@ -78,7 +78,7 @@
 				</tr>
 				<tr height="40">
 					<td>密&nbsp;码:</td>
-					<td><input type="text" class="form-control" name="password" /></td>
+					<td><input type="password" class="form-control" name="password" /></td>
 					<td><a href="/TeachingAssistant/common/register.jsp"><font
 							size="3" color="white">&nbsp;&nbsp;还没有账户？</font></a></td>
 				</tr>
