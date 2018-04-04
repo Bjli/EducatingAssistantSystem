@@ -29,7 +29,7 @@
   		没有录入用户！
   	</c:if>
 		<c:if test="${!empty uList}">
-			<table class="table table-hover" align="center">
+			<table class="table table-hover">
 				<thead>
 					<tr align="center">
 						<td>用户编号</td>
@@ -42,7 +42,7 @@
 				</thead>
 				<tbody id="Tbody">
 					<c:forEach items="${uList}" var="c">
-						<tr>
+						<tr  align="center">
 							<td>${c.userID }</td>
 							<td>${c.userName }</td>
 							<td>${c.userType }</td>

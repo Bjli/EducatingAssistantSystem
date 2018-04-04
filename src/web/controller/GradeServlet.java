@@ -212,7 +212,7 @@ public class GradeServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			List<AnswerInfo> nList = null;
 			nList = business.checkAnswerT((String) session.getAttribute("userID"));
-			logger.info((String) session.getAttribute("userID")+"do deleteGrade,for stu:"+userId+"_"+workId);
+			logger.info((String) session.getAttribute("userID") + "do deleteGrade,for stu:" + userId + "_" + workId);
 			request.setAttribute("nList", nList);
 			request.getRequestDispatcher("/client/teacher/checkAnswer.jsp").forward(request, response);
 		} catch (IOException e) {
@@ -334,9 +334,12 @@ public class GradeServlet extends HttpServlet {
 		try {
 			BeanUtils.populate(grade, request.getParameterMap());
 			business.inputGrade(grade);
-			logger.info(grade.getTeacherId()+"do inputGrade,for stu:"+grade.getUserId()+"_"+grade.getWorkTitle());
+			logger.info(grade.getTeacherId() + " do inputGrade,for stu:" + grade.getUserId() + "_" + grade.getWorkTitle());
 			request.setAttribute("message", "<script type='text/javascript'>alert('添加成功！')</script>");
-			request.getRequestDispatcher("/client/teacher/inputGrade.jsp").forward(request, response);
+			List<AnswerInfo> nList = null;
+			nList = business.checkAnswerT((String) session.getAttribute("userID"));
+			request.setAttribute("nList", nList);
+			request.getRequestDispatcher("/client/teacher/checkAnswer.jsp").forward(request, response);
 		} catch (IOException e) {
 			logger.error(e.getMessage());
 			String errorMsg = "IO异常,请重试";

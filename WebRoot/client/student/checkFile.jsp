@@ -25,7 +25,7 @@
 		<div class="table-responsive">
 			<table class="table table-striped" align="center">
 				<thead>
-					<tr>
+					<tr align="center">
 						<td>文件名</td>
 						<td>上传日期</td>
 						<td>上传者</td>
@@ -35,7 +35,7 @@
 				</thead>
 				<tbody id="Tbody">
 					<c:forEach items="${fList}" var="c">
-						<tr>
+						<tr align="center">
 							<td>${c.name }</td>
 							<td>${c.uploadTime }</td>
 							<td>${c.uploader }</td>

@@ -15,10 +15,9 @@
 
 <link href="${pageContext.request.contextPath}/css/style.css"
 	rel="stylesheet" type="text/css" />
-<script language="JavaScript"
+<script 
 	src="${pageContext.request.contextPath}/js/jquery.js"></script>
-<script src="${pageContext.request.contextPath}/js/cloud.js"
-	type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/cloud.js"></script>
 <script language="javascript">
 	$(function() {
 		$('.loginbox').css({
@@ -45,11 +44,9 @@
  %> <%=time.format(date)%>
 		</span>
 	</div>
-
+	<div id="cloud1" class="cloud"></div>
 	<div id="mainBody">
 		<div id="cloud1" class="cloud"></div>
-		<div id="cloud2" class="cloud"></div>
-		<div id="cloud3" class="cloud"></div>
 	</div>
 
 	<div

@@ -2,7 +2,7 @@
 // Cloud Float...
     var $main = $cloud = mainwidth = null;
     var offset1 = 450;
-	var offset2 = 0;
+	var offset2 = 100;
 	
 	var offsetbg = 0;
     
@@ -12,7 +12,6 @@
 			$body = $("body");
             $cloud1 = $("#cloud1");
 			$cloud2 = $("#cloud2");
-			$cloud3 = $("#cloud3");
 			
             mainwidth = $main.outerWidth();
          
@@ -31,10 +30,8 @@
 		
         offset1 += 1.1;
 		offset2 += 1;
-        $cloud1.css("background-position", offset1 + "px 100px")
-		
-		$cloud2.css("background-position", offset2 + "px 460px")
-		$cloud3.css("background-position", offset2 + "px 460px")
+        $cloud1.css("background-position", offset1 + "px 50px")
+		$cloud2.css("background-position", offset2 + "px 120px")
     }, 70);
 	
 	

@@ -90,7 +90,6 @@
 				<tr height="40">
 					<td width="80">用户类型:</td>
 					<td><select name="userType">
-							<option value="管理员">管理员</option>
 							<option value="教师">教师</option>
 							<option value="学生">学生</option>
 					</select></td>
