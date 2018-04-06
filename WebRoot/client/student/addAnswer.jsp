@@ -28,15 +28,14 @@
 }
 </style>
 <script type="text/javascript">
-function Check_form()  
-{    
-    if ( document.getElementById("userid").value==""||document.getElementById("userid")==null)   
-    {  
-        alert('请正确输入学号!');   
-        return false;  
-    }  
-     return true;  
-}  
+	function Check_form() {
+		if (document.getElementById("userid").value == ""
+				|| document.getElementById("userid") == null) {
+			alert('请正确输入学号!');
+			return false;
+		}
+		return true;
+	}
 </script>
 </head>
 <body>
@@ -57,7 +56,8 @@ function Check_form()
 			<table border="1" width="100%">
 				<tr>
 					<td width="30%">学号:</td>
-					<td><input type="text" name="userid" id="userid"/></td>
+					<td><input type="text" name="userid" id="userid"
+						value="${sessionScope.userID}" /></td>
 				</tr>
 				<tr>
 					<td width="30%">操作:&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -71,8 +71,8 @@ function Check_form()
 				UEDITOR_CONFIG.UEDITOR_HOME_URL = '/TeachingAssistant/ueditor/'; //一定要用这句话，否则你需要去ueditor.config.js修改路径的配置信息
 				UE.getEditor('myEditor');
 			</script>
-			${message}
 		</form>
+		${message}
 	</div>
 
 </body>

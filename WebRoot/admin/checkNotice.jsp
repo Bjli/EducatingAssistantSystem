@@ -42,7 +42,7 @@
 					<c:forEach items="${nList}" var="c">
 						<tr align="center">
 							<td><a
-								href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=getNotice&id=${c.id}">${c.title }</a></td>
+								href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=getNotice&id=${c.id}&op=check">${c.title }</a></td>
 							<td>${c.author }</td>
 							<td>${c.releaseDate }</td>
 							<td><a

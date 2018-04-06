@@ -129,11 +129,10 @@ public class AnswerServlet extends HttpServlet {
 		try {
 			BeanUtils.populate(answer, request.getParameterMap());
 			business.addAnswer(answer);
-			logger.info((String) session.getAttribute("userID") + "do addAnswer,for:" + answer.getAnswerid());
+			logger.info((String) session.getAttribute("userID") + " do addAnswer,for:" + answer.getAnswerid());
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
-			String errorMsg = "数据库操作异常，请重试";
-			request.setAttribute("errorMsg", errorMsg);
+			request.setAttribute("errorMsg", "<script type='text/javascript'>alert('提交成功!')</script>");
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		} catch (ParseException e) {
 			logger.error(e.getMessage());
@@ -146,22 +145,19 @@ public class AnswerServlet extends HttpServlet {
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		}
-		request.setAttribute("message", "<script type='text/javascript'>alert('提交成功！')</script>");
+		List<AnswerInfo> nList = null;
 		try {
-			List<Notice> nList = null;
-			try {
-				nList = business.checkNotice();
+				nList = business.checkAnswerS((String) session.getAttribute("userID"));
 				request.setAttribute("nList", nList);
-				request.getRequestDispatcher("/client/student/checkNotice.jsp").forward(request, response);
-			} catch (SQLException e) {
-				logger.error(e.getMessage());
-				String errorMsg = "数据库操作异常，请重试";
-				request.setAttribute("errorMsg", errorMsg);
-				request.getRequestDispatcher("../common/error.jsp").forward(request, response);
-			}
+				request.getRequestDispatcher("/client/student/checkAnswer.jsp").forward(request, response);
 		} catch (IOException e) {
 			logger.error(e.getMessage());
 			String errorMsg = "IO异常,请重试";
+			request.setAttribute("errorMsg", errorMsg);
+			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
+		} catch (SQLException e) {
+			logger.error(e.getMessage());
+			String errorMsg = "数据库操作异常，请重试";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		}

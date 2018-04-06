@@ -49,13 +49,12 @@ public class NoticeServlet extends HttpServlet {
 	private void getNotice(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String id=request.getParameter("id");
-		HttpSession session=request.getSession();
-		String userType=(String)session.getAttribute("userType");
+		String op=request.getParameter("op");
 		Notice notice=null;
 		try {
 			notice = business.getNotice(id);
 			request.setAttribute("notice", notice);
-			if(userType.equals("学生")){
+			if(op.equals("addAnswer")){
 				request.getRequestDispatcher("/client/student/addAnswer.jsp").forward(request, response);
 			} else {
 				request.getRequestDispatcher("/common/getNotice.jsp").forward(request, response);
@@ -88,22 +87,28 @@ public class NoticeServlet extends HttpServlet {
 		}
 		checkNotice(request, response);
 	}
-	//获取通知列表
+	//获取通知/作业列表
 	private void checkNotice(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
 		String userType=(String)session.getAttribute("userType");
 		List<Notice> nList=null;
 		try {
-			nList = business.checkNotice();
-			request.setAttribute("nList", nList);
+
 			if(userType.equals("管理员")){
+				nList = business.checkNotice();
+				request.setAttribute("nList", nList);
 				request.getRequestDispatcher("/admin/checkNotice.jsp").forward(request, response);
 			}
 			else if(userType.equals("教师")){
+				String userId = (String) session.getAttribute("userID");
+				nList = business.tCheckNotice(userId);
+				request.setAttribute("nList", nList);
 				request.getRequestDispatcher("/client/teacher/checkNotice.jsp").forward(request, response);
 			}
 			else {
+				nList = business.checkNotice();
+				request.setAttribute("nList", nList);
 				request.getRequestDispatcher("/client/student/checkNotice.jsp").forward(request, response);
 			}
 		} catch (IOException e) {
@@ -117,7 +122,7 @@ public class NoticeServlet extends HttpServlet {
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		}
-	}
+	}	
 	//发布通知
 	private void releaseNotice(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {

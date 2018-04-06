@@ -35,10 +35,16 @@ public class NoticeDaoImpl implements NoticeDao {
 		String sql="select id,author,identity,releaseDate,title from Notice order by releaseDate desc;";
 		return qr.query(sql, new BeanListHandler<Notice>(Notice.class));
 	}
+	
+	public List<Notice> tCheckNotice(String userId) throws SQLException {
+		String sql="select id,author,identity,releaseDate,title from Notice where authorId=? or identity='通知' order by releaseDate desc;";
+		return qr.query(sql, new BeanListHandler<Notice>(Notice.class),userId);
+	}
 
 	//获取通知
 	public Notice getNotice(String id) throws SQLException {
 		String sql="select * from Notice where id=?";
 		return qr.query(sql, new BeanHandler<Notice>(Notice.class),id);
 	}
+
 }

@@ -41,12 +41,12 @@
 					<c:forEach items="${nList}" var="c">
 						<tr>
 							<td><a
-								href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=getNotice&id=${c.id}">${c.title }</a></td>
+								href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=getNotice&id=${c.id}&op=check">${c.title }</a></td>
 							<td>${c.author }</td>
 							<td>${c.releaseDate }</td>
 							<c:if test="${c.identity == '作业'}">
 								<td><a
-									href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=getNotice&id=${c.id}">答题</a></td>
+									href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=getNotice&id=${c.id}&op=addAnswer">答题</a></td>
 							</c:if>
 							<c:if test="${c.identity =='通知'}">
 								<td>无</td>

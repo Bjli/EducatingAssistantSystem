@@ -77,6 +77,9 @@ public class BusinessServiceImpl implements BusinessService {
 	public List<Notice> checkNotice() throws SQLException {
 		return nDao.checkNotice();
 	}
+	public List<Notice> tCheckNotice(String userId) throws SQLException {
+		return nDao.tCheckNotice(userId);
+	}
 	public Notice getNotice(String id) throws SQLException {
 		return nDao.getNotice(id);
 	}
@@ -131,5 +134,6 @@ public class BusinessServiceImpl implements BusinessService {
 	public AnswerInfo getAnswer(String id) throws SQLException {
 		return aDao.getAnswer(id);
 	}
+
 
 }

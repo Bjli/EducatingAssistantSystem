@@ -41,7 +41,7 @@
 					<c:forEach items="${nList}" var="c">
 						<tr>
 							<td><a
-								href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=getNotice&id=${c.workid}">${c.worktitle}</a></td>
+								href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=getNotice&id=${c.workid}&op=check">${c.worktitle}</a></td>
 							<td>${c.workuser }</td>
 							<td><a
 								href="${pageContext.request.contextPath}/servlet/AnswerServlet?operation=getAnswer&id=${c.answerid}">点击查看作答详情</a>

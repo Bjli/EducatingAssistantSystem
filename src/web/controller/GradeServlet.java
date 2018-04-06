@@ -41,12 +41,15 @@ public class GradeServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String operation = request.getParameter("operation");
+		//录入成绩
 		if ("inputGrade".equals(operation)) {
 			inputGrade(request, response);
 		}
+		//删除成绩
 		if ("deleteGrade".equals(operation)) {
 			deleteGrade(request, response);
 		}
+		//修改成绩
 		if ("modifyGrade".equals(operation)) {
 			modifyGrade(request, response);
 		}

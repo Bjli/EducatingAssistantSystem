@@ -33,6 +33,7 @@ public interface BusinessService {
 	void releaseNotice(Notice notice) throws SQLException, ParseException;
 	void deleteNotice(String id) throws SQLException;
 	List<Notice> checkNotice() throws SQLException;
+	List<Notice> tCheckNotice(String userId) throws SQLException;
 	Notice getNotice(String id) throws SQLException;
 	//成绩管理模块
 	void inputGrade(Grade grade) throws SQLException;
