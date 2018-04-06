@@ -15,8 +15,7 @@
 
 <link href="${pageContext.request.contextPath}/css/style.css"
 	rel="stylesheet" type="text/css" />
-<script 
-	src="${pageContext.request.contextPath}/js/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery.js"></script>
 <script src="${pageContext.request.contextPath}/js/cloud.js"></script>
 <script language="javascript">
 	$(function() {
@@ -44,9 +43,10 @@
  %> <%=time.format(date)%>
 		</span>
 	</div>
-	<div id="cloud1" class="cloud"></div>
+
 	<div id="mainBody">
 		<div id="cloud1" class="cloud"></div>
+		<div id="cloud2" class="cloud"></div>
 	</div>
 
 	<div
@@ -62,8 +62,7 @@
 				<tr height="40">
 					<td>用户名:</td>
 					<td><input type="text" class="form-control" name="userID" /></td>
-					<td>
-						<font size="3" color="white">&nbsp;&nbsp;学号或教师编号</font></td>
+					<td><font size="3" color="white">&nbsp;&nbsp;学号或教师编号</font></td>
 				</tr>
 				<tr height="40">
 					<td>用户类型:</td>
@@ -75,13 +74,14 @@
 				</tr>
 				<tr height="40">
 					<td>密&nbsp;码:</td>
-					<td><input type="password" class="form-control" name="password" /></td>
+					<td><input type="password" class="form-control"
+						name="password" /></td>
 					<td><a href="/TeachingAssistant/common/register.jsp"><font
 							size="3" color="white">&nbsp;&nbsp;还没有账户？</font></a></td>
 				</tr>
 				<tr height="40">
 					<td><input type="submit" class="btn btn-default" value="登录" /></td>
-					
+
 					<td colspan="2" align="center"><a
 						href="/TeachingAssistant/common/findPWD.jsp">找回密码</a></td>
 				</tr>
