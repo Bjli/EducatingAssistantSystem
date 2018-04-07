@@ -66,7 +66,7 @@
 				</tr>
 				<tr height="40">
 					<td>用户类型:</td>
-					<td><select name="userType">
+					<td><select name="userType" >
 							<option value="管理员">管理员</option>
 							<option value="教师">教师</option>
 							<option value="学生">学生</option>
@@ -76,7 +76,7 @@
 					<td>密&nbsp;码:</td>
 					<td><input type="password" class="form-control"
 						name="password" /></td>
-					<td><a href="/TeachingAssistant/common/register.jsp"><font
+					<td><a href="${pageContext.request.contextPath}/servlet/UserServlet?operation=getClassName&op=register"><font
 							size="3" color="white">&nbsp;&nbsp;还没有账户？</font></a></td>
 				</tr>
 				<tr height="40">

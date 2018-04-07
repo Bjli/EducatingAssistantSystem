@@ -107,7 +107,8 @@ public class NoticeServlet extends HttpServlet {
 				request.getRequestDispatcher("/client/teacher/checkNotice.jsp").forward(request, response);
 			}
 			else {
-				nList = business.checkNotice();
+				String userId = (String) session.getAttribute("userID");
+				nList = business.sCheckNotice(userId);
 				request.setAttribute("nList", nList);
 				request.getRequestDispatcher("/client/student/checkNotice.jsp").forward(request, response);
 			}

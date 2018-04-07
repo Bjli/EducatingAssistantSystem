@@ -135,10 +135,12 @@
 				<div id="collapseOne" class="panel-collapse collapse in">
 					<div class="panel-body">
 						<ul class="menuson">
-							<li><cite></cite><a href="addUser.jsp" target="middleFrame">添加用户</a><i></i></li>
+						<li><cite></cite><a href="addClass.jsp" target="middleFrame">注册班级</a><i></i></li>
+						<li><cite></cite><a href="${pageContext.request.contextPath}/servlet/UserServlet?operation=getClassName&op=mCName" target="middleFrame">班级管理</a><i></i></li>
+							<li><cite></cite><a href="${pageContext.request.contextPath}/servlet/UserServlet?operation=getClassName&op=adduser" target="middleFrame">添加用户</a><i></i></li>
 							<li><cite></cite><a
 								href="${pageContext.request.contextPath}/servlet/UserServlet?operation=checkUser"
-								target="middleFrame">查看用户</a><i></i></li>
+								target="middleFrame">用户管理</a><i></i></li>
 							<li><cite></cite><a
 								href="/TeachingAssistant/common/modifyPWD.jsp"
 								target="middleFrame">修改密码</a><i></i></li>
@@ -182,7 +184,7 @@
 				<div id="collapseThree" class="panel-collapse collapse">
 					<div class="panel-body">
 						<ul class="menuson">
-							<li><cite></cite><a href="../common/releaseNotice.jsp"
+							<li><cite></cite><a href="${pageContext.request.contextPath}/servlet/UserServlet?operation=getClassName&op=rNotice"
 								target="middleFrame">发布通知</a><i></i></li>
 							<li><cite></cite><a
 								href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=checkNotice"

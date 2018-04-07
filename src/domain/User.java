@@ -11,7 +11,14 @@ public class User implements Serializable {
 	private String password;
 	private String phoneNumber;
 	private String email;
+	private String className;
 	
+	public String getClassName() {
+		return className;
+	}
+	public void setClassName(String className) {
+		this.className = className;
+	}
 	public String getUserID() {
 		return userID;
 	}

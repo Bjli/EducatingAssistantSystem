@@ -11,6 +11,14 @@ public class Notice implements Serializable {
     private String releaseDate;//通知发布时间
     private String title;//通知标题
     private String content;//通知内容
+	private String className;//面向对象
+	
+	public String getClassName() {
+		return className;
+	}
+	public void setClassName(String className) {
+		this.className = className;
+	}
     
     public String getAuthorId() {
 		return authorId;

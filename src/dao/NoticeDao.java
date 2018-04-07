@@ -11,5 +11,6 @@ public interface NoticeDao {
 	void deleteNotice(String id) throws SQLException;
 	List<Notice> checkNotice() throws SQLException;
 	List<Notice> tCheckNotice(String userId) throws SQLException;
+	List<Notice> sCheckNotice(String userId) throws SQLException;
 	Notice getNotice(String id) throws SQLException;
 }

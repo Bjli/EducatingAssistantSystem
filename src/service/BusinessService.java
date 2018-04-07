@@ -10,6 +10,7 @@ import java.util.List;
 import org.apache.commons.fileupload.FileItem;
 
 import domain.AnswerInfo;
+import domain.ClassInfo;
 import domain.FileInfo;
 import domain.Grade;
 import domain.Notice;
@@ -22,6 +23,9 @@ public interface BusinessService {
 	User getUser(String userid) throws SQLException;
 	void deleteUser(User user) throws SQLException;
 	List<User> checkUser() throws SQLException;
+	void addClass(ClassInfo classInfo) throws SQLException;
+	void deleteClass(String classID) throws SQLException;
+	List<ClassInfo> getClassName() throws SQLException;
 	String findPWD(User user) throws SQLException;
 	void modifyPWD(User user) throws SQLException;
 	//资源管理模块
@@ -34,6 +38,7 @@ public interface BusinessService {
 	void deleteNotice(String id) throws SQLException;
 	List<Notice> checkNotice() throws SQLException;
 	List<Notice> tCheckNotice(String userId) throws SQLException;
+	List<Notice> sCheckNotice(String userId) throws SQLException;
 	Notice getNotice(String id) throws SQLException;
 	//成绩管理模块
 	void inputGrade(Grade grade) throws SQLException;

@@ -1,11 +1,19 @@
 <%@ page language="java" import="java.util.*,java.text.*"
 	contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>	
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/bootstrap-3.3.7/css/bootstrap.min.css">
+<script
+	src="${pageContext.request.contextPath}/bootstrap-3.3.7/jquery-3.3.1.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
 <link href="${pageContext.request.contextPath}/css/style.css"
 	rel="stylesheet" type="text/css" />
 <script language="JavaScript"
@@ -43,9 +51,9 @@ input:focus {
 
 	<div class="logintop">
 		<span>欢迎注册实验报告管理教学平台! &nbsp;&nbsp; <%
-			Date date = new Date();
-			SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		%> <%=time.format(date)%></span>
+ 	Date date = new Date();
+ 	SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+ %> <%=time.format(date)%></span>
 	</div>
 
 	<div id="mainBody">
@@ -56,15 +64,15 @@ input:focus {
 
 	<div
 		style="border: solid 1px white; width: 550px; margin-left: 30%; margin-top: 120px">
-		
+
 		<br>
 		<form
 			action="${pageContext.request.contextPath}/servlet/UserServlet?operation=addUser"
 			method="post" name="useradd">
 			<table align="center" border="0">
-			<tr height="50px">
-			<td colspan="2" align="center"><font size="5" color="white">注册账户</font></td>
-			</tr>
+				<tr height="50px">
+					<td colspan="2" align="center"><font size="5" color="white">注册账户</font></td>
+				</tr>
 				<tr height="40">
 					<td>用户编号:</td>
 					<td><input type="text" name="userID" /> <font size="3"
@@ -78,6 +86,15 @@ input:focus {
 					<td>用户类型:</td>
 					<td><input type="radio" name="userType" value="教师" checked>教师
 						<input type="radio" name="userType" value="学生">学生</td>
+				</tr>
+				<tr height="40">
+					<td>注册班级:</td>
+					<td><select name="className" class="form-control">
+							<option value="无">教师选项</option>
+							<c:forEach items="${cList}" var="c">
+								<option value="${c.className }">${c.className }</option>
+							</c:forEach>
+					</select> </td>
 				</tr>
 				<tr height="40">
 					<td>密&nbsp;&nbsp;码:</td>
@@ -95,8 +112,7 @@ input:focus {
 					<td align="center"><input type="button"
 						onClick="return test()" value="提交"
 						Style="width: 100px;height=20px" /></td>
-					<td align="right"><input type="reset"
-						 value="重置"
+					<td align="right"><input type="reset" value="重置"
 						Style="width: 100px;height=20px" /></td>
 				</tr>
 			</table>

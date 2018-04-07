@@ -186,7 +186,7 @@
 				<div id="collapseThree" class="panel-collapse collapse">
 					<div class="panel-body">
 						<ul class="menuson">
-							<li><cite></cite><a href="../../common/releaseNotice.jsp"
+							<li><cite></cite><a href="${pageContext.request.contextPath}/servlet/UserServlet?operation=getClassName&op=rNotice"
 								target="middleFrame">发布通知</a><i></i></li>
 							<li><cite></cite><a
 								href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=checkNotice"

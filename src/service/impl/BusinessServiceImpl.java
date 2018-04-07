@@ -20,6 +20,7 @@ import dao.impl.GradeDaoImpl;
 import dao.impl.NoticeDaoImpl;
 import dao.impl.UserDaoImpl;
 import domain.AnswerInfo;
+import domain.ClassInfo;
 import domain.FileInfo;
 import domain.Grade;
 import domain.Notice;
@@ -41,6 +42,16 @@ public class BusinessServiceImpl implements BusinessService {
 	public List<User> checkUser() throws SQLException {
 		return uDao.checkUser();
 	}
+	public void addClass(ClassInfo classInfo) throws SQLException {
+		uDao.addClass(classInfo);
+	}
+	public void deleteClass(String classID) throws SQLException {
+		uDao.deleteClass(classID);
+	}
+	public List<ClassInfo> getClassName() throws SQLException {
+		return uDao.getClassName();
+	}
+
 	public User getUser(String userid) throws SQLException {
 		return uDao.getUser(userid);
 	}
@@ -79,6 +90,9 @@ public class BusinessServiceImpl implements BusinessService {
 	}
 	public List<Notice> tCheckNotice(String userId) throws SQLException {
 		return nDao.tCheckNotice(userId);
+	}
+	public List<Notice> sCheckNotice(String userId) throws SQLException {
+		return nDao.sCheckNotice(userId);
 	}
 	public Notice getNotice(String id) throws SQLException {
 		return nDao.getNotice(id);

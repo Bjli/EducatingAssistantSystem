@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -7,6 +8,7 @@
 	src="/TeachingAssistant/ueditor/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8"
 	src="/TeachingAssistant/ueditor/ueditor.all.min.js">
+	
 </script>
 <script type="text/javascript" charset="utf-8"
 	src="/TeachingAssistant/ueditor/lang/zh-cn/zh-cn.js"></script>
@@ -22,25 +24,24 @@
 	src="${pageContext.request.contextPath}/bootstrap-3.3.7/js/bootstrap.min.js"></script>
 
 <script type="text/javascript">
-function Check_form()  
-{    
-    if ( document.getElementById("user").value==""||document.getElementById("user")==null)   
-    {  
-        alert('请输入发布者工号');   
-        return false;  
-    }
-    if ( document.getElementById("date").value==""||document.getElementById("date")==null)   
-    {  
-        alert('请选择发布时间');   
-        return false;  
-    }
-    if ( document.getElementById("title").value==""||document.getElementById("title")==null)   
-    {  
-        alert('请输入通知标题');   
-        return false;  
-    }
-        return true;
-}
+	function Check_form() {
+		if (document.getElementById("user").value == ""
+				|| document.getElementById("user") == null) {
+			alert('请输入发布者工号');
+			return false;
+		}
+		if (document.getElementById("date").value == ""
+				|| document.getElementById("date") == null) {
+			alert('请选择发布时间');
+			return false;
+		}
+		if (document.getElementById("title").value == ""
+				|| document.getElementById("title") == null) {
+			alert('请输入通知标题');
+			return false;
+		}
+		return true;
+	}
 </script>
 </head>
 <body style="background-color: #EDF6FA;">
@@ -48,27 +49,36 @@ function Check_form()
 	<form
 		action="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=releaseNotice"
 		onsubmit="return Check_form()" method="post">
-		<table border="1" width="100%">
+		<table border="1" width="80%">
 			<tr height="30px">
 				<td width="30%">发布者:</td>
-				<td><input type="text" name="author" id="user" />
-				    <input type="radio" name="identity" value="通知" checked="checked" />通知
-				    <input type="radio" name="identity" value="作业" />作业</td>
+				<td><input type="text" name="author" id="user" /> <input
+					type="radio" name="identity" value="通知" checked="checked" />通知 <input
+					type="radio" name="identity" value="作业" />作业</td>
+			</tr>
+			<tr height="30px">
+				<td width="30%">面向对象:</td>
+				<td><select name="className" class="form-control">
+						<option value="ALL">ALL</option>
+						<c:forEach items="${cList}" var="c">
+							<option value="${c.className }">${c.className }</option>
+						</c:forEach>
+				</select></td>
 			</tr>
 			<tr height="30px">
 				<td width="30%">发布时间:</td>
-				<td><input type="date" name="releaseDate" id="date"/> <font size="2"
-					color="red">若手动输入，格式为：yyyy-MM-dd，例如2017-02-02</font></td>
+				<td><input type="date" name="releaseDate" id="date" /> <font
+					size="2" color="red">若手动输入，格式为：yyyy-MM-dd，例如2017-02-02</font></td>
 			</tr>
 			<tr height="30px">
 				<td width="30%">标题:&nbsp;&nbsp;&nbsp;&nbsp;</td>
-				<td><input type="text" name="title" id="title" style="width: 500px" /> <font
-					size="2" color="red">最多可输入100字</font></td>
+				<td><input type="text" name="title" id="title"
+					style="width: 500px" /> <font size="2" color="red">最多可输入100字</font></td>
 			</tr>
 			<tr height="30px">
 				<td width="30%">操作:&nbsp;&nbsp;&nbsp;&nbsp;</td>
-				<td><input type="submit" class="btn btn-default btn-success" value="保存并发布"> <font size="2"
-					color="red">在下方输入通知内容点击发布</font></td>
+				<td><input type="submit" class="btn btn-default btn-success"
+					value="保存并发布"> <font size="2" color="red">在下方输入通知内容点击发布</font></td>
 			</tr>
 		</table>
 		<textarea name="content" id="myEditor"

@@ -9,6 +9,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import dao.UserDao;
+import domain.ClassInfo;
 import domain.Mail;
 import domain.User;
 import util.DBCPUtil;
@@ -46,7 +47,7 @@ public class UserDaoImpl implements UserDao {
 	}
 	//添加用户
 	public void addUser(User user) throws SQLException {
-		qr.update("insert into User(userID,userName,userType,password,phoneNumber,email) values(?,?,?,?,?,?)", user.getUserID(),user.getUserName(),user.getUserType(),MD5Util.getMD5(user.getPassword()),user.getPhoneNumber(),user.getEmail());
+		qr.update("insert into User(userID,userName,userType,className,password,phoneNumber,email) values(?,?,?,?,?,?,?)", user.getUserID(),user.getUserName(),user.getUserType(),user.getClassName(),MD5Util.getMD5(user.getPassword()),user.getPhoneNumber(),user.getEmail());
 	}
 	//删除用户
 	public void deleteUser(User user) throws SQLException {
@@ -95,5 +96,20 @@ public class UserDaoImpl implements UserDao {
 		String sql="update User set password=? where userID=? and userType=?";
 		user.setPassword(MD5Util.getMD5(user.getPassword()));
 		qr.update(sql,user.getPassword(),user.getUserID(),user.getUserType());
+	}
+	//获取当前班级列表
+	public List<ClassInfo> getClassName() throws SQLException {
+		// TODO Auto-generated method stub
+		return  qr.query("select * from class",new BeanListHandler<ClassInfo>(ClassInfo.class));
+		
+	}
+	//注册班级
+	public void addClass(ClassInfo classInfo) throws SQLException {
+		qr.update("insert into Class(id,className) values(?,?)", classInfo.getId(),classInfo.getClassName());
+	}
+	//删除班级信息
+	public void deleteClass(String classID) throws SQLException {
+		qr.update("delete from User where className=(select className from class where ID=?)",classID);
+		qr.update("delete from Class where id=?",classID);
 	}
 }

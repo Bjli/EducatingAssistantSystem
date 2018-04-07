@@ -15,9 +15,11 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
 
+import domain.ClassInfo;
 import domain.User;
 import service.BusinessService;
 import service.impl.BusinessServiceImpl;
+import util.IdGenerator;
 
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -28,6 +30,15 @@ public class UserServlet extends HttpServlet {
 		String operation = request.getParameter("operation");
 		if ("login".equals(operation)) {
 			login(request, response);
+		}
+		if ("getClassName".equals(operation)) {
+			getClassName(request, response);
+		}
+		if ("deleteClass".equals(operation)) {
+			deleteClass(request, response);
+		}
+		if ("addClass".equals(operation)) {
+			addClass(request, response);
 		}
 		if ("logout".equals(operation)) {
 			logout(request, response);
@@ -46,6 +57,71 @@ public class UserServlet extends HttpServlet {
 		}
 		if ("modifyPWD".equals(operation)) {
 			modifyPWD(request, response);
+		}
+	}
+
+	private void deleteClass(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		String classID = request.getParameter("classID");
+		try {
+			business.deleteClass(classID);
+			List<ClassInfo> cList = null;
+			cList = business.getClassName();
+			request.setAttribute("cList", cList);
+			request.getRequestDispatcher("../admin/checkClass.jsp").forward(request, response);
+		} catch (SQLException e) {
+			logger.error(e.getMessage());
+			String errorMsg = "数据库操作异常，请重试";
+			request.setAttribute("errorMsg", errorMsg);
+			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
+		}
+
+	}
+
+	private void addClass(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		HttpSession session = request.getSession();
+		ClassInfo classInfo = new ClassInfo();
+		String className = request.getParameter("className");
+		classInfo.setClassName(className);
+		classInfo.setId(IdGenerator.genPrimaryKey());
+		try {
+			business.addClass(classInfo);
+			request.setAttribute("message", "<script type='text/javascript'>alert('注册成功！')</script>");
+			request.getRequestDispatcher("../admin/addClass.jsp").forward(request, response);
+		} catch (SQLException e) {
+			logger.error(e.getMessage());
+			String errorMsg = "数据库操作异常，请重试";
+			request.setAttribute("errorMsg", errorMsg);
+			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
+		}
+	}
+
+	// 获取班级列表
+	private void getClassName(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		List<ClassInfo> cList = null;
+		try {
+			cList = business.getClassName();
+			request.setAttribute("cList", cList);
+		} catch (SQLException e) {
+			logger.error(e.getMessage());
+			String errorMsg = "数据库操作异常，请重试";
+			request.setAttribute("errorMsg", errorMsg);
+			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
+		}
+		String op = request.getParameter("op");
+		if (op.equals("rNotice")) {
+			request.getRequestDispatcher("../common/releaseNotice.jsp").forward(request, response);
+		} else if (op.equals("adduser")) {
+			request.getRequestDispatcher("../admin/addUser.jsp").forward(request, response);
+		} else if (op.equals("mCName")) {
+			request.getRequestDispatcher("../admin/checkClass.jsp").forward(request, response);
+		} else {
+			request.getRequestDispatcher("../common/register.jsp").forward(request, response);
 		}
 	}
 
@@ -83,7 +159,7 @@ public class UserServlet extends HttpServlet {
 		try {
 			business.modifyPWD(user);
 			request.setAttribute("message", "<script type='text/javascript'>alert('修改成功')</script>");
-			logger.info(userID+": do modifyPWD success.");
+			logger.info(userID + ": do modifyPWD success.");
 			request.getRequestDispatcher("/common/modifyPWD.jsp").forward(request, response);
 		} catch (IOException e) {
 			logger.error(e.getMessage());
@@ -105,7 +181,7 @@ public class UserServlet extends HttpServlet {
 			BeanUtils.populate(user, request.getParameterMap());
 			business.findPWD(user);
 			request.setAttribute("message", "<script type='text/javascript'>alert('密码已发送至你的邮箱！')</script>");
-			logger.info(user.getUserID()+": do findPWD success.");
+			logger.info(user.getUserID() + ": do findPWD success.");
 			request.getRequestDispatcher("/common/login.jsp").forward(request, response);
 		} catch (IllegalAccessException | InvocationTargetException e) {
 			logger.error(e.getMessage());
@@ -128,7 +204,7 @@ public class UserServlet extends HttpServlet {
 			loginRes = business.login(user);
 			if (loginRes.equals("登录成功")) {
 				User login = business.getUser(user.getUserID());
-				logger.info(login.getUserID()+"/"+login.getUserName()+":login success");
+				logger.info(login.getUserID() + "/" + login.getUserName() + ":login success");
 				HttpSession session = request.getSession(true);
 				// session.setMaxInactiveInterval(60);
 				session.setAttribute("userID", login.getUserID());
@@ -188,7 +264,7 @@ public class UserServlet extends HttpServlet {
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		}
-		logger.info((String) session.getAttribute("userID")+": do deleteUser:"+userID+" success.");
+		logger.info((String) session.getAttribute("userID") + ": do deleteUser:" + userID + " success.");
 		checkUser(request, response);
 	}
 
@@ -223,7 +299,7 @@ public class UserServlet extends HttpServlet {
 			BeanUtils.populate(user, request.getParameterMap());
 			business.addUser(user);
 			request.setAttribute("message", "<script type='text/javascript'>alert('注册成功！')</script>");
-			logger.info("User:"+user.getUserID()+"register.");
+			logger.info("User:" + user.getUserID() + "register.");
 			if (userId == "" || userId == null) {
 				request.getRequestDispatcher("/common/login.jsp").forward(request, response);
 			} else {

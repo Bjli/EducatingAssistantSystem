@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -32,10 +33,19 @@
 				</tr>
 				<tr height="40">
 					<td>用户类型:</td>
-					<td><select name="userType">
+					<td><select name="userType"  class="form-control">
 							<option value="管理员">管理员</option>
 							<option value="教师">教师</option>
 							<option value="学生">学生</option>
+					</select></td>
+				</tr>
+				<tr height="40">
+					<td>注册班级:</td>
+					<td><select name="className"  class="form-control">
+							<option value="无">管理员/教师选项</option>
+							<c:forEach items="${cList }" var="c">
+								<option value="${c.className }">${c.className }</option>
+							</c:forEach>
 					</select></td>
 				</tr>
 				<tr height="40">
