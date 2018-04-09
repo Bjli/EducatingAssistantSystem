@@ -23,17 +23,16 @@
 		<div class="table-responsive">
 			<table class="table table-striped" align="center">
 				<thead>
-					<tr  align="center">
+					<tr align="center">
 						<td>班级名称</td>
 						<td>操作</td>
 					</tr>
 				</thead>
 				<tbody id="Tbody">
 					<c:forEach items="${cList}" var="c">
-						<tr  align="center">
+						<tr align="center">
 							<td>${c.className }</td>
-							<td><a
-								href="javascript:if(confirm('确定要删除吗?此操作将删除注册在该班级下的所有用户!!'))window.location.href='${pageContext.request.contextPath}/servlet/UserServlet?operation=deleteClass&classID=${c.id}'">删除</a>
+							<td><a href="javascript:if(confirm('确定要删除吗?此操作将删除注册在该班级下的所有用户!!'))window.location.href='${pageContext.request.contextPath}/servlet/UserServlet?operation=deleteClass&classID=${c.id}'">删除</a>
 							</td>
 						</tr>
 					</c:forEach>
