@@ -14,31 +14,31 @@
 	src="${pageContext.request.contextPath}/bootstrap-3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body onload="goPage(1,9);">
-	<h3 align="center">所有已注册班级信息</h3>
+	<h3 align="center">我的所授科目</h3>
 	<hr>
 	<c:if test="${empty cList }">
-  		暂时没有注册的班级信息！
+  		暂时没有录入所授科目信息！
   	</c:if>
 	<c:if test="${!empty cList}">
 		<div class="table-responsive">
 			<table class="table table-striped" align="center">
 				<thead>
 					<tr align="center">
-						<td>班级名称</td>
+						<td>科目名称</td>
 						<td>操作</td>
 					</tr>
 				</thead>
 				<tbody id="Tbody">
 					<c:forEach items="${cList}" var="c">
 						<tr align="center">
-							<td>${c.className }</td>
-							<td><a href="javascript:if(confirm('确定要删除吗?此操作将删除注册在该班级下的所有用户!!'))window.location.href='${pageContext.request.contextPath}/servlet/UserServlet?operation=deleteClass&classId=${c.classId }'">删除</a>
+							<td>${c.courseName }</td>
+							<td><a href="javascript:if(confirm('确定要删除吗?此操作将删除与该科目相关的作业&成绩!!'))window.location.href='${pageContext.request.contextPath}/servlet/UserServlet?operation=deleteCourse&courseId=${c.courseId}'">删除</a>
 							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-			<%@ include file="../common/page.jsp"%>
+			<%@ include file="../../common/page.jsp"%>
 		</div>
 	</c:if>
 </body>

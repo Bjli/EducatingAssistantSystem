@@ -10,6 +10,7 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import dao.UserDao;
 import domain.ClassInfo;
+import domain.CourseInfo;
 import domain.Mail;
 import domain.User;
 import util.DBCPUtil;
@@ -98,18 +99,33 @@ public class UserDaoImpl implements UserDao {
 		qr.update(sql,user.getPassword(),user.getUserID(),user.getUserType());
 	}
 	//获取当前班级列表
-	public List<ClassInfo> getClassName() throws SQLException {
-		// TODO Auto-generated method stub
+	public List<ClassInfo> getClassList() throws SQLException {
 		return  qr.query("select * from class",new BeanListHandler<ClassInfo>(ClassInfo.class));
 		
 	}
 	//注册班级
 	public void addClass(ClassInfo classInfo) throws SQLException {
-		qr.update("insert into Class(id,className) values(?,?)", classInfo.getId(),classInfo.getClassName());
+		qr.update("insert into Class(classid,className) values(?,?)", classInfo.getClassId(),classInfo.getClassName());
 	}
 	//删除班级信息
 	public void deleteClass(String classID) throws SQLException {
-		qr.update("delete from User where className=(select className from class where ID=?)",classID);
-		qr.update("delete from Class where id=?",classID);
+		qr.update("delete from User where className=(select className from class where classID=?)",classID);
+		qr.update("delete from Class where classid=?",classID);
+	}
+
+	//注册课程
+	public void addCourse(CourseInfo courseInfo) throws SQLException {
+		qr.update("insert into Course(courseId,courseName,teacherId) values(?,?,?)", courseInfo.getCourseId(), courseInfo.getCourseName(),courseInfo.getTeacherId());
+	}
+	//删除课程信息
+	public void deleteCourse(String courseId) throws SQLException {
+		qr.update("delete from Answer where CourseId=?",courseId);
+		qr.update("delete from grade where CourseId=?",courseId);
+		qr.update("delete from Notice where CourseId=?",courseId);
+		qr.update("delete from Course where courseId=?",courseId);
+	}
+	//获取已注册课程列表
+	public List<CourseInfo> getCourseList(String teacherId) throws SQLException {
+		return qr.query("select * from course where teacherId=?",new BeanListHandler<CourseInfo>(CourseInfo.class),teacherId);
 	}
 }

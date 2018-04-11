@@ -38,9 +38,9 @@ public class AnswerServlet extends HttpServlet {
 		if ("checkAnswer".equals(operation)) {
 			checkAnswer(request, response);
 		}
-		if ("deleteAnswer".equals(operation)) {
-			deleteAnswer(request, response);
-		}
+		// if ("deleteAnswer".equals(operation)) {
+		// deleteAnswer(request, response);
+		// }
 		if ("getAnswer".equals(operation)) {
 			getAnswer(request, response);
 		}
@@ -67,28 +67,25 @@ public class AnswerServlet extends HttpServlet {
 			String errorMsg = "数据库操作异常，请重试";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
-		} catch (IOException e) {
-			logger.error(e.getMessage());
-			String errorMsg = "IO异常,请重试";
-			request.setAttribute("errorMsg", errorMsg);
-			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		}
 	}
 
 	// 删除特定id的作业记录
-	private void deleteAnswer(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String id = request.getParameter("id");
-		try {
-			business.deleteAnswer(id);
-		} catch (SQLException e) {
-			logger.error(e.getMessage());
-			String errorMsg = "数据库操作异常，请重试";
-			request.setAttribute("errorMsg", errorMsg);
-			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
-		}
-		checkAnswer(request, response);
-	}
+	// private void deleteAnswer(HttpServletRequest request, HttpServletResponse
+	// response)
+	// throws ServletException, IOException {
+	// String id = request.getParameter("id");
+	// try {
+	// business.deleteAnswer(id);
+	// } catch (SQLException e) {
+	// logger.error(e.getMessage());
+	// String errorMsg = "数据库操作异常，请重试";
+	// request.setAttribute("errorMsg", errorMsg);
+	// request.getRequestDispatcher("../common/error.jsp").forward(request,
+	// response);
+	// }
+	// checkAnswer(request, response);
+	// }
 
 	// 获取作业列表
 	private void checkAnswer(HttpServletRequest request, HttpServletResponse response)
@@ -106,11 +103,6 @@ public class AnswerServlet extends HttpServlet {
 				request.setAttribute("nList", nList);
 				request.getRequestDispatcher("/client/student/checkAnswer.jsp").forward(request, response);
 			}
-		} catch (IOException e) {
-			logger.error(e.getMessage());
-			String errorMsg = "IO异常,请重试";
-			request.setAttribute("errorMsg", errorMsg);
-			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 			String errorMsg = "数据库操作异常，请重试";
@@ -125,14 +117,11 @@ public class AnswerServlet extends HttpServlet {
 		AnswerInfo answer = new AnswerInfo();
 		answer.setAnswerid(IdGenerator.genPrimaryKey());
 		HttpSession session = request.getSession();
+		answer.setUserid((String) session.getAttribute("userID"));
 		answer.setUsername((String) session.getAttribute("userName"));
 		try {
 			BeanUtils.populate(answer, request.getParameterMap());
 			business.addAnswer(answer);
-			List<AnswerInfo> nList = null;
-			nList = business.checkAnswerS((String) session.getAttribute("userID"));
-			request.setAttribute("nList", nList);
-			request.getRequestDispatcher("/client/student/checkAnswer.jsp").forward(request, response);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 			String errorMsg = "数据库操作异常，请重试";
@@ -149,5 +138,6 @@ public class AnswerServlet extends HttpServlet {
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		}
+		checkAnswer(request, response);
 	}
 }

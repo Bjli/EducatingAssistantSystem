@@ -13,6 +13,26 @@ public class AnswerInfo implements Serializable {
 	private String worktitle;//作业标题（发布）
 	private String workuser;//作业发布者
 	private String workuserid;//作业发布者id
+	private String courseId;//科目标识
+	private String courseName;//科目名称
+	
+	
+	public String getCourseName() {
+		return courseName;
+	}
+
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
+	}
+
+	public String getCourseId() {
+		return courseId;
+	}
+
+	public void setCourseId(String courseId) {
+		this.courseId = courseId;
+	}
+
 	private String state;// 已提交/已批改
 	
 

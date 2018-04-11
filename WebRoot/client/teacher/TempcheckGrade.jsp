@@ -43,33 +43,23 @@ input:focus {
 			alert('请选择具体科目!');
 			return false;
 		}
-		if (document.getElementById("condition").value == ""
-				|| document.getElementById("condition") == null) {
-			alert('请输入学号或作业标题!');
-			return false;
-		}
-
 		return true;
 	}
 </script>
 </head>
 <body>
-	<h3 align="center">成绩检索</h3>
+	<h3 align="center">查看成绩</h3>
 	<hr>
 	<div class="seachBox">
 		<form
-			action="${pageContext.request.contextPath}/servlet/GradeServlet?operation=getStuGrade"
+			action="${pageContext.request.contextPath}/servlet/GradeServlet?operation=tCheckGrade"
 			onsubmit="return Check_form()" method="post">
-			选择科目: <select name="courseId" id="courseId" style="width: 100px; height: 30px;">
+			选择要查看的科目: <select name="courseId" id="courseId" style="width: 200px; height: 35px;">
 				<option value="null">-请选择-</option>
 				<c:forEach items="${cList}" var="c">
 					<option value="${c.courseId }">${c.courseName }</option>
 				</c:forEach>
-			</select><br> <br> 选择对应的检索类型：<input type="radio" name="ways"
-				value="Uid" checked>学号 <input type="radio" name="ways"
-				value="Title">作业标题 <br> <br> 请输入学号或作业标题：<input
-				type="text" name="condition" id="condition"> <input
-				type="submit" value="检索" style="width: 150px; height: 35px">
+			   <input type="submit" value="检索" style="width: 150px; height: 35px">
 		</form>
 	</div>
 

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>成绩检索</title>
+<title>班级注册</title>
 <style type="text/css">
 input {
 	border: 1px solid #ccc;
@@ -30,48 +30,34 @@ input:focus {
 		rgba(102, 175, 233, .6)
 }
 
-.seachBox {
+.Box {
 	padding: 10px 0px;
-	padding-left: 25%;
+	padding-left: 33%;
 	align: center;
 }
 </style>
 <script type="text/javascript">
 	function Check_form() {
-		if (document.getElementById("courseId").value == "null"
-				|| document.getElementById("courseId") == null) {
-			alert('请选择具体科目!');
+		if (document.getElementById("courseName").value == ""
+				|| document.getElementById("courseName") == null) {
+			alert('请输入科目名称');
 			return false;
 		}
-		if (document.getElementById("condition").value == ""
-				|| document.getElementById("condition") == null) {
-			alert('请输入学号或作业标题!');
-			return false;
-		}
-
 		return true;
 	}
 </script>
 </head>
 <body>
-	<h3 align="center">成绩检索</h3>
+	<h3 align="center">注册课程</h3>
 	<hr>
-	<div class="seachBox">
+	<div class="Box">
 		<form
-			action="${pageContext.request.contextPath}/servlet/GradeServlet?operation=getStuGrade"
+			action="${pageContext.request.contextPath}/servlet/UserServlet?operation=addCourse"
 			onsubmit="return Check_form()" method="post">
-			选择科目: <select name="courseId" id="courseId" style="width: 100px; height: 30px;">
-				<option value="null">-请选择-</option>
-				<c:forEach items="${cList}" var="c">
-					<option value="${c.courseId }">${c.courseName }</option>
-				</c:forEach>
-			</select><br> <br> 选择对应的检索类型：<input type="radio" name="ways"
-				value="Uid" checked>学号 <input type="radio" name="ways"
-				value="Title">作业标题 <br> <br> 请输入学号或作业标题：<input
-				type="text" name="condition" id="condition"> <input
-				type="submit" value="检索" style="width: 150px; height: 35px">
+			请输入科目名称：<input type="text" name="courseName" id="courseName"> <input
+				type="submit" value="注册" style="width: 150px; height: 35px">
 		</form>
 	</div>
-
+	${message}
 </body>
 </html>

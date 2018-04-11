@@ -46,7 +46,12 @@
 							<td><a
 								href="${pageContext.request.contextPath}/servlet/AnswerServlet?operation=getAnswer&id=${c.answerid}">点击查看作答详情</a>
 							<td>${c.date }</td>
-							<td>${c.state}</td>
+							<c:if test="${c.state =='已申请撤销'}">
+								<td>已提交</td>
+							</c:if>
+							<c:if test="${c.state !='已申请撤销'}">
+								<td>${c.state }</td>
+							</c:if>
 						</tr>
 					</c:forEach>
 				</tbody>

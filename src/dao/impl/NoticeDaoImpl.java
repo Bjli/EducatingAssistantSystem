@@ -19,12 +19,12 @@ public class NoticeDaoImpl implements NoticeDao {
 
 	// 发布通知
 	public void releaseNotice(Notice notice) throws SQLException, ParseException {
-		String sql = "insert into Notice(id,author,authorId,identity,className,releaseDate,title,content) values(?,?,?,?,?,?,?,?)";
+		String sql = "insert into Notice(id,author,authorId,identity,className,courseId,releaseDate,title,content) values(?,?,?,?,?,?,?,?,?)";
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		java.util.Date date = sdf.parse(notice.getReleaseDate());
 		Date sDate = new Date(date.getTime());
 		qr.update(sql, notice.getId(), notice.getAuthor(), notice.getAuthorId(), notice.getIdentity(),
-				notice.getClassName(), sDate, notice.getTitle(), notice.getContent());
+				notice.getClassName(),notice.getCourseId(), sDate, notice.getTitle(), notice.getContent());
 	}
 
 	// 删除通知

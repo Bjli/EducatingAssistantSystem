@@ -26,6 +26,7 @@
 				<tr align="center">
 					<td width="25%">学号</td>
 					<td>姓名</td>
+					<td>科目</td>
 					<td>作业名称</td>
 					<td>分数</td>
 					<td width="25%">评语</td>
@@ -37,6 +38,7 @@
 						<tr class="danger" align="center">
 							<td>${c.userId }</td>
 							<td>${c.userName }</td>
+							<td>${c.courseName }</td>
 							<td>${c.workTitle }</td>
 							<td>${c.score }</td>
 							<td>${c.remark}</td>
@@ -46,6 +48,7 @@
 						<tr class="success" align="center">
 							<td>${c.userId }</td>
 							<td>${c.userName }</td>
+							<td>${c.courseName }</td>
 							<td>${c.workTitle }</td>
 							<td>${c.score }</td>
 							<td>${c.remark}</td>
@@ -55,6 +58,7 @@
 						<tr class="warning" align="center">
 							<td>${c.userId }</td>
 							<td>${c.userName }</td>
+							<td>${c.courseName }</td>
 							<td>${c.workTitle }</td>
 							<td>${c.score }</td>
 							<td>${c.remark}</td>

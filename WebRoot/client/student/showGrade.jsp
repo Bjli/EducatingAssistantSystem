@@ -6,7 +6,8 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
-<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/css/style.css"
+	rel="stylesheet" type="text/css" />
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/bootstrap-3.3.7/css/bootstrap.min.css">
 <script
@@ -15,8 +16,8 @@
 	src="${pageContext.request.contextPath}/bootstrap-3.3.7/js/bootstrap.min.js"></script>
 <style type="text/css">
 .connect-box {
-width:90%;
-margin-left:5%;
+	width: 90%;
+	margin-left: 5%;
 }
 </style>
 </head>
@@ -31,6 +32,7 @@ margin-left:5%;
 			<table class="table table-bordered" align="center">
 				<thead>
 					<tr height="25">
+						<td>科目</td>
 						<td>作业题目</td>
 						<td>成绩</td>
 						<td>老师</td>
@@ -43,6 +45,7 @@ margin-left:5%;
 					%>
 					<c:forEach items="${Grade}" var="c">
 						<tr>
+							<td>${c.courseName }</td>
 							<td>${c.workTitle }</td>
 							<%
 								sum++;
@@ -53,7 +56,7 @@ margin-left:5%;
 						</tr>
 					</c:forEach>
 					<tr align="right">
-						<td colspan="4">总计发现:<%=sum%>次成绩记录
+						<td colspan="5">总计发现:<%=sum%>次成绩记录
 						</td>
 					</tr>
 				</tbody>

@@ -66,7 +66,7 @@ function Check_form()
 		<hr>
 		<h4 align="center">录入成绩</h4>
 		<form
-			action="${pageContext.request.contextPath}/servlet/GradeServlet?operation=inputGrade&workTitle=${answerinfo.worktitle}&userId=${answerinfo.userid}&workId=${answerinfo.workid}&userName=${answerinfo.username}" onsubmit="return Check_form()" method="post">
+			action="${pageContext.request.contextPath}/servlet/GradeServlet?operation=inputGrade&workTitle=${answerinfo.worktitle}&userId=${answerinfo.userid}&workId=${answerinfo.workid}&userName=${answerinfo.username}&courseId=${answerinfo.courseId}" onsubmit="return Check_form()" method="post">
 			<table align="center">
 				<tr>
 					<td>成绩：</td>

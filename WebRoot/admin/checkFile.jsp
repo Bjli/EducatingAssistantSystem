@@ -33,12 +33,12 @@
 				</thead>
 				<tbody id="Tbody">
 					<c:forEach items="${fList}" var="c">
-						<tr  align="center">
-							<td>${c.name }</td>
-							<td>${c.uploadTime }</td>
-							<td>${c.uploader }</td>
-							<td>${c.description }</td>
-							<td><a
+						<tr>
+							<td >${c.name }</td>
+							<td  align="center">${c.uploadTime }</td>
+							<td   align="center">${c.uploader }</td>
+							<td   align="center">${c.description }</td>
+							<td   align="center"><a
 								href="javascript:if(confirm('确定要删除吗?'))window.location.href='${pageContext.request.contextPath}/servlet/FileServlet?operation=deleteFile&id=${c.id}'">删除</a>
 								<a
 								href="${pageContext.request.contextPath}/servlet/FileServlet?operation=downloadFile&id=${c.id}&name=${c.name}">下载</a>

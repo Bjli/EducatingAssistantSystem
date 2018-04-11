@@ -12,7 +12,16 @@ public class Notice implements Serializable {
     private String title;//通知标题
     private String content;//通知内容
 	private String className;//面向对象
+	private String courseId;//科目id
 	
+	
+	
+	public String getCourseId() {
+		return courseId;
+	}
+	public void setCourseId(String courseId) {
+		this.courseId = courseId;
+	}
 	public String getClassName() {
 		return className;
 	}

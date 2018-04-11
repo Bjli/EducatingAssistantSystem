@@ -16,6 +16,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.log4j.Logger;
 
 import domain.ClassInfo;
+import domain.CourseInfo;
 import domain.User;
 import service.BusinessService;
 import service.impl.BusinessServiceImpl;
@@ -32,13 +33,22 @@ public class UserServlet extends HttpServlet {
 			login(request, response);
 		}
 		if ("getClassName".equals(operation)) {
-			getClassName(request, response);
+			getClassList(request, response);
 		}
 		if ("deleteClass".equals(operation)) {
 			deleteClass(request, response);
 		}
 		if ("addClass".equals(operation)) {
 			addClass(request, response);
+		}
+		if ("addCourse".equals(operation)) {
+			addCourse(request, response);
+		}
+		if ("deleteCourse".equals(operation)) {
+			deleteCourse(request, response);
+		}
+		if ("getCourseList".equals(operation)) {
+			getCourseList(request, response);
 		}
 		if ("logout".equals(operation)) {
 			logout(request, response);
@@ -60,13 +70,80 @@ public class UserServlet extends HttpServlet {
 		}
 	}
 
+	// 注册课程信息
+	private void addCourse(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		CourseInfo courseInfo = new CourseInfo();
+		String courseName = request.getParameter("courseName");
+		courseInfo.setCourseName(courseName);
+		courseInfo.setTeacherId((String) session.getAttribute("userID"));
+		courseInfo.setCourseId(IdGenerator.genPrimaryKey());
+		try {
+			business.addCourse(courseInfo);
+			request.setAttribute("message", "<script type='text/javascript'>alert('课程注册成功！')</script>");
+			request.getRequestDispatcher("../client/teacher/addCourse.jsp").forward(request, response);
+		} catch (SQLException e) {
+			logger.error(e.getMessage());
+			String errorMsg = "数据库操作异常，请重试";
+			request.setAttribute("errorMsg", errorMsg);
+			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
+		}
+	}
+
+	// 删除课程信息
+	private void deleteCourse(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		String courseId = request.getParameter("courseId");
+		try {
+			business.deleteCourse(courseId);
+			logger.info(session.getAttribute("userID") + " do delete course: " + courseId);
+			List<CourseInfo> cList = null;
+			cList = business.getCourseList((String) session.getAttribute("userID"));
+			request.setAttribute("cList", cList);
+			request.getRequestDispatcher("../client/teacher/checkCourse.jsp").forward(request, response);
+		} catch (SQLException e) {
+			logger.error(e.getMessage());
+			String errorMsg = "数据库操作异常，请重试";
+			request.setAttribute("errorMsg", errorMsg);
+			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
+		}
+	}
+
+	// 获取课程列表
+	private void getCourseList(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		List<CourseInfo> cList = null;
+		try {
+			cList = business.getCourseList((String) session.getAttribute("userID"));
+			request.setAttribute("cList", cList);
+		} catch (SQLException e) {
+			logger.error(e.getMessage());
+			String errorMsg = "数据库操作异常，请重试";
+			request.setAttribute("errorMsg", errorMsg);
+			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
+		}
+		String op = request.getParameter("op");
+		if (op.equals("mCourse")) {
+			request.getRequestDispatcher("../client/teacher/checkCourse.jsp").forward(request, response);
+		} else if (op.equals("sGrade")) {
+			request.getRequestDispatcher("../client/teacher/seachGrade.jsp").forward(request, response);
+		} else {
+			request.getRequestDispatcher("../client/teacher/TempcheckGrade.jsp").forward(request, response);
+		}
+	}
+
+	// 删除班级信息
 	private void deleteClass(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		String classID = request.getParameter("classID");
+		String classID = request.getParameter("classId");
 		try {
 			business.deleteClass(classID);
+			logger.info(session.getAttribute("userID") + " do delete class: " + classID);
 			List<ClassInfo> cList = null;
 			cList = business.getClassName();
 			request.setAttribute("cList", cList);
@@ -80,14 +157,13 @@ public class UserServlet extends HttpServlet {
 
 	}
 
+	// 注册班级信息
 	private void addClass(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
 		ClassInfo classInfo = new ClassInfo();
 		String className = request.getParameter("className");
 		classInfo.setClassName(className);
-		classInfo.setId(IdGenerator.genPrimaryKey());
+		classInfo.setClassId(IdGenerator.genPrimaryKey());
 		try {
 			business.addClass(classInfo);
 			request.setAttribute("message", "<script type='text/javascript'>alert('注册成功！')</script>");
@@ -101,7 +177,7 @@ public class UserServlet extends HttpServlet {
 	}
 
 	// 获取班级列表
-	private void getClassName(HttpServletRequest request, HttpServletResponse response)
+	private void getClassList(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		List<ClassInfo> cList = null;
 		try {
@@ -115,6 +191,17 @@ public class UserServlet extends HttpServlet {
 		}
 		String op = request.getParameter("op");
 		if (op.equals("rNotice")) {
+			HttpSession session = request.getSession();
+			List<CourseInfo> courseList = null;
+			try {
+				courseList = business.getCourseList((String) session.getAttribute("userID"));
+			} catch (SQLException e) {
+				logger.error(e.getMessage());
+				String errorMsg = "数据库操作异常，请重试";
+				request.setAttribute("errorMsg", errorMsg);
+				request.getRequestDispatcher("../common/error.jsp").forward(request, response);
+			}
+			request.setAttribute("courseList", courseList);
 			request.getRequestDispatcher("../common/releaseNotice.jsp").forward(request, response);
 		} else if (op.equals("adduser")) {
 			request.getRequestDispatcher("../admin/addUser.jsp").forward(request, response);
@@ -174,6 +261,7 @@ public class UserServlet extends HttpServlet {
 		}
 	}
 
+	// 找回密码
 	private void findPWD(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		User user = new User();
@@ -196,6 +284,7 @@ public class UserServlet extends HttpServlet {
 		}
 	}
 
+	// 用户登录
 	private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User user = new User();
 		String loginRes = null;

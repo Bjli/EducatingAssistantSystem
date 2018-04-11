@@ -30,6 +30,7 @@
 			<table class="table" align="center">
 				<thead>
 					<tr>
+						<td>科目</td>
 						<td>题目要求</td>
 						<td>学号</td>
 						<td>姓名</td>
@@ -42,6 +43,7 @@
 					<c:forEach items="${nList}" var="c">
 						<c:if test="${c.state =='已批改'}">
 							<tr class="success">
+								<td>${c.courseName }</td>
 								<td><a
 									href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=getNotice&id=${c.workid}">${c.worktitle}</a></td>
 								<td>${c.userid}</td>
@@ -49,11 +51,12 @@
 								<td>${c.date }</td>
 								<td>${c.state}</td>
 								<td><a
-									href="javascript:if(confirm('确定要删除吗?'))window.location.href='${pageContext.request.contextPath}/servlet/GradeServlet?operation=deleteGrade&workId=${c.workid}&userId=${c.userid}'">删除成绩</a></td>
+									href="javascript:if(confirm('确定申请撤销成绩吗?'))window.location.href='${pageContext.request.contextPath}/servlet/GradeServlet?operation=applyModifyGrade&workId=${c.workid}&userId=${c.userid}'">申请撤销</a></td>
 							</tr>
 						</c:if>
 						<c:if test="${c.state =='已提交'}">
 							<tr class="warning">
+								<td>${c.courseName }</td>
 								<td><a
 									href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=getNotice&id=${c.workid}">${c.worktitle}</a></td>
 								<td>${c.userid}</td>
@@ -62,6 +65,18 @@
 								<td>${c.state}</td>
 								<td><a
 									href="${pageContext.request.contextPath}/servlet/AnswerServlet?operation=getAnswer&id=${c.answerid}">批改</a></td>
+							</tr>
+						</c:if>
+						<c:if test="${c.state =='已申请撤销'}">
+							<tr class="warning">
+								<td>${c.courseName }</td>
+								<td><a
+									href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=getNotice&id=${c.workid}">${c.worktitle}</a></td>
+								<td>${c.userid}</td>
+								<td>${c.username}</td>
+								<td>${c.date }</td>
+								<td>${c.state}</td>
+								<td>等待管理员审批</td>
 							</tr>
 						</c:if>
 					</c:forEach>

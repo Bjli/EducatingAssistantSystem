@@ -21,6 +21,7 @@ import dao.impl.NoticeDaoImpl;
 import dao.impl.UserDaoImpl;
 import domain.AnswerInfo;
 import domain.ClassInfo;
+import domain.CourseInfo;
 import domain.FileInfo;
 import domain.Grade;
 import domain.Notice;
@@ -49,9 +50,17 @@ public class BusinessServiceImpl implements BusinessService {
 		uDao.deleteClass(classID);
 	}
 	public List<ClassInfo> getClassName() throws SQLException {
-		return uDao.getClassName();
+		return uDao.getClassList();
 	}
-
+	public void addCourse(CourseInfo courseInfo) throws SQLException {
+		uDao.addCourse(courseInfo);
+	}
+	public void deleteCourse(String courseId) throws SQLException {
+		uDao.deleteCourse(courseId);
+	}
+	public List<CourseInfo> getCourseList(String teacherId) throws SQLException {
+		return uDao.getCourseList(teacherId);
+	}
 	public User getUser(String userid) throws SQLException {
 		return uDao.getUser(userid);
 	}
@@ -107,27 +116,27 @@ public class BusinessServiceImpl implements BusinessService {
 		gDao.deleteGrade(userid,workId);
 		
 	}
-	public void modifyGrade(Grade grade) throws SQLException {
-		gDao.modifyGrade(grade);
+	public void applyModifyGrade(String userid,String workId) throws SQLException {
+		gDao.applyModifyGrade(userid, workId);
 	}
 	public List<Grade> aCheckGrade() throws SQLException {
 		return gDao.aCheckGrade();
 	}
 	
-	public List<Grade> tCheckGrade(String teacherId) throws SQLException {
-		return gDao.tCheckGrade(teacherId);
+	public List<Grade> tCheckGrade(String teacherId,String courseId) throws SQLException {
+		return gDao.tCheckGrade(teacherId,courseId);
 	}
 
-	public List<Grade> tGetGradeByUid(String studentID,String teacherId) throws SQLException {
-		return gDao.tGetGradeByUid(studentID, teacherId);
+	public List<Grade> tGetGradeByUid(String studentID,String teacherId,String courseId) throws SQLException {
+		return gDao.tGetGradeByUid(studentID, teacherId, courseId);
 	}
 	
 	public List<Grade> getGrade(String studentID) throws SQLException {
 		return gDao.getGrade(studentID);
 	}
 	
-	public List<Grade> tGetGradeByTitle(String workTitle,String teacherId) throws SQLException {
-		return gDao.tGetGradeByTitle(workTitle,teacherId);
+	public List<Grade> tGetGradeByTitle(String workTitle,String teacherId,String courseId) throws SQLException {
+		return gDao.tGetGradeByTitle(workTitle,teacherId, courseId);
 	}
 
 	
@@ -148,6 +157,7 @@ public class BusinessServiceImpl implements BusinessService {
 	public AnswerInfo getAnswer(String id) throws SQLException {
 		return aDao.getAnswer(id);
 	}
+
 
 
 }

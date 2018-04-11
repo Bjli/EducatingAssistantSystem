@@ -24,10 +24,10 @@ public class AnswerDaoImp implements AnswerDao {
 		String sql0 = "select * from answer where userid=? and workid=?;";
 		aList=qr.query(sql0, new BeanListHandler<AnswerInfo>(AnswerInfo.class), answer.getUserid(),answer.getWorkid());
 		if (aList.size() == 0) {
-			String sql = "insert into answer(answerID,userID,userName,date,content,workid,worktitle,workuser,state,workuserid) values(?,?,?,?,?,?,?,?,?,?)";
+			String sql = "insert into answer(answerID,userID,userName,date,content,workid,worktitle,workuser,courseId,state,workuserid) values(?,?,?,?,?,?,?,?,?,?,?)";
 			Date nowTime = new Date();
 			SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			qr.update(sql, answer.getAnswerid(), answer.getUserid(), answer.getUsername(), time.format(nowTime),answer.getContent(), answer.getWorkid(), answer.getWorktitle(), answer.getWorkuser(), "已提交",answer.getWorkuserid());
+			qr.update(sql, answer.getAnswerid(), answer.getUserid(), answer.getUsername(), time.format(nowTime),answer.getContent(), answer.getWorkid(), answer.getWorktitle(), answer.getWorkuser(),answer.getCourseId(), "已提交",answer.getWorkuserid());
 			logger.info(answer.getUserid() + " do addAnswer,for:" + answer.getAnswerid());
 		} else {
 			String sql = "update answer set date=?,content=? where userid=? and workid=?";
@@ -50,7 +50,7 @@ public class AnswerDaoImp implements AnswerDao {
 	}
 
 	public List<AnswerInfo> checkAnswerT(String workuserid) throws SQLException {
-		String sql = "select answerid,workid,worktitle,userid,username,date,state from answer where workuserid=? order by worktitle desc;";
+		String sql = "select course.courseName,answer.answerid,answer.workid,answer.worktitle,answer.userid,answer.username,answer.date,answer.state from course,answer where course.courseId=answer.courseid and answer.workuserid=? order by course.courseName desc;";
 		return qr.query(sql, new BeanListHandler<AnswerInfo>(AnswerInfo.class), workuserid);
 	}
 

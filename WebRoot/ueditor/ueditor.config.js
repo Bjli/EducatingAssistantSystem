@@ -28,7 +28,10 @@
 
         //为编辑器实例添加一个路径，这个不能被注释
         UEDITOR_HOME_URL: URL
-
+        ,imageUrl: URL + "jsp/imageUp.jsp"
+        ,imagePath: URL + "jsp/"
+        ,fileUrl: URL + "jsp/fileUp.jsp"
+        ,filePath: URL + "jsp/"
         // 服务器统一请求接口路径
         , serverUrl: URL + "jsp/controller.jsp"
 

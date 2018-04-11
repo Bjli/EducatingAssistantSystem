@@ -3,15 +3,15 @@ package domain;
 public class ClassInfo {
 	private static final long serialVersionUID = 1L;
 	private String className;//°à¼¶Ãû
-	private String id;//id
+	private String classId;//id
 	
 	
-	public String getId() {
-		return id;
+	public String getClassId() {
+		return classId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setClassId(String id) {
+		this.classId = id;
 	}
 
 	public String getClassName() {

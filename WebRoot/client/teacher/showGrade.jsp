@@ -109,7 +109,8 @@
 					method="post" name="useradd">
 					<input type="hidden" name="ways" value="${ways}"> <input
 						type="hidden" name="op" value="teacher"> <input
-						type="hidden" name="condition" value="${condition}"> <br>
+						type="hidden" name="condition" value="${condition}">
+						<input type="hidden" name="courseId" value="${courseId}"> <br>
 					<input type="submit" class="btn btn-primary" value="导出成绩单">
 				</form>
 			</div>

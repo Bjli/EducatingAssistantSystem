@@ -64,11 +64,6 @@ public class NoticeServlet extends HttpServlet {
 			String errorMsg = "数据库操作异常，请重试";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
-		} catch (IOException e) {
-			logger.error(e.getMessage());
-			String errorMsg = "IO异常,请重试";
-			request.setAttribute("errorMsg", errorMsg);
-			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		}
 	}
 	//删除特点id的通知
@@ -112,11 +107,6 @@ public class NoticeServlet extends HttpServlet {
 				request.setAttribute("nList", nList);
 				request.getRequestDispatcher("/client/student/checkNotice.jsp").forward(request, response);
 			}
-		} catch (IOException e) {
-			logger.error(e.getMessage());
-			String errorMsg = "IO异常,请重试";
-			request.setAttribute("errorMsg", errorMsg);
-			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 			String errorMsg = "数据库操作异常，请重试";

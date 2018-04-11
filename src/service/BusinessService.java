@@ -11,6 +11,7 @@ import org.apache.commons.fileupload.FileItem;
 
 import domain.AnswerInfo;
 import domain.ClassInfo;
+import domain.CourseInfo;
 import domain.FileInfo;
 import domain.Grade;
 import domain.Notice;
@@ -26,6 +27,9 @@ public interface BusinessService {
 	void addClass(ClassInfo classInfo) throws SQLException;
 	void deleteClass(String classID) throws SQLException;
 	List<ClassInfo> getClassName() throws SQLException;
+	void addCourse(CourseInfo courseInfo) throws SQLException;
+	void deleteCourse(String courseId) throws SQLException;
+	List<CourseInfo> getCourseList(String teacherId) throws SQLException;
 	String findPWD(User user) throws SQLException;
 	void modifyPWD(User user) throws SQLException;
 	//资源管理模块
@@ -43,12 +47,12 @@ public interface BusinessService {
 	//成绩管理模块
 	void inputGrade(Grade grade) throws SQLException;
 	void deleteGrade(String userid,String workId) throws SQLException;
-	void modifyGrade(Grade grade) throws SQLException;
+	void applyModifyGrade(String userid,String workId) throws SQLException;
 	List<Grade> aCheckGrade() throws SQLException;
-	List<Grade> tCheckGrade(String teacherId) throws SQLException;
-	List<Grade> tGetGradeByUid(String studentID,String teacherId) throws SQLException;
+	List<Grade> tCheckGrade(String teacherId,String courseId) throws SQLException;
+	List<Grade> tGetGradeByUid(String studentID,String teacherId,String courseId) throws SQLException;
 	List<Grade> getGrade(String studentID) throws SQLException;
-	List<Grade> tGetGradeByTitle(String workTitle,String teacherId) throws SQLException;
+	List<Grade> tGetGradeByTitle(String workTitle,String teacherId,String courseId) throws SQLException;
 	
 	
 	//答题模块

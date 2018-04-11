@@ -14,7 +14,7 @@
 	src="${pageContext.request.contextPath}/bootstrap-3.3.7/js/bootstrap.min.js"></script>
 <style type="text/css">
 .export_but {
-  margin-left:80%;
+	margin-left: 80%;
 }
 </style>
 </head>
@@ -53,20 +53,17 @@
 						<td>${c.score }</td>
 						<td>${c.remark }</td>
 						<td>${c.teacherName }</td>
-						<td><a href="#">无</a>
+						<c:if test="${c.state =='applyed'}">
+							<td><a href="javascript:if(confirm('该操作会删除该次成绩，是否继续?'))window.location.href='${pageContext.request.contextPath}/servlet/GradeServlet?operation=deleteGrade&workId=${c.workId}&userId=${c.userId}'">删除成绩</a></td>
+						</c:if>
+						<c:if test="${c.state =='ok'}">
+							<td>无</td>
+						</c:if>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		<%@ include file="../common/page.jsp" %>
-		<div class="export_but">
-			<form
-				action="${pageContext.request.contextPath}/servlet/GradeServlet?operation=ExportExcel"
-				method="post" name="useradd">
-				<input type="hidden" name="op" value="admin"> <br> <input
-					type="submit" class="btn btn-primary" value="导出成绩单">
-			</form>
-		</div>
+		<%@ include file="../common/page.jsp"%>
 	</c:if>
 </body>
 </html>

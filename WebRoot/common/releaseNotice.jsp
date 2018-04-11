@@ -52,32 +52,44 @@
 		<table border="1" width="80%">
 			<tr height="30px">
 				<td width="30%">发布者:</td>
-				<td><input type="text" name="author" id="user" /> <input
+				<td colspan="3"><input type="text" name="author" id="user" /> <input
 					type="radio" name="identity" value="通知" checked="checked" />通知 <input
 					type="radio" name="identity" value="作业" />作业</td>
 			</tr>
 			<tr height="30px">
 				<td width="30%">面向对象:</td>
-				<td><select name="className" class="form-control">
+				<td>
+				<select name="className" class="form-control">
 						<option value="ALL">ALL</option>
 						<c:forEach items="${cList}" var="c">
 							<option value="${c.className }">${c.className }</option>
 						</c:forEach>
 				</select></td>
+				<td>
+				科目信息:
+				</td>
+				<td>
+				<select name="courseId" class="form-control">
+						<option value="null">通知选择此项</option>
+						<c:forEach items="${courseList}" var="c">
+							<option value="${c.courseId }">${c.courseName }</option>
+						</c:forEach>
+				</select>
+				</td>
 			</tr>
 			<tr height="30px">
 				<td width="30%">发布时间:</td>
-				<td><input type="date" name="releaseDate" id="date" /> <font
+				<td colspan="3"><input type="date" name="releaseDate" id="date" /> <font
 					size="2" color="red">若手动输入，格式为：yyyy-MM-dd，例如2017-02-02</font></td>
 			</tr>
 			<tr height="30px">
 				<td width="30%">标题:&nbsp;&nbsp;&nbsp;&nbsp;</td>
-				<td><input type="text" name="title" id="title"
+				<td colspan="3"><input type="text" name="title" id="title"
 					style="width: 500px" /> <font size="2" color="red">最多可输入100字</font></td>
 			</tr>
 			<tr height="30px">
 				<td width="30%">操作:&nbsp;&nbsp;&nbsp;&nbsp;</td>
-				<td><input type="submit" class="btn btn-default btn-success"
+				<td colspan="3"><input type="submit" class="btn btn-default btn-success"
 					value="保存并发布"> <font size="2" color="red">在下方输入通知内容点击发布</font></td>
 			</tr>
 		</table>

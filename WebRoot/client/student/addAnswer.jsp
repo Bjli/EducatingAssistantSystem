@@ -15,6 +15,13 @@
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
 <meta http-equiv="expires" content="0">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/bootstrap-3.3.7/css/bootstrap.min.css">
+<script
+	src="${pageContext.request.contextPath}/bootstrap-3.3.7/jquery-3.3.1.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+
 <title>学生作答</title>
 <style type="text/css">
 .box {
@@ -51,13 +58,13 @@
 		<hr>
 		<h4 align="center">学生作答</h4>
 		<form
-			action="${pageContext.request.contextPath}/servlet/AnswerServlet?operation=addAnswer&workid=${notice.id}&worktitle=${notice.title}&workuser=${notice.author}&workuserid=${notice.authorId}"
+			action="${pageContext.request.contextPath}/servlet/AnswerServlet?operation=addAnswer&workid=${notice.id}&worktitle=${notice.title}&workuser=${notice.author}&workuserid=${notice.authorId}&courseId=${notice.courseId}"
 			onsubmit="return Check_form()" method="post">
 			<table border="1" width="100%">
 				<tr>
 					<td width="30%">学号:</td>
-					<td><input type="text" name="userid" id="userid"
-						value="${sessionScope.userID}" /></td>
+					<td><input type="text" class="form-control" name="userid" id="userid"
+						value="${sessionScope.userID}"  disabled/></td>
 				</tr>
 				<tr>
 					<td width="30%">操作:&nbsp;&nbsp;&nbsp;&nbsp;</td>

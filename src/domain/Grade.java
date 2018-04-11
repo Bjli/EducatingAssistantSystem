@@ -8,12 +8,26 @@ public class Grade implements Serializable {
 	private String userName;//姓名
 	private String workId;//对应作业标识
 	private String workTitle;//作业标题
+	private String courseId;//科目标识
+	private String courseName;//科目名称
 	private String teacherName;//相应老师的姓名
 	private String teacherId;//相应老师工号
 	private int score;//成绩
 	private String remark;//评语
+	private String state;//成绩状态
  
-	
+	public String getCourseId() {
+		return courseId;
+	}
+	public void setCourseId(String courseId) {
+		this.courseId = courseId;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 	public String getTeacherId() {
 		return teacherId;
 	}
@@ -22,6 +36,13 @@ public class Grade implements Serializable {
 	}
 	public String getUserName() {
 		return userName;
+	}
+	
+	public String getCourseName() {
+		return courseName;
+	}
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
 	}
 	public String getTeacherName() {
 		return teacherName;

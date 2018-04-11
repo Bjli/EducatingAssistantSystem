@@ -41,17 +41,17 @@ public class GradeServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String operation = request.getParameter("operation");
-		//录入成绩
+		// 录入成绩
 		if ("inputGrade".equals(operation)) {
 			inputGrade(request, response);
 		}
-		//删除成绩
+		// 删除成绩
 		if ("deleteGrade".equals(operation)) {
 			deleteGrade(request, response);
 		}
-		//修改成绩
-		if ("modifyGrade".equals(operation)) {
-			modifyGrade(request, response);
+		// 申请重录成绩
+		if ("applyModifyGrade".equals(operation)) {
+			applyModifyGrade(request, response);
 		}
 		// 管理员查看成绩
 		if ("aCheckGrade".equals(operation)) {
@@ -87,13 +87,14 @@ public class GradeServlet extends HttpServlet {
 			} else {
 				String condition = request.getParameter("condition");
 				String ways = request.getParameter("ways");
+				String courseId = request.getParameter("courseId");
 				if (ways.equals("Title")) {
-					gList = business.tGetGradeByTitle(condition, userId);
+					gList = business.tGetGradeByTitle(condition, userId,courseId);
 				} else {
-					gList = business.tGetGradeByUid(condition, userId);
+					gList = business.tGetGradeByUid(condition, userId,courseId);
 				}
 			}
-			logger.info(userId + ":ExportExcel success.");
+			logger.info(userId + ": ExportExcel success.");
 
 			// 创建工作表
 			WritableWorkbook book = null;
@@ -133,23 +134,26 @@ public class GradeServlet extends HttpServlet {
 				sheet.setColumnView(0, sheet.getCell(1, 1).getContents().length() * 2 + 15);
 				sheet.setColumnView(1, sheet.getCell(1, 1).getContents().length() * 3 + 12);
 				sheet.setColumnView(2, sheet.getCell(1, 1).getContents().length() * 3 + 20);
+				sheet.setColumnView(3, sheet.getCell(1, 1).getContents().length() * 3 + 20);
 				sheet.mergeCells(0, 0, 4, 0);
 				Label title = new Label(0, 0, "学生成绩统计表", format);
 				sheet.addCell(title);
 				// 表字段名
 				sheet.addCell(new jxl.write.Label(0, 1, "学号", format2));
 				sheet.addCell(new jxl.write.Label(1, 1, "姓名", format2));
-				sheet.addCell(new jxl.write.Label(2, 1, "作业名称", format2));
-				sheet.addCell(new jxl.write.Label(3, 1, "成绩", format2));
-				sheet.addCell(new jxl.write.Label(4, 1, "老师", format2));
+				sheet.addCell(new jxl.write.Label(2, 1, "科目", format2));
+				sheet.addCell(new jxl.write.Label(3, 1, "作业名称", format2));
+				sheet.addCell(new jxl.write.Label(4, 1, "成绩", format2));
+				sheet.addCell(new jxl.write.Label(5, 1, "老师", format2));
 
 				// 将数据追加
 				for (int i = 1; i < gList.size() + 1; i++) {
 					sheet.addCell(new jxl.write.Label(0, i + 1, gList.get(i - 1).getUserId(), format3));
 					sheet.addCell(new jxl.write.Label(1, i + 1, gList.get(i - 1).getUserName(), format3));
-					sheet.addCell(new jxl.write.Label(2, i + 1, gList.get(i - 1).getWorkTitle(), format3));
-					sheet.addCell(new jxl.write.Label(3, i + 1, gList.get(i - 1).getScore() + "", format3));
-					sheet.addCell(new jxl.write.Label(4, i + 1, gList.get(i - 1).getTeacherName(), format3));
+					sheet.addCell(new jxl.write.Label(2, i + 1, gList.get(i - 1).getCourseName(), format3));
+					sheet.addCell(new jxl.write.Label(3, i + 1, gList.get(i - 1).getWorkTitle(), format3));
+					sheet.addCell(new jxl.write.Label(4, i + 1, gList.get(i - 1).getScore() + "", format3));
+					sheet.addCell(new jxl.write.Label(5, i + 1, gList.get(i - 1).getTeacherName(), format3));
 				}
 				book.write();
 				book.close();
@@ -174,29 +178,20 @@ public class GradeServlet extends HttpServlet {
 
 	}
 
-	// 修改成绩
-	private void modifyGrade(HttpServletRequest request, HttpServletResponse response)
+	// 申请修改成绩
+	private void applyModifyGrade(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		String userId = (String) session.getAttribute("userID");
-		String studentID = request.getParameter("userid");
-		String workTitle = request.getParameter("worktitle");
-		String score = request.getParameter("modifyscore");
-		String remark = request.getParameter("remark");
-		Grade grade = new Grade();
-		grade.setUserId(studentID);
-		grade.setWorkTitle(workTitle);
-		grade.setScore(Integer.parseInt(score));
-		if (remark.equals("") || remark == null) {
-			grade.setRemark(null);
-		} else {
-			grade.setRemark(remark);
-		}
+		String userId = request.getParameter("userId");
+		String workId = request.getParameter("workId");
 		try {
-			business.modifyGrade(grade);
-			request.setAttribute("message", "<script type='text/javascript'>alert('修改成功！')</script>");
-			logger.info(userId + "do modifyGrade,for stu:" + studentID + "_" + workTitle + "----" + score);
-			request.getRequestDispatcher("../admin/inputGrade.jsp").forward(request, response);
+			business.applyModifyGrade(userId, workId);
+			HttpSession session = request.getSession();
+			List<AnswerInfo> nList = null;
+			nList = business.checkAnswerT((String) session.getAttribute("userID"));
+			logger.info(
+					(String) session.getAttribute("userID") + " do applyModifyGrade,for stu:" + userId + "_" + workId);
+			request.setAttribute("nList", nList);
+			request.getRequestDispatcher("/client/teacher/checkAnswer.jsp").forward(request, response);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 			String errorMsg = "数据库操作异常，请重试";
@@ -213,22 +208,14 @@ public class GradeServlet extends HttpServlet {
 		try {
 			business.deleteGrade(userId, workId);
 			HttpSession session = request.getSession();
-			List<AnswerInfo> nList = null;
-			nList = business.checkAnswerT((String) session.getAttribute("userID"));
 			logger.info((String) session.getAttribute("userID") + "do deleteGrade,for stu:" + userId + "_" + workId);
-			request.setAttribute("nList", nList);
-			request.getRequestDispatcher("/client/teacher/checkAnswer.jsp").forward(request, response);
-		} catch (IOException e) {
-			logger.error(e.getMessage());
-			String errorMsg = "IO异常,请重试";
-			request.setAttribute("errorMsg", errorMsg);
-			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 			String errorMsg = "数据库操作异常，请重试";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		}
+		aCheckGrade(request, response);
 	}
 
 	// 管理员查看成绩
@@ -244,11 +231,6 @@ public class GradeServlet extends HttpServlet {
 			String errorMsg = "数据库操作异常，请重试";
 			request.setAttribute("errorMsg", errorMsg);
 			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
-		} catch (IOException e) {
-			logger.error(e.getMessage());
-			String errorMsg = "IO异常,请重试";
-			request.setAttribute("errorMsg", errorMsg);
-			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		}
 	}
 
@@ -261,11 +243,6 @@ public class GradeServlet extends HttpServlet {
 			List<Grade> grade = business.getGrade(studentID);
 			request.setAttribute("Grade", grade);
 			request.getRequestDispatcher("/client/student/showGrade.jsp").forward(request, response);
-		} catch (IOException e) {
-			logger.error(e.getMessage());
-			String errorMsg = "IO异常,请重试";
-			request.setAttribute("errorMsg", errorMsg);
-			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 			String errorMsg = "数据库操作异常，请重试";
@@ -279,24 +256,21 @@ public class GradeServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String condition = request.getParameter("condition");
 		String ways = request.getParameter("ways");
+		String courseId = request.getParameter("courseId");
 		HttpSession session = request.getSession();
 		String teacherId = (String) session.getAttribute("userID");
 		try {
 			List<Grade> grade = null;
 			if (ways.equals("Title")) {
-				grade = business.tGetGradeByTitle(condition, teacherId);
+				grade = business.tGetGradeByTitle(condition, teacherId, courseId);
 			} else {
-				grade = business.tGetGradeByUid(condition, teacherId);
+				grade = business.tGetGradeByUid(condition, teacherId, courseId);
 			}
+			request.setAttribute("courseId", courseId);
 			request.setAttribute("grade", grade);
 			request.setAttribute("ways", ways);
 			request.setAttribute("condition", condition);
 			request.getRequestDispatcher("/client/teacher/showGrade.jsp").forward(request, response);
-		} catch (IOException e) {
-			logger.error(e.getMessage());
-			String errorMsg = "IO异常,请重试";
-			request.setAttribute("errorMsg", errorMsg);
-			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 			String errorMsg = "数据库操作异常，请重试";
@@ -310,15 +284,11 @@ public class GradeServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String teacherId = (String) session.getAttribute("userID");
+		String courseId = request.getParameter("courseId");
 		try {
-			List<Grade> tList = business.tCheckGrade(teacherId);
+			List<Grade> tList = business.tCheckGrade(teacherId,courseId);
 			request.setAttribute("tList", tList);
 			request.getRequestDispatcher("/client/teacher/checkGrade.jsp").forward(request, response);
-		} catch (IOException e) {
-			logger.error(e.getMessage());
-			String errorMsg = "IO异常,请重试";
-			request.setAttribute("errorMsg", errorMsg);
-			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 			String errorMsg = "数据库操作异常，请重试";
@@ -337,17 +307,13 @@ public class GradeServlet extends HttpServlet {
 		try {
 			BeanUtils.populate(grade, request.getParameterMap());
 			business.inputGrade(grade);
-			logger.info(grade.getTeacherId() + " do inputGrade,for stu:" + grade.getUserId() + "_" + grade.getWorkTitle());
+			logger.info(
+					grade.getTeacherId() + " do inputGrade,for stu:" + grade.getUserId() + "_" + grade.getWorkTitle());
 			request.setAttribute("message", "<script type='text/javascript'>alert('添加成功！')</script>");
 			List<AnswerInfo> nList = null;
 			nList = business.checkAnswerT((String) session.getAttribute("userID"));
 			request.setAttribute("nList", nList);
 			request.getRequestDispatcher("/client/teacher/checkAnswer.jsp").forward(request, response);
-		} catch (IOException e) {
-			logger.error(e.getMessage());
-			String errorMsg = "IO异常,请重试";
-			request.setAttribute("errorMsg", errorMsg);
-			request.getRequestDispatcher("../common/error.jsp").forward(request, response);
 		} catch (SQLException e) {
 			logger.error(e.getMessage());
 			String errorMsg = "数据库操作异常，请重试";

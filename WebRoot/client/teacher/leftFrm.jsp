@@ -91,6 +91,7 @@
 .title {
 	cursor: pointer;
 }
+
 .link_me {
 	position: fixed;
 	bottom: 20px;
@@ -139,6 +140,10 @@
 				<div id="collapseOne" class="panel-collapse collapse in">
 					<div class="panel-body">
 						<ul class="menuson">
+							<li><cite></cite><a href="addCourse.jsp" target="middleFrame">科目注册</a><i></i></li>
+							<li><cite></cite><a
+								href="${pageContext.request.contextPath}/servlet/UserServlet?operation=getCourseList&op=mCourse"
+								target="middleFrame">教学管理</a><i></i></li>
 							<li><cite></cite><a
 								href="/TeachingAssistant/common/modifyPWD.jsp"
 								target="middleFrame">修改密码</a><i></i></li>
@@ -160,17 +165,17 @@
 				</div>
 				<div id="collapseTwo" class="panel-collapse collapse">
 					<div class="panel-body">
-			<ul class="menuson">
-				<li><cite></cite><a
-					href="${pageContext.request.contextPath}/servlet/AnswerServlet?operation=checkAnswer"
-					target="middleFrame">批改作业</a><i></i></li>
-				<li><cite></cite><a
-					href="${pageContext.request.contextPath}/servlet/GradeServlet?operation=tCheckGrade"
-					target="middleFrame">查看成绩</a><i></i></li>
-				<li><cite></cite><a
-					href="${pageContext.request.contextPath}/client/teacher/seachGrade.jsp"
-					target="middleFrame">成绩检索</a><i></i></li>
-			</ul>
+						<ul class="menuson">
+							<li><cite></cite><a
+								href="${pageContext.request.contextPath}/servlet/AnswerServlet?operation=checkAnswer"
+								target="middleFrame">批改作业</a><i></i></li>
+							<li><cite></cite><a
+								href="${pageContext.request.contextPath}/servlet/UserServlet?operation=getCourseList&op=gGrade""
+								target="middleFrame">查看成绩</a><i></i></li>
+							<li><cite></cite><a
+								href="${pageContext.request.contextPath}/servlet/UserServlet?operation=getCourseList&op=sGrade"
+								target="middleFrame">成绩检索</a><i></i></li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -186,7 +191,8 @@
 				<div id="collapseThree" class="panel-collapse collapse">
 					<div class="panel-body">
 						<ul class="menuson">
-							<li><cite></cite><a href="${pageContext.request.contextPath}/servlet/UserServlet?operation=getClassName&op=rNotice"
+							<li><cite></cite><a
+								href="${pageContext.request.contextPath}/servlet/UserServlet?operation=getClassName&op=rNotice"
 								target="middleFrame">发布通知</a><i></i></li>
 							<li><cite></cite><a
 								href="${pageContext.request.contextPath}/servlet/NoticeServlet?operation=checkNotice"
@@ -218,16 +224,17 @@
 			</div>
 		</div>
 		<div class="link_me">
-		<table>
-			<tr>
-				<td colspan="2"><font size="2" face="arial" color="grey">如遇到问题或在使用中有什么建议，请联系作者，谢谢。</font></td>
-			<tr>
-				<td><img alt="email" src="../../images/email.png" width="20px"
-					height="20px"></td>
-				<td><font size="3" face="arial" color="grey">: ljb_nwuer@163.com</font></td>
-			</tr>
-		</table>
-	</div>
+			<table>
+				<tr>
+					<td colspan="2"><font size="2" face="arial" color="grey">如遇到问题或在使用中有什么建议，请联系作者，谢谢。</font></td>
+				<tr>
+					<td><img alt="email" src="../../images/email.png" width="20px"
+						height="20px"></td>
+					<td><font size="3" face="arial" color="grey">:
+							ljb_nwuer@163.com</font></td>
+				</tr>
+			</table>
+		</div>
 	</div>
 </body>
 
