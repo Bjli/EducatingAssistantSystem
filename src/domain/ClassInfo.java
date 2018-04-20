@@ -1,6 +1,8 @@
 package domain;
 
-public class ClassInfo {
+import java.io.Serializable;
+
+public class ClassInfo implements Serializable  {
 	private static final long serialVersionUID = 1L;
 	private String className;//°à¼¶Ãû
 	private String classId;//id

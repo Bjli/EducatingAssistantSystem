@@ -26,6 +26,9 @@
 	<div class="topleft">
 		<div style="margin-left: 80%; margin-top: 25px; color: white">您好,${sessionScope.userType}:${sessionScope.userName}</div>
 		<img src="../images/logo.png" />
+		<div style="margin-left: 40%;margin-top:-35px;">
+			<font size="6" face="STXingkai" color="white">实验报告教学管理系统</font>
+		</div>
 	</div>
 </body>
 </html>

@@ -56,7 +56,7 @@
 			method="post">
 			<table align="center" border="0">
 				<tr height="50">
-					<td colspan="3" align="center"><font size="6" color="white">用户登录</font>
+					<td colspan="3" align="center"><font size="6" face="STXingkai" color="white">用户登录</font>
 						<br></td>
 				</tr>
 				<tr height="40">

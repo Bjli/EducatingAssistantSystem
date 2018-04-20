@@ -71,7 +71,7 @@ input:focus {
 			method="post" name="useradd">
 			<table align="center" border="0">
 				<tr height="50px">
-					<td colspan="2" align="center"><font size="5" color="white">注册账户</font></td>
+					<td colspan="2" align="center"><font size="6" face="STXingkai" color="white">注册账户</font></td>
 				</tr>
 				<tr height="40">
 					<td>用户编号:</td>

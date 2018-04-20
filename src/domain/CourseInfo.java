@@ -1,6 +1,8 @@
 package domain;
 
-public class CourseInfo {
+import java.io.Serializable;
+
+public class CourseInfo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String courseId;//科目id
 	private String courseName;//科目名称

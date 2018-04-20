@@ -79,7 +79,7 @@
 			onsubmit="return Check_form()" method="post">
 			<table align="center" border="0">
 				<tr height="50">
-					<td colspan="2" align="center"><font size="5" color="white">找回密码</font>
+					<td colspan="2" align="center"><font size="6" face="STXingkai" color="white">找回密码</font>
 						<br></td>
 				</tr>
 				<tr height="40">

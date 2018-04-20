@@ -101,7 +101,6 @@
 				<td><a href="http://ist.nwu.edu.cn">信息科学与技术学院</a></td>
 				<td><a href="http://cice.nwu.edu.cn">国际文化交流学院</a></td>
 				<td><a href="http://mks.nwu.edu.cn/">马克思主义学院</a></td>
-
 			</tr>
 		</table>
 	</div>
