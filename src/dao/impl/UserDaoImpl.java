@@ -81,7 +81,7 @@ public class UserDaoImpl implements UserDao {
 			mail.setSender("ljb_nwuer@163.com");  
 			mail.setReceiver(mailAdd); // 接收人  
 			mail.setUsername("ljb_nwuer@163.com"); // 登录账号,一般都是和邮箱名一样吧  
-			mail.setPassword("123456ljb"); // 发件人邮箱的登录密码  
+			mail.setPassword("741236985ljb"); // 发件人邮箱的登录密码  
 			mail.setSubject("找回密码");  
 			mail.setMessage("<br><h3>您的新密码是："+pwd+"<br>----------------<br><br> sender by @李吉波<br>"+date+"</h3>");  
 			mail.setName("实验报告教学管理系统");
